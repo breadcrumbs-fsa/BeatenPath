@@ -3,7 +3,7 @@ import {compose, withProps} from 'recompose'
 import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
 const secrets = require('../../secrets')
 
-const mapkey = process.env.GOOGLE_MAPJS_API
+const mapkey = process.env.GOOGLE_MAPJS_KEY
 const MyMapComponent = compose(
   withProps({
     googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapkey}&js?v=3.exp&libraries=geometry,drawing,places`,
