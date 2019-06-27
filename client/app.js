@@ -12,8 +12,8 @@ const App = () => {
       <Navbar />
       <Routes />
 
-      <Map />
       <MapDirections />
+
       <SimpleContainer />
     </div>
   )

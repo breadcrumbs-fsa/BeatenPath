@@ -22,7 +22,9 @@ const MyMapComponent = compose(
   lifecycle({
     componentDidMount() {
       const DirectionsService = new google.maps.DirectionsService()
-
+      this.setState({
+        directions: []
+      })
       DirectionsService.route(
         {
           origin: new google.maps.LatLng(41.85073, -87.65126),
@@ -31,8 +33,27 @@ const MyMapComponent = compose(
         },
         (result, status) => {
           if (status === google.maps.DirectionsStatus.OK) {
+            console.log(result)
             this.setState({
-              directions: result
+              directions: [...this.state.directions, result]
+            })
+          } else {
+            console.error(`error fetching directions ${result}`)
+          }
+        }
+      )
+
+      DirectionsService.route(
+        {
+          origin: new google.maps.LatLng(41.85258, -87.65141),
+          destination: new google.maps.LatLng(41.854616, -87.646359),
+          travelMode: google.maps.TravelMode.DRIVING
+        },
+        (result, status) => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            console.log(result)
+            this.setState({
+              directions: [...this.state.directions, result]
             })
           } else {
             console.error(`error fetching directions ${result}`)
@@ -46,7 +67,12 @@ const MyMapComponent = compose(
     defaultZoom={8}
     defaultCenter={new google.maps.LatLng(41.85073, -87.65126)}
   >
-    {props.directions && <DirectionsRenderer directions={props.directions} />}
+    {props.directions && (
+      <DirectionsRenderer directions={props.directions[1]} />
+    )},{' '}
+    {props.directions && (
+      <DirectionsRenderer directions={props.directions[0]} />
+    )}}
   </GoogleMap>
 ))
 
