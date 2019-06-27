@@ -4,6 +4,7 @@ import {Navbar} from './components'
 import Routes from './routes'
 import Map from './components/Map.js'
 import SimpleContainer from './components/SimpleContainer'
+import MapDirections from './components/MapDirections'
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes />
 
       <Map />
+      <MapDirections />
       <SimpleContainer />
     </div>
   )
