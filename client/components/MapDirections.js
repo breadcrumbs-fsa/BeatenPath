@@ -33,7 +33,6 @@ const MyMapComponent = compose(
         },
         (result, status) => {
           if (status === google.maps.DirectionsStatus.OK) {
-            console.log(result)
             this.setState({
               directions: [...this.state.directions, result]
             })
@@ -51,7 +50,6 @@ const MyMapComponent = compose(
         },
         (result, status) => {
           if (status === google.maps.DirectionsStatus.OK) {
-            console.log(result)
             this.setState({
               directions: [...this.state.directions, result]
             })

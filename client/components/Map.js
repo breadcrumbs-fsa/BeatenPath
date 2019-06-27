@@ -4,52 +4,83 @@ import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
 console.log('before', process.env)
 import '../../secrets'
 console.log('after', process.env)
-
+import RouteView from './RouteView'
 const mapkey = process.env.GOOGLE_MAPJS_API
+
+export const MyMapComponent = withScriptjs(
+  withGoogleMap(props => (
+    <GoogleMap defaultZoom={15} defaultCenter={{lat: 41.85258, lng: -87.65141}}>
+      <RouteView />
+    </GoogleMap>
+  ))
+)
+
+export default MyMapComponent
+
 // console.log(map)
-const MyMapComponent = compose(
-  withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapkey}&js?v=3.exp&libraries=geometry,drawing,places`,
-    loadingElement: <div style={{height: '100%'}} />,
-    containerElement: <div style={{height: `400px`}} />,
-    mapElement: <div style={{height: `100%`}} />
-  }),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-  <GoogleMap defaultZoom={15} defaultCenter={{lat: 41.8781, lng: -87.6298}}>
-    {props.isMarkerShown && (
-      <Marker position={{lat: 41.913501, lng: -87.648163}} />
-    )}
-  </GoogleMap>
-))
 
-export default class MyFancyComponent extends React.PureComponent {
-  state = {
-    isMarkerShown: false
-  }
+// const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+//
+//
+//     <GoogleMap
+//     defaultZoom={8}
+//     defaultCenter={{ lat: -34.397, lng: 150.644 }}
+//   >
+//     {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+//   </GoogleMap>
+// ))
+//
+// <MyMapComponent
+//   isMarkerShown
+//   googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+//   loadingElement={<div style={{ height: `100%` }} />}
+//   containerElement={<div style={{ height: `400px` }} />}
+//   mapElement={<div style={{ height: `100%` }} />}
+// />
 
-  componentDidMount() {
-    this.delayedShowMarker()
-  }
+// const MyMapComponent = compose(
+//   withProps({
+//     googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapkey}&js?v=3.exp&libraries=geometry,drawing,places`,
+//     loadingElement: <div style={{height: '100%'}} />,
+//     containerElement: <div style={{height: `400px`}} />,
+//     mapElement: <div style={{height: `100%`}} />
+//   }),
+//   withScriptjs,
+//   withGoogleMap
+// )(props => (
+//   <GoogleMap defaultZoom={15} defaultCenter={{lat: 41.8781, lng: -87.6298}}>
+//     {props.isMarkerShown && (
+//       <Marker position={{lat: 41.913501, lng: -87.648163}} />
+//     )}
+//   </GoogleMap>
+// ))
 
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({isMarkerShown: true})
-    }, 3000)
-  }
-
-  handleMarkerClick = () => {
-    this.setState({isMarkerShown: false})
-    this.delayedShowMarker()
-  }
-
-  render() {
-    return (
-      <MyMapComponent
-        isMarkerShown={this.state.isMarkerShown}
-        onMarkerClick={this.handleMarkerClick}
-      />
-    )
-  }
-}
+// export default class MyFancyComponent extends React.PureComponent {
+//   state = {
+//     isMarkerShown: false
+//   }
+//
+//   componentDidMount() {
+//     this.delayedShowMarker()
+//   }
+//
+//   delayedShowMarker = () => {
+//     setTimeout(() => {
+//       this.setState({isMarkerShown: true})
+//     }, 3000)
+//   }
+//
+//   handleMarkerClick = () => {
+//     this.setState({isMarkerShown: false})
+//     this.delayedShowMarker()
+//   }
+//
+//   render() {
+//     return (
+//       <MyMapComponent
+//         isMarkerShown={this.state.isMarkerShown}
+//         onMarkerClick={this.handleMarkerClick}
+//       />
+//     )
+//   }
+// }
