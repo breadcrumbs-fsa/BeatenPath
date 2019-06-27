@@ -1,12 +1,15 @@
 import React from 'react'
-import {compose, withProps} from 'recompose'
-import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
-console.log('before', process.env)
+import {compose, withProps, lifecycle} from 'recompose'
+import {
+  GoogleMap,
+  Marker,
+  withGoogleMap,
+  withScriptjs,
+  DirectionsRenderer
+} from 'react-google-maps'
 import '../../secrets'
-console.log('after', process.env)
 
 const mapkey = process.env.GOOGLE_MAPJS_API
-// console.log(map)
 const MyMapComponent = compose(
   withProps({
     googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${mapkey}&js?v=3.exp&libraries=geometry,drawing,places`,
@@ -15,12 +18,35 @@ const MyMapComponent = compose(
     mapElement: <div style={{height: `100%`}} />
   }),
   withScriptjs,
-  withGoogleMap
+  withGoogleMap,
+  lifecycle({
+    componentDidMount() {
+      const DirectionsService = new google.maps.DirectionsService()
+
+      DirectionsService.route(
+        {
+          origin: new google.maps.LatLng(41.85073, -87.65126),
+          destination: new google.maps.LatLng(41.85258, -87.65141),
+          travelMode: google.maps.TravelMode.DRIVING
+        },
+        (result, status) => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            this.setState({
+              directions: result
+            })
+          } else {
+            console.error(`error fetching directions ${result}`)
+          }
+        }
+      )
+    }
+  })
 )(props => (
-  <GoogleMap defaultZoom={15} defaultCenter={{lat: 41.8781, lng: -87.6298}}>
-    {props.isMarkerShown && (
-      <Marker position={{lat: 41.913501, lng: -87.648163}} />
-    )}
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={new google.maps.LatLng(41.85073, -87.65126)}
+  >
+    {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
 ))
 
