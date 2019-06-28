@@ -60,6 +60,7 @@ export class MyMapComponent extends Component {
     console.log(this.state)
     return (
       <GoogleMap
+        defaultOptions={{mapTypeControl: false}}
         ref={this.state.onMapMounted}
         defaultZoom={15}
         defaultCenter={{lat: 41.85258, lng: -87.65141}}
@@ -69,7 +70,7 @@ export class MyMapComponent extends Component {
         <SearchBox
           ref={this.state.onSearchBoxMounted}
           bounds={this.state.bounds}
-          controlPosition={google.maps.ControlPosition.TOP_LEFT}
+          controlPosition={google.maps.ControlPosition.TOP_CENTER}
           onPlacesChanged={this.state.onPlacesChanged}
         >
           <input
