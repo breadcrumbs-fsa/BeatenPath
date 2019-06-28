@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Navbar} from './components'
+import {Navbar, AppBar} from './components'
 import Routes from './routes'
 import Map from './components/Map.js'
 import SimpleContainer from './components/SimpleContainer'
@@ -11,6 +11,7 @@ import MapContainer from './components/MapContainer'
 const App = () => {
   return (
     <div>
+      <AppBar />
       <Navbar />
       <Routes />
       <MapContainer />
