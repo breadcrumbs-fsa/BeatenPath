@@ -4,7 +4,7 @@ import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
 console.log('before', process.env)
 import '../../secrets'
 console.log('after', process.env)
-import RouteView from './RouteView'
+import {RouteView} from './RouteView'
 const mapkey = process.env.GOOGLE_MAPJS_API
 
 export const MyMapComponent = withScriptjs(
