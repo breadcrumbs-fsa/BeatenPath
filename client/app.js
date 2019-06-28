@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navbar} from './components'
+import {Navbar, AppBar} from './components'
 import Routes from './routes'
 import SimpleContainer from './components/SimpleContainer'
 import MapContainer from './components/MapContainer'
@@ -7,7 +7,8 @@ import MapContainer from './components/MapContainer'
 const App = () => {
   return (
     <div>
-      <Navbar />
+      <AppBar />
+      {/* <Navbar /> */}
       <Routes />
       <MapContainer />
       {/* <MapDirections /> */}
