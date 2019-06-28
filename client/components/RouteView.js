@@ -34,6 +34,8 @@ const RouteViewer = props => {
   )
 }
 
+export default RouteView
+
 // constructor(props) {
 //     super(props)
 //     this.state = {
