@@ -23,6 +23,7 @@ const MapContainerView = props => {
           loadingElement={<div style={{height: `100%`}} />}
           containerElement={<div style={{height: `400px`}} />}
           mapElement={<div style={{height: `100%`}} />}
+          dispatch={props.dispatch}
         />
       </div>
       <div>
@@ -30,23 +31,29 @@ const MapContainerView = props => {
           type="button"
           onClick={async function() {
             const DirectionsService = new google.maps.DirectionsService()
-
+            const DirectionsDisplay = new google.maps.DirectionsRenderer()
+            var seg = {}
             await DirectionsService.route(
               {
                 origin: new google.maps.LatLng(41.85073, -87.65126),
+                // origin: new google.maps.LatLng(41.85073, -87.65126),
                 destination: new google.maps.LatLng(41.85258, -87.65141),
                 travelMode: google.maps.TravelMode.DRIVING
               },
-              (result, status) => {
+              async (result, status) => {
                 if (status === google.maps.DirectionsStatus.OK) {
-                  // seg = result
-                  props.dispatch({type: 'ADD_SEGMENT_1', segment: result})
+                  await DirectionsDisplay.setDirections(result)
+                  console.log('INSIDE: ', DirectionsDisplay.getDirections())
+
+                  props.dispatch({
+                    type: 'ADD_SEGMENT_1',
+                    segment: DirectionsDisplay.getDirections()
+                  })
                 } else {
                   console.error(`error fetching directions ${result}`)
                 }
               }
             )
-            // console.log('SEG: ', seg)
           }}
         >
           ROUTE1

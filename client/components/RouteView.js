@@ -23,18 +23,17 @@ const RouteViewer = props => {
   // console.log('ROUTEVIEW2: ', this.state)
 
   return (
-    console.log(props.segments),
-    (
-      <div>
-        {props.segments &&
-          props.segments.map(
-            (segment, index) => (
-              console.log('INDEX: ', index),
-              <DirectionsRenderer key={index} directions={segment} />
-            )
-          )}
-      </div>
-    )
+    // console.log(props.dispatch),
+    <div>
+      {props.segments &&
+        props.segments.map((segment, index) => (
+          <DirectionsRenderer
+            key={index}
+            directions={segment}
+            options={{suppressMarkers: true}}
+          />
+        ))}
+    </div>
   )
 }
 
