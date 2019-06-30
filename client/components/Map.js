@@ -10,7 +10,6 @@ export class MyMapComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      bounds: null,
       center: {lat: 41.851, lng: -87.6513},
       markers: []
     }
@@ -65,7 +64,6 @@ export class MyMapComponent extends Component {
         defaultZoom={15}
         defaultCenter={{lat: 41.85258, lng: -87.65141}}
         center={this.state.center}
-        onBoundsChanged={this.state.onBoundsChanged}
       >
         <SearchBox
           ref={this.state.onSearchBoxMounted}
