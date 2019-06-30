@@ -2,9 +2,7 @@ import _ from 'lodash'
 import React, {Component} from 'react'
 import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
 import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
-import '../../secrets'
 import RouteView from './RouteView'
-const mapkey = process.env.GOOGLE_MAPJS_API
 import {directions} from '../utils/directions'
 
 export class MyMapComponent extends Component {
@@ -21,7 +19,6 @@ export class MyMapComponent extends Component {
 
   componentWillMount() {
     const refs = {}
-    console.log('HEY!!!', directions)
 
     this.setState({
       onMapMounted: ref => {

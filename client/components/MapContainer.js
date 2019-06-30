@@ -1,19 +1,16 @@
-import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps'
 import React, {useContext} from 'react'
 import Map from './Map'
-
 import '../../secrets'
-
 import {Store} from '../app'
-
 const mapkey = process.env.GOOGLE_MAPJS_API
 
+// context wrapper
 export const MapContainer = () => {
   const [state, dispatch] = useContext(Store)
   return <MapContainerView segment={state.segment} dispatch={dispatch} />
 }
+
 const MapContainerView = props => {
-  // const [state, dispatch] = useContext(Store);
   return (
     <div>
       <div>
