@@ -1,10 +1,10 @@
 import {DirectionsRenderer} from 'react-google-maps'
 import React, {Component, createContext, useContext} from 'react'
-import {Store} from '../app'
+import {StoreContext} from '../app'
 import {colorPicker} from '../utils/colorPicker'
 
 export const RouteView = () => {
-  const [state, dispatch] = useContext(Store)
+  const [state, dispatch] = useContext(StoreContext)
   return <RouteViewer segments={state.segments} dispatch={dispatch} />
 }
 

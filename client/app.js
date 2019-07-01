@@ -13,7 +13,7 @@ import {rootReducer, initialState} from './hooks-store/rootReducer'
 
 import {createContext} from 'react'
 
-export const Store = createContext()
+export const StoreContext = createContext()
 
 import {useReducer} from 'react'
 import logger from 'use-reducer-logger'
@@ -22,13 +22,13 @@ const App = () => {
   // const store = useReducer(logger(rootReducer), initialState)
   const store = useReducer(rootReducer, initialState)
   return (
-    <Store.Provider value={store}>
+    <StoreContext.Provider value={store}>
       <div>
         <AppBar />
         <MapContainer />
         <RouteList />
       </div>
-    </Store.Provider>
+    </StoreContext.Provider>
   )
 }
 

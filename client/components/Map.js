@@ -4,6 +4,11 @@ import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
 import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
 import RouteView from './RouteView'
 import {directions} from '../utils/directions'
+import {ADD_PLACE_PREVIEW} from '../hooks-store/placePreviewReducer'
+import {
+  DELETE_FIRST_OR_LAST,
+  DELETE_SEGMENT
+} from '../hooks-store/segmentsReducer'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -19,7 +24,6 @@ export class MyMapComponent extends Component {
 
   componentWillMount() {
     const refs = {}
-
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
@@ -47,13 +51,16 @@ export class MyMapComponent extends Component {
         const nextMarkers = places.map(place => ({
           position: place.geometry.location
         }))
-        const nextCenter = _.get(nextMarkers, '0.position', this.state.center)
-        this.setState({
-          center: nextCenter,
-          markers: [...this.state.markers, nextMarkers[0]],
-          places: [...this.state.places, places]
-        })
 
+        const nextCenter = _.get(nextMarkers, '0.position', this.state.center)
+        // this.setState({
+        //   center: nextCenter,
+        //   markers: [...this.state.markers, nextMarkers[0]],
+        //   places: [...this.state.places, places]
+        // })
+
+        console.log('MARKERS & PLACES', nextMarkers[0], places)
+        this.props.dispatch({type: ADD_PLACE_PREVIEW, place: places})
         //TODO: can we do markers & routes with just single state value?
 
         // places should never have more than two items in it,
@@ -112,9 +119,14 @@ export class MyMapComponent extends Component {
             }}
           />
         </SearchBox>
-        {this.state.markers.map((marker, index) => (
-          <Marker key={index} position={marker.position} />
-        ))}
+        {this.props.placePreview[0] &&
+          (console.log(
+            'PLACE PREVIEwW: ',
+            this.props.placePreview[0].geometry.location
+            // 'MARKER:',this.state.markers[0].position,
+            // this.props.placePreview[0].geometry.location == this.state.markers[0].position
+          ),
+          <Marker position={this.props.placePreview[0].geometry.location} />)}
         <RouteView />
       </GoogleMap>
     )

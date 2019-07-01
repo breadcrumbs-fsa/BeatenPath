@@ -8,7 +8,7 @@ export async function directions(
 ) {
   const DirectionsService = new google.maps.DirectionsService()
   const DirectionsDisplay = new google.maps.DirectionsRenderer()
-  DirectionsService.route(
+  await DirectionsService.route(
     {
       // origin: new google.maps.LatLng(41.85073, -87.65126),
       origin: {placeId: placeId1},
@@ -18,7 +18,7 @@ export async function directions(
     async (result, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
         await DirectionsDisplay.setDirections(result)
-
+        console.log('INSIDE: ', DirectionsDisplay.getDirections())
         dispatch({
           type: dispatchType,
           segment: DirectionsDisplay.getDirections(),
@@ -29,4 +29,5 @@ export async function directions(
       }
     }
   )
+  console.log('OUTSIDE: ', DirectionsDisplay.getDirections())
 }
