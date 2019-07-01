@@ -1,19 +1,17 @@
-import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps'
 import React, {useContext} from 'react'
 import Map from './Map'
-
 import '../../secrets'
-
 import {Store} from '../app'
-
 const mapkey = process.env.GOOGLE_MAPJS_API
-
+import {directions} from '../utils/directions'
+import {DELETE_SEGMENT} from '../hooks-store/segmentsReducer'
+// context wrapper
 export const MapContainer = () => {
   const [state, dispatch] = useContext(Store)
-  return <MapContainerView segment={state.segment} dispatch={dispatch} />
+  return <MapContainerView segments={state.segments} dispatch={dispatch} />
 }
+
 const MapContainerView = props => {
-  // const [state, dispatch] = useContext(Store);
   return (
     <div>
       <div>
@@ -23,33 +21,26 @@ const MapContainerView = props => {
           loadingElement={<div style={{height: `100%`}} />}
           containerElement={<div style={{height: `400px`}} />}
           mapElement={<div style={{height: `100%`}} />}
+          dispatch={props.dispatch}
         />
       </div>
       <div>
         <button
           type="button"
           onClick={async function() {
-            const DirectionsService = new google.maps.DirectionsService()
-
-            await DirectionsService.route(
-              {
-                origin: new google.maps.LatLng(41.85073, -87.65126),
-                destination: new google.maps.LatLng(41.85258, -87.65141),
-                travelMode: google.maps.TravelMode.DRIVING
-              },
-              (result, status) => {
-                if (status === google.maps.DirectionsStatus.OK) {
-                  // seg = result
-                  props.dispatch({type: 'ADD_SEGMENT_1', segment: result})
-                } else {
-                  console.error(`error fetching directions ${result}`)
-                }
-              }
-            )
-            // console.log('SEG: ', seg)
+            if (props.segments && props.segments.length > 2) {
+              directions(
+                props.segments[1].request.origin.placeId,
+                props.segments[2].request.destination.placeId,
+                props.dispatch,
+                'WALKING',
+                DELETE_SEGMENT,
+                1
+              )
+            } else console.log('not enough segments', props)
           }}
         >
-          ROUTE1
+          DELETE ROUTE 2
         </button>
         <button
           type="button"

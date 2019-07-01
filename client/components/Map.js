@@ -2,9 +2,8 @@ import _ from 'lodash'
 import React, {Component} from 'react'
 import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
 import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
-import '../../secrets'
 import RouteView from './RouteView'
-const mapkey = process.env.GOOGLE_MAPJS_API
+import {directions} from '../utils/directions'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -12,7 +11,9 @@ export class MyMapComponent extends Component {
     this.state = {
       bounds: null,
       center: {lat: 41.851, lng: -87.6513},
-      markers: []
+      //markers used for map markers, places used to draw routes
+      markers: [],
+      places: []
     }
   }
 
@@ -47,17 +48,37 @@ export class MyMapComponent extends Component {
           position: place.geometry.location
         }))
         const nextCenter = _.get(nextMarkers, '0.position', this.state.center)
-
         this.setState({
           center: nextCenter,
-          markers: nextMarkers
+          markers: [...this.state.markers, nextMarkers[0]],
+          places: [...this.state.places, places]
         })
+
+        //TODO: can we do markers & routes with just single state value?
+
+        // places should never have more than two items in it,
+        // when we add the 3rd+ item to markers,  add it to places & remove 1st element, shifting places array
+        if (this.state.markers.length > 2) {
+          this.setState({
+            places: this.state.places.splice(1, 2)
+          })
+        }
+
+        // Uses the two items in places to draw route.
+        // Currently have to pass props in as util function doesnt have access to dispatch from react context
+        if (this.state.markers.length > 1) {
+          directions(
+            this.state.places[0][0].place_id,
+            this.state.places[1][0].place_id,
+            this.props.dispatch,
+            'WALKING'
+          )
+        }
       }
     })
   }
 
   render() {
-    console.log(this.state)
     return (
       <GoogleMap
         defaultOptions={{mapTypeControl: false}}

@@ -7,6 +7,7 @@ import SimpleContainer from './components/SimpleContainer'
 import MapDirections from './components/MapDirections'
 import {GoogleMap} from 'react-google-maps'
 import MapContainer from './components/MapContainer'
+import RouteList from './components/RouteList'
 
 import {rootReducer, initialState} from './hooks-store/rootReducer'
 
@@ -18,12 +19,14 @@ import {useReducer} from 'react'
 import logger from 'use-reducer-logger'
 
 const App = () => {
-  const store = useReducer(logger(rootReducer), initialState)
+  // const store = useReducer(logger(rootReducer), initialState)
+  const store = useReducer(rootReducer, initialState)
   return (
     <Store.Provider value={store}>
       <div>
         <AppBar />
         <MapContainer />
+        <RouteList />
       </div>
     </Store.Provider>
   )

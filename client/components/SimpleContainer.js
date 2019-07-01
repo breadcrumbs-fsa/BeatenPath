@@ -10,7 +10,7 @@ export default function SimpleContainer() {
       <Container maxWidth="sm">
         <Typography
           component="div"
-          style={{backgroundColor: '#cfe8fc', height: '100vh'}}
+          style={{backgroundColor: '#cfe8fc', height: '100vh', width: '100vh'}}
         />
       </Container>
     </React.Fragment>
