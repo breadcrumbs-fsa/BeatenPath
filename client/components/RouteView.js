@@ -9,6 +9,7 @@ export const RouteView = () => {
 }
 
 const RouteViewer = props => {
+  // console.log('SEGMENTS: ', props.segments)
   return (
     <div>
       {props.segments &&
