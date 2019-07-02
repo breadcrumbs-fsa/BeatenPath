@@ -4,6 +4,7 @@ import {AppBar} from './components'
 import Routes from './routes'
 import MapContainer from './components/MapContainer'
 import RouteList from './components/RouteList'
+
 import {rootReducer, initialState} from './hooks-store/rootReducer'
 import {createContext} from 'react'
 export const StoreContext = createContext()
@@ -26,3 +27,6 @@ const App = () => {
 }
 
 export default App
+
+// <BottomInfo />
+// <RouteList />
