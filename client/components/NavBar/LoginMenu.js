@@ -7,7 +7,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {SignIn} from '../../../old/components/SignIn'
 import {logout} from '../../store'
+import {Login} from './Login'
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -40,11 +42,8 @@ export default function SimpleMenu() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My Account</MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link to="/signup">Sign Up</Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link to="/login">Login</Link>
+        <MenuItem onClick={handleClick}>
+          <Link to="/auth/google">Login</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
