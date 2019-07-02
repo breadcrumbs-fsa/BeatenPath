@@ -67,7 +67,11 @@ export class MyMapComponent extends Component {
     console.log('onMapMounted: ', this.state.onMapMounted)
     return (
       <GoogleMap
-        defaultOptions={{mapTypeControl: false}}
+        defaultOptions={{
+          mapTypeControl: false,
+          fullscreenControl: false,
+          zoomControl: false
+        }}
         ref={this.state.onMapMounted}
         defaultZoom={14}
         defaultCenter={{lat: 41.85258, lng: -87.65138}}
