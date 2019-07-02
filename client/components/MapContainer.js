@@ -4,8 +4,8 @@ import '../../secrets'
 import {StoreContext} from '../app'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import CommandBar from './CommandBar'
-import {directions} from '../utils/directions'
-import {DELETE_SEGMENT} from '../hooks-store/segments/segmentsReducer'
+// import {directions} from '../utils/directions'
+// import {DELETE_SEGMENT} from '../hooks-store/segments/segmentsReducer'
 // context wrapper
 
 export const MapContainer = () => {
