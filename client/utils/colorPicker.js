@@ -1,5 +1,7 @@
 export const colorPicker = index => {
   switch (index) {
+    case -1:
+      return '#E1442C'
     case 0:
       return '#31ACC4'
     case 1:
@@ -10,6 +12,3 @@ export const colorPicker = index => {
       return '#E1982C'
   }
 }
-
-//    case 0:
-//       return '#E1442C'

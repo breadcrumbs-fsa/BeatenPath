@@ -1,13 +1,19 @@
-import combineReducers from './combineReducers'
-import segmentReducer from './segmentsReducer'
-import placePreviewReducer from './placePreviewReducer'
+import combineReducers from '../utils/combineReducers'
+import segmentReducer from './segments/segmentsReducer'
+import placePreviewReducer from './places/placePreviewReducer'
+import placesPreviewReducer from './places/placesReducer'
+import segmentPreviewReducer from './segments/segmentPreviewReducer'
 
 export const initialState = {
+  segmentPreview: [],
   segments: [],
-  placePreview: []
+  placePreview: [],
+  places: []
 }
 
 export const rootReducer = combineReducers({
+  segmentPreview: segmentPreviewReducer,
   segments: segmentReducer,
-  placePreview: placePreviewReducer
+  placePreview: placePreviewReducer,
+  places: placesPreviewReducer
 })

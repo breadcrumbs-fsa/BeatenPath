@@ -5,13 +5,29 @@ import {colorPicker} from '../utils/colorPicker'
 
 export const RouteView = () => {
   const [state, dispatch] = useContext(StoreContext)
-  return <RouteViewer segments={state.segments} dispatch={dispatch} />
+  return (
+    <RouteViewer
+      segments={state.segments}
+      dispatch={dispatch}
+      segmentPreview={state.segmentPreview}
+    />
+  )
 }
 
 const RouteViewer = props => {
-  // console.log('SEGMENTS: ', props.segments)
   return (
     <div>
+      {props.segmentPreview && (
+        <DirectionsRenderer
+          key={-1}
+          directions={props.segmentPreview[0]}
+          options={{
+            suppressMarkers: true,
+            polylineOptions: {strokeColor: colorPicker(-1)},
+            preserveViewport: true
+          }}
+        />
+      )}
       {props.segments &&
         props.segments.map((segment, index) => (
           <DirectionsRenderer
@@ -19,7 +35,8 @@ const RouteViewer = props => {
             directions={segment}
             options={{
               suppressMarkers: true,
-              polylineOptions: {strokeColor: colorPicker(index)}
+              polylineOptions: {strokeColor: colorPicker(index)},
+              preserveViewport: true
             }}
           />
         ))}

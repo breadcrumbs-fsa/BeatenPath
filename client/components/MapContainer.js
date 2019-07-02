@@ -5,7 +5,7 @@ import {StoreContext} from '../app'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import CommandBar from './CommandBar'
 import {directions} from '../utils/directions'
-import {DELETE_SEGMENT} from '../hooks-store/segmentsReducer'
+import {DELETE_SEGMENT} from '../hooks-store/segments/segmentsReducer'
 // context wrapper
 
 export const MapContainer = () => {
@@ -14,6 +14,8 @@ export const MapContainer = () => {
     <MapContainerView
       segments={state.segments}
       placePreview={state.placePreview}
+      places={state.places}
+      segmentPreview={state.segmentPreview}
       dispatch={dispatch}
     />
   )
@@ -31,6 +33,8 @@ const MapContainerView = props => {
           mapElement={<div style={{height: `100%`}} />}
           dispatch={props.dispatch}
           placePreview={props.placePreview}
+          places={props.places}
+          segmentPreview={props.segmentPreview}
         />
       </div>
       <div>

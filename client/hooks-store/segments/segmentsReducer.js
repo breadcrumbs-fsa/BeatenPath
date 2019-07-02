@@ -7,6 +7,10 @@ export const addSegment1 = segment => ({
   segment
 })
 
+export const placePreviewToNth = segment => ({
+  type: ADD_SEGMENT_1,
+  segment
+})
 export const deleteSegment = (segment, index) => ({
   type: DELETE_SEGMENT,
   segment,
