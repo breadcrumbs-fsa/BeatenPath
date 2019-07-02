@@ -12,7 +12,11 @@ import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
-// context wrapper
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
+
+
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -29,8 +33,9 @@ export const CommandBar = () => {
 const CommandBarView = props => {
   return (
     <div>
-      <button
-        type="button"
+          <Grid item xs={12}>
+      <ButtonGroup fullWidth aria-label="Full width outlined button group">
+        <Button type="button"
         disabled={props.placePreview.length === 0}
         onClick={function() {
           if (props.places.length === 0) {
@@ -51,11 +56,11 @@ const CommandBarView = props => {
               place: props.placePreview[0]
             })
           }
-        }}
-      >
-        add
-      </button>
-      <button>x</button>
+        }}>Add to journey</Button>
+        {/* <Button>width</Button>
+          <Button>ButtonGroup</Button> */}
+      </ButtonGroup>
+    </Grid>
     </div>
   )
 }

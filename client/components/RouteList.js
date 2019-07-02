@@ -49,13 +49,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value
-    })
-  )
-}
+// function generate(element) {
+//   return [0, 1, 2].map(value =>
+//     React.cloneElement(element, {
+//       key: value
+//     })
+//   )
+// }
 
 const RouteLister = props => {
   const classes = useStyles()
@@ -63,6 +63,7 @@ const RouteLister = props => {
   const [secondary] = React.useState(false)
 
   return (
+    console.log(props.placePreview),
     <div className={classes.root}>
       <FormGroup row />
 
@@ -93,9 +94,45 @@ const RouteLister = props => {
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
-              {generate(
+              {props.placePreview[0] ?       <ListItem>
+                  <ListItemIcon style={{color: colorPicker(-1)}}>
+                    <LocationOnIcon />
+                  </ListItemIcon>
+
+                  {/* <ListItemAvatar>
+                    <Avatar>
+                      <FolderIcon />
+                    </Avatar>
+                  </ListItemAvatar> */}
+                  <ListItemText
+                    primary={props.placePreview[0].name}
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton edge="end" aria-label="Delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+              </ListItem>  : <ListItem>
+
+
+                  {/* <ListItemAvatar>
+                    <Avatar>
+                      <FolderIcon />
+                    </Avatar>
+                  </ListItemAvatar> */}
+                  <ListItemText
+                    primary='Add a place!'
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+
+              </ListItem>}
+
+
+
+              {props.places && props.places.slice().reverse().map((place,index) =>(
                 <ListItem>
-                  <ListItemIcon>
+                  <ListItemIcon style={{color: colorPicker(index)}}>
                     <LocationOnIcon />
                   </ListItemIcon>
                   {/* <ListItemAvatar>
@@ -104,7 +141,7 @@ const RouteLister = props => {
                     </Avatar>
                   </ListItemAvatar> */}
                   <ListItemText
-                    primary="Single-line item"
+                    primary={place.name}
                     secondary={secondary ? 'Secondary text' : null}
                   />
                   <ListItemSecondaryAction>
@@ -113,7 +150,7 @@ const RouteLister = props => {
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
-              )}
+                ))}
             </List>
           </div>
         </Grid>
