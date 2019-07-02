@@ -5,7 +5,7 @@
  */
 // export {default as Navbar} from './navbar'
 export {default as AppBar} from './NavBar/AppBar'
-export {default as UserHome} from './user-home'
+export {default as UserHome} from '../../old/components/user-home'
 export {Login, Signup} from './auth-form'
 export {default as BottomInfo} from './BottomInfo'
 // export {default as SignIn} from './NavBar/SignIn'
