@@ -8,6 +8,7 @@ import MapDirections from './components/MapDirections'
 import {GoogleMap} from 'react-google-maps'
 import MapContainer from './components/MapContainer'
 import RouteList from './components/RouteList'
+import BottomInfo from './components/BottomInfo'
 
 import {rootReducer, initialState} from './hooks-store/rootReducer'
 
@@ -26,6 +27,7 @@ const App = () => {
       <div>
         <AppBar />
         <MapContainer />
+        <BottomInfo />
         <RouteList />
       </div>
     </Store.Provider>
