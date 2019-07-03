@@ -46,7 +46,6 @@ router.get('/:journeyId/:segmentId', async (req, res, next) => {
   }
 })
 
-
 // Update current segment
 router.put('/:journeyId/:segmentId', async (req, res, next) => {
   try {
