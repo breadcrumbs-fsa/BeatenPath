@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, {Component} from 'react'
-import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
+import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps'
 import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
 import MarkerView from './MarkerView'
 import RouteView from './RouteView'
@@ -15,19 +15,21 @@ export class MyMapComponent extends Component {
       center: {lat: 41.851, lng: -87.6513}
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     const refs = {}
     this.setState({
       onMapMounted: ref => {
+        console.log('refmap: ', ref)
         refs.map = ref
       },
-      onBoundsChanged: () => {
+      onIdle: () => {
         this.setState({
           bounds: refs.map.getBounds(),
           center: refs.map.getCenter()
         })
       },
       onSearchBoxMounted: ref => {
+        console.log('refsearch: ', ref)
         refs.searchBox = ref
       },
       onPlacesChanged: () => {
@@ -62,14 +64,19 @@ export class MyMapComponent extends Component {
     })
   }
   render() {
+    console.log('onMapMounted: ', this.state.onMapMounted)
     return (
       <GoogleMap
-        defaultOptions={{mapTypeControl: false}}
+        defaultOptions={{
+          mapTypeControl: false,
+          fullscreenControl: false,
+          zoomControl: false
+        }}
         ref={this.state.onMapMounted}
         defaultZoom={14}
         defaultCenter={{lat: 41.85258, lng: -87.65138}}
         center={this.state.center}
-        onBoundsChanged={this.state.onBoundsChanged}
+        onIdle={this.state.onIdle}
       >
         <SearchBox
           ref={this.state.onSearchBoxMounted}
