@@ -6,6 +6,7 @@ import MarkerView from './MarkerView'
 import RouteView from './RouteView'
 import {directions} from '../utils/directions'
 import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
+import {ADD_REF} from '../hooks-store/search/searchReducer'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -32,15 +33,9 @@ export class MyMapComponent extends Component {
       },
       onPlacesChanged: () => {
         const places = refs.searchBox.getPlaces()
-        // const bounds = new google.maps.LatLngBounds()
-        //
-        // places.forEach(place => {
-        //   if (place.geometry.viewport) {
-        //     bounds.union(place.geometry.viewport)
-        //   } else {
-        //     bounds.extend(place.geometry.location)
-        //   }
-        // })
+
+        console.log(refs.input)
+
         const nextMarkers = places.map(place => ({
           position: place.geometry.location
         }))
@@ -58,6 +53,13 @@ export class MyMapComponent extends Component {
             'PREVIEW_SEGMENT'
           )
         }
+      },
+
+      onInputMounted: ref => {
+        // refs.input = ref
+        this.props.dispatch({type: 'ADD_REF', ref: ref})
+        // console.log(refs.input)
+        // refs.input.value=''
       }
     })
   }
@@ -84,6 +86,7 @@ export class MyMapComponent extends Component {
           <input
             type="text"
             placeholder="Search"
+            ref={this.state.onInputMounted}
             style={{
               boxSizing: `border-box`,
               border: `1px solid transparent`,
