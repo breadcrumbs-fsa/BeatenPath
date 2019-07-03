@@ -21,10 +21,21 @@ module.exports = router
 //     }
 // })
 
+// Add new segment
+router.post('/', async (req, res, next) => {
+  try {
+    console.log('req body: ', req.body)
+    const newSegment = await Segment.create(req.body)
+    res.json(newSegment)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // Get current segment of specific journey
 router.get('/:journeyId/:segmentId', async (req, res, next) => {
   try {
-    const currentSegment = await Segments.findByPk(rq.params.segmentId)
+    const currentSegment = await Segment.findByPk(req.params.segmentId)
     if (currentSegment) {
       res.json(currentSegment)
     } else {
@@ -35,15 +46,6 @@ router.get('/:journeyId/:segmentId', async (req, res, next) => {
   }
 })
 
-// Add new segment
-router.post('/', async (req, res, next) => {
-  try {
-    const newSegment = await Segment.create(req.body)
-    res.json(newSegment)
-  } catch (err) {
-    next(err)
-  }
-})
 
 // Update current segment
 router.put('/:journeyId/:segmentId', async (req, res, next) => {
