@@ -1,5 +1,7 @@
 const router = require('express').Router()
 // const { } = require('../db/models') TODO: Add models
+const Journey = require('../db/models/journey')
+
 module.exports = router
 
 // Get all journeys
@@ -78,7 +80,8 @@ router.get('/:categoryId/:journeyId', async (req, res, next) => {
 // Add new journey
 router.post('/', async (req, res, next) => {
   try {
-    res.json()
+    const newJourney = await Journey.create(req.body)
+    res.json(newJourney)
   } catch (err) {
     next(err)
   }
