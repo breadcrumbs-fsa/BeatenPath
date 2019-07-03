@@ -34,7 +34,7 @@ export class MyMapComponent extends Component {
       onPlacesChanged: () => {
         const places = refs.searchBox.getPlaces()
 
-        console.log(refs.input)
+        console.log('props: ', this.props)
 
         const nextMarkers = places.map(place => ({
           position: place.geometry.location

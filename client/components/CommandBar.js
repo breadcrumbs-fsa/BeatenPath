@@ -4,6 +4,7 @@ import '../../secrets'
 import {StoreContext} from '../app'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import {directions} from '../utils/directions'
+import {saveJourney} from '../utils/saveJourney'
 import {
   DELETE_FIRST_OR_LAST,
   DELETE_SEGMENT
@@ -15,8 +16,7 @@ import {
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
-
-
+import TextField from '@material-ui/core/TextField'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -33,34 +33,48 @@ export const CommandBar = () => {
 const CommandBarView = props => {
   return (
     <div>
-          <Grid item xs={12}>
-      <ButtonGroup fullWidth aria-label="Full width outlined button group">
-        <Button type="button"
-        disabled={props.placePreview.length === 0}
-        onClick={function() {
-          if (props.places.length === 0) {
-            props.dispatch({
-              type: PLACE_PREVIEW_TO_FIRST,
-              place: props.placePreview[0]
-            })
-          } else if (props.places.length > 0) {
-            directions(
-              props.places[props.places.length - 1].place_id,
-              props.placePreview[0].place_id,
-              props.dispatch,
-              'WALKING',
-              'ADD_SEGMENT_1'
-            )
-            props.dispatch({
-              type: PLACE_PREVIEW_TO_NTH,
-              place: props.placePreview[0]
-            })
-          }
-        }}>Add to journey</Button>
-        {/* <Button>width</Button>
+      <Grid item xs={12}>
+        <ButtonGroup fullWidth aria-label="Full width outlined button group">
+          <Button
+            type="button"
+            disabled={props.placePreview.length === 0}
+            onClick={function() {
+              if (props.places.length === 0) {
+                props.dispatch({
+                  type: PLACE_PREVIEW_TO_FIRST,
+                  place: props.placePreview[0]
+                })
+              } else if (props.places.length > 0) {
+                directions(
+                  props.places[props.places.length - 1].place_id,
+                  props.placePreview[0].place_id,
+                  props.dispatch,
+                  'WALKING',
+                  'ADD_SEGMENT_1'
+                )
+                props.dispatch({
+                  type: PLACE_PREVIEW_TO_NTH,
+                  place: props.placePreview[0]
+                })
+              }
+            }}
+          >
+            Add to journey
+          </Button>
+          {/* <Button>width</Button>
           <Button>ButtonGroup</Button> */}
-      </ButtonGroup>
-    </Grid>
+        </ButtonGroup>
+        <form
+          onSubmit={event =>
+            saveJourney(event.target.content.value, props.segments)
+          }
+        >
+          <div>
+            <input type="text" name="content" placeholder="Untitled Journey" />
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </Grid>
     </div>
   )
 }
