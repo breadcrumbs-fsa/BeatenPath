@@ -36,6 +36,7 @@ const MapContainer = props => {
           placePreview={state.placePreview}
           places={state.places}
           segmentPreview={state.segmentPreview}
+          searchInput={state.searchInput}
         />
       </div>
       <div>
