@@ -19,7 +19,6 @@ export class MyMapComponent extends Component {
     const refs = {}
     this.setState({
       onMapMounted: ref => {
-        console.log('refmap: ', ref)
         refs.map = ref
       },
       onIdle: () => {
@@ -29,7 +28,6 @@ export class MyMapComponent extends Component {
         })
       },
       onSearchBoxMounted: ref => {
-        console.log('refsearch: ', ref)
         refs.searchBox = ref
       },
       onPlacesChanged: () => {
@@ -64,7 +62,6 @@ export class MyMapComponent extends Component {
     })
   }
   render() {
-    console.log('onMapMounted: ', this.state.onMapMounted)
     return (
       <GoogleMap
         defaultOptions={{

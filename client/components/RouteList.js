@@ -63,7 +63,6 @@ const RouteLister = props => {
   const [secondary] = React.useState(false)
 
   return (
-    console.log(props.placePreview),
     <div className={classes.root}>
       <FormGroup row />
 
@@ -94,7 +93,8 @@ const RouteLister = props => {
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
-              {props.placePreview[0] ?       <ListItem>
+              {props.placePreview[0] ? (
+                <ListItem>
                   <ListItemIcon style={{color: colorPicker(-1)}}>
                     <LocationOnIcon />
                   </ListItemIcon>
@@ -113,44 +113,46 @@ const RouteLister = props => {
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
-              </ListItem>  : <ListItem>
-
-
-                  {/* <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar> */}
-                  <ListItemText
-                    primary='Add a place!'
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-
-              </ListItem>}
-
-
-
-              {props.places && props.places.slice().reverse().map((place,index) =>(
-                <ListItem>
-                  <ListItemIcon style={{color: colorPicker(index)}}>
-                    <LocationOnIcon />
-                  </ListItemIcon>
-                  {/* <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar> */}
-                  <ListItemText
-                    primary={place.name}
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="Delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
                 </ListItem>
-                ))}
+              ) : (
+                <ListItem>
+                  {/* <ListItemAvatar>
+                    <Avatar>
+                      <FolderIcon />
+                    </Avatar>
+                  </ListItemAvatar> */}
+                  <ListItemText
+                    primary="Add a place!"
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                </ListItem>
+              )}
+              {console.log(props.places)}
+              {props.places &&
+                props.places
+                  .slice()
+                  .reverse()
+                  .map((place, index) => (
+                    <ListItem key={place.id}>
+                      <ListItemIcon style={{color: colorPicker(index)}}>
+                        <LocationOnIcon />
+                      </ListItemIcon>
+                      {/* <ListItemAvatar>
+                    <Avatar>
+                      <FolderIcon />
+                    </Avatar>
+                  </ListItemAvatar> */}
+                      <ListItemText
+                        primary={place.name}
+                        secondary={secondary ? 'Secondary text' : null}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="Delete">
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
             </List>
           </div>
         </Grid>

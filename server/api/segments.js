@@ -1,5 +1,7 @@
 const router = require('express').Router()
 // const { } = require('../db/models') TODO: Add models
+const Segment = require('../db/models/segment')
+
 module.exports = router
 
 // Get all segments of specific journey
@@ -36,7 +38,8 @@ router.get('/:journeyId/:segmentId', async (req, res, next) => {
 // Add new segment
 router.post('/', async (req, res, next) => {
   try {
-    res.json()
+    const newSegment = await Segment.create(req.body)
+    res.json(newSegment)
   } catch (err) {
     next(err)
   }

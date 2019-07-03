@@ -8,7 +8,7 @@ const Place = db.define('places', {
   },
 
   googlePlaceId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     unique: true
   },

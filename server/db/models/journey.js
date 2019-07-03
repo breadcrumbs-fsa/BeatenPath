@@ -6,15 +6,13 @@ const Journey = db.define('journeys', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  tripStart: {
-    foreignKey: true,
+  journeyStart: {
     allowNull: false,
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
-  tripEnd: {
-    foreignKey: true,
+  journeyEnd: {
     allowNull: false,
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   }
   //TODO: TotalDistance, Lat, Long, Radius (degree type?)
 })
