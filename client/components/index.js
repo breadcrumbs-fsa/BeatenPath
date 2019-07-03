@@ -6,6 +6,7 @@
 // export {default as Navbar} from './navbar'
 export {default as AppBar} from './NavBar/AppBar'
 export {default as UserHome} from '../../old/components/user-home'
-export {Login, Signup} from './auth-form'
+// export {Login} from './auth-form'
+export {default as Login} from '../components/NavBar/Login'
 // export {default as SignIn} from './NavBar/SignIn'
 // export {default as SignUp} from './NavBar/SignUp'
