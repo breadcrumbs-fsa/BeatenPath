@@ -63,7 +63,6 @@ const RouteLister = props => {
   const [secondary] = React.useState(false)
 
   return (
-    console.log(props.placePreview),
     <div className={classes.root}>
       <FormGroup row />
 
