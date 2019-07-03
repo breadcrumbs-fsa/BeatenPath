@@ -7,21 +7,22 @@ import CommandBar from './CommandBar'
 // import {directions} from '../utils/directions'
 // import {DELETE_SEGMENT} from '../hooks-store/segments/segmentsReducer'
 // context wrapper
+//
+// export const MapContainer = () => {
+//   const [state, dispatch] = useContext(StoreContext)
+//   return (
+//     <MapContainerView
+//       segments={state.segments}
+//       placePreview={state.placePreview}
+//       places={state.places}
+//       segmentPreview={state.segmentPreview}
+//       dispatch={dispatch}
+//     />
+//   )
+// }
 
-export const MapContainer = () => {
+const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
-  return (
-    <MapContainerView
-      segments={state.segments}
-      placePreview={state.placePreview}
-      places={state.places}
-      segmentPreview={state.segmentPreview}
-      dispatch={dispatch}
-    />
-  )
-}
-
-const MapContainerView = props => {
   return (
     <div>
       <div>
@@ -31,10 +32,10 @@ const MapContainerView = props => {
           loadingElement={<div style={{height: `100%`}} />}
           containerElement={<div style={{height: `400px`}} />}
           mapElement={<div style={{height: `100%`}} />}
-          dispatch={props.dispatch}
-          placePreview={props.placePreview}
-          places={props.places}
-          segmentPreview={props.segmentPreview}
+          dispatch={dispatch}
+          placePreview={state.placePreview}
+          places={state.places}
+          segmentPreview={state.segmentPreview}
         />
       </div>
       <div>
