@@ -21,25 +21,26 @@ module.exports = router
 //     }
 // })
 
-// Get current segment of specific journey
-router.get('/:journeyId/:segmentId', async (req, res, next) => {
+// Add new segment
+router.post('/', async (req, res, next) => {
   try {
-    const currentSegment = await Segments.findByPk(rq.params.segmentId)
-    if (currentSegment) {
-      res.json(currentSegment)
-    } else {
-      res.send('this leg of the journey has magically disappeared')
-    }
+    console.log('req body: ', req.body)
+    const newSegment = await Segment.create(req.body)
+    res.json(newSegment)
   } catch (err) {
     next(err)
   }
 })
 
-// Add new segment
-router.post('/', async (req, res, next) => {
+// Get current segment of specific journey
+router.get('/:journeyId/:segmentId', async (req, res, next) => {
   try {
-    const newSegment = await Segment.create(req.body)
-    res.json(newSegment)
+    const currentSegment = await Segment.findByPk(req.params.segmentId)
+    if (currentSegment) {
+      res.json(currentSegment)
+    } else {
+      res.send('this leg of the journey has magically disappeared')
+    }
   } catch (err) {
     next(err)
   }
