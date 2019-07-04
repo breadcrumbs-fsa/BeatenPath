@@ -8,7 +8,7 @@ async function seed() {
   console.log('db synced!')
 
   let journeyOne = await Journey.create({
-    id: 1,
+    // id: 1,
     journeyEnd: 'ChIJb5jjxrjaD4gRXr0WSVF-WOU',
     updatedAt: '2019-07-03 14:15:01.193-05',
     name: 'Date Night',
@@ -17,7 +17,7 @@ async function seed() {
   })
 
   let journeyTwo = await Journey.create({
-    id: 3,
+    // id: 3,
     journeyEnd: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
     updatedAt: '2019-07-03 14:25:15.949-05',
     name: 'Afternoon',
@@ -26,7 +26,7 @@ async function seed() {
   })
 
   let journeyThree = await Journey.create({
-    id: 4,
+    // id: 4,
     journeyEnd: 'ChIJeRTPP8fSD4gRl4sybR1EJmY',
     updatedAt: '2019-07-03 14:29:29.317-05',
     name: 'Bar Crawl',
@@ -37,8 +37,8 @@ async function seed() {
   let segOne = await Segment.create({
     journeyId: 1,
     segmentEnd: 'ChIJg4wvjkbTD4gR9wL71pYazkg',
-    id: 1,
-    order: 1,
+    // id: 1,
+    order: 0,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJIbdi2_8sDogRNs8JXduUSpo',
@@ -49,8 +49,8 @@ async function seed() {
   let segTwo = await Segment.create({
     journeyId: 1,
     segmentEnd: 'ChIJVUmkEX0sDogRcQVW_jiV2JE',
-    id: 2,
-    order: 2,
+    // id: 2,
+    order: 1,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJg4wvjkbTD4gR9wL71pYazkg',
@@ -61,8 +61,8 @@ async function seed() {
   let segThree = await Segment.create({
     journeyId: 1,
     segmentEnd: 'ChIJwwvDb8fSD4gRb54qO3OOpVA',
-    id: 3,
-    order: 3,
+    // id: 3,
+    order: 2,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJVUmkEX0sDogRcQVW_jiV2JE',
@@ -73,8 +73,8 @@ async function seed() {
   let segFour = await Segment.create({
     journeyId: 1,
     segmentEnd: 'ChIJb5jjxrjaD4gRXr0WSVF-WOU',
-    id: 4,
-    order: 4,
+    // id: 4,
+    order: 3,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJwwvDb8fSD4gRb54qO3OOpVA',
@@ -83,22 +83,22 @@ async function seed() {
   })
 
   let segFive = await Segment.create({
-    journeyId: 3,
+    journeyId: 2,
     segmentEnd: 'ChIJr-ihyFbTD4gR81mealSWir4',
-    id: 5,
-    order: 1,
+    // id: 5,
+    order: 0,
     transportation: 'WALKING',
     placeId: null,
-    segmentStart: 'ChIJ2y7xkU0rDogR3KSIsJbbrNA',
+    segmentStart: 'ChIJ2y7xkU0rDogR2KSIsJbbrNA',
     updatedAt: '2019-07-03 15:25:52.692-05',
     createdAt: '2019-07-03 15:25:52.692-05'
   })
 
   let segSix = await Segment.create({
-    journeyId: 3,
+    journeyId: 2,
     segmentEnd: 'ChIJD-dqScYsDogRF6FSDLxT3H8',
-    id: 6,
-    order: 2,
+    // id: 6,
+    order: 1,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJr-ihyFbTD4gR81mealSWir4',
@@ -107,10 +107,10 @@ async function seed() {
   })
 
   let segSeven = await Segment.create({
-    journeyId: 3,
+    journeyId: 2,
     segmentEnd: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
-    id: 7,
-    order: 3,
+    // id: 7,
+    order: 2,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJD-dqScYsDogRF6FSDLxT3H8',
@@ -119,10 +119,10 @@ async function seed() {
   })
 
   let segEight = await Segment.create({
-    journeyId: 3,
+    journeyId: 2,
     segmentEnd: 'ChIJ7ZBcatgsDogRVeUuWDAD0TM',
-    id: 8,
-    order: 4,
+    // id: 8,
+    order: 3,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
@@ -131,10 +131,10 @@ async function seed() {
   })
 
   let segNine = await Segment.create({
-    journeyId: 4,
+    journeyId: 3,
     segmentEnd: 'ChIJ2dxMprjSD4gRvUWbdblbV1w',
-    id: 9,
-    order: 1,
+    // id: 9,
+    order: 0,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJk6WVC5XSD4gRxhZ8j-A-loE',
@@ -143,10 +143,10 @@ async function seed() {
   })
 
   let segTen = await Segment.create({
-    journeyId: 4,
+    journeyId: 3,
     segmentEnd: 'ChIJazuRe8fSD4gRJeLBiMM_Izg',
-    id: 10,
-    order: 2,
+    // id: 10,
+    order: 1,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJ2dxMprjSD4gRvUWbdblbV1w',
@@ -155,10 +155,10 @@ async function seed() {
   })
 
   let segEleven = await Segment.create({
-    journeyId: 4,
+    journeyId: 3,
     segmentEnd: 'ChIJzx42AsfSD4gRpemze8L8nO4',
-    id: 11,
-    order: 3,
+    // id: 11,
+    order: 2,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJazuRe8fSD4gRJeLBiMM_Izg',
@@ -167,10 +167,10 @@ async function seed() {
   })
 
   let segTwelve = await Segment.create({
-    journeyId: 4,
+    journeyId: 3,
     segmentEnd: 'ChIJ7ZBcatgsDogRVeUuWDAD0TM',
-    id: 12,
-    order: 4,
+    // id: 12,
+    order: 3,
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJzx42AsfSD4gRpemze8L8nO4',
