@@ -9,7 +9,7 @@ export async function saveJourney(journeyName, segmentArray) {
         segmentArray[segmentArray.length - 1].geocoded_waypoints[1].place_id
     })
 
-    segmentArray.map(async (segment, index) => {
+    await segmentArray.map(async (segment, index) => {
       await axios.post('/api/segments', {
         segmentStart: segment.geocoded_waypoints[0].place_id,
         segmentEnd: segment.geocoded_waypoints[1].place_id,
