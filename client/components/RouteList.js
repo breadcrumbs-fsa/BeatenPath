@@ -105,7 +105,11 @@ const RouteLister = props => {
                     </Avatar>
                   </ListItemAvatar> */}
                   <ListItemText
-                    primary={props.placePreview[0].name}
+                    primary={
+                      props.placePreview[0].name
+                        ? props.placePreview[0].name
+                        : props.placePreview[0].formatted_address
+                    }
                     secondary={secondary ? 'Secondary text' : null}
                   />
                   <ListItemSecondaryAction>
@@ -143,9 +147,12 @@ const RouteLister = props => {
                     </Avatar>
                   </ListItemAvatar> */}
                       <ListItemText
-                        primary={place.name}
+                        primary={
+                          place.name ? place.name : place.formatted_address
+                        }
                         secondary={secondary ? 'Secondary text' : null}
                       />
+
                       <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="Delete">
                           <DeleteIcon />
