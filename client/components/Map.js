@@ -15,39 +15,6 @@ export class MyMapComponent extends Component {
       bounds: null,
       center: {lat: 41.851, lng: -87.6513}
     }
-    this.onClickHandler = this.onClickHandler.bind(this)
-  }
-
-  async onClickHandler(event, props) {
-    const geocoder = new google.maps.Geocoder()
-    const lat = event.latLng.lat()
-    const lng = event.latLng.lng()
-    const latlng = {lat: parseFloat(lat), lng: parseFloat(lng)}
-    // console.log('IN CLICK:', event.latLng.lat())
-    console.log(this.props)
-    await geocoder.geocode({location: latlng}, function(results, status) {
-      if (status === google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          // console.log(this)
-          // console.log(dispatch)
-          console.log(props)
-          props.dispatch({type: ADD_PLACE_PREVIEW, place: [results[1]]})
-          if (props.places.length > 0) {
-            directions(
-              props.places[props.places.length - 1].place_id,
-              results[1].place_id,
-              props.dispatch,
-              'WALKING',
-              'PREVIEW_SEGMENT'
-            )
-          }
-        } else {
-          window.alert('No results found')
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status)
-      }
-    })
   }
 
   componentDidMount() {
@@ -68,7 +35,6 @@ export class MyMapComponent extends Component {
       onPlacesChanged: () => {
         const places = refs.searchBox.getPlaces()
 
-        // console.log('props: ', this.props)
         console.log(places)
         const nextMarkers = places.map(place => ({
           position: place.geometry.location
@@ -90,44 +56,63 @@ export class MyMapComponent extends Component {
       },
 
       onInputMounted: ref => {
-        // refs.input = ref
         this.props.dispatch({type: 'ADD_REF', ref: ref})
-        // console.log(refs.input)
-        // refs.input.value=''
-      }
+      },
 
-      // onClickHandler: event => {
-      //   const geocoder = new google.maps.Geocoder()
-      //   const lat = event.latLng.lat()
-      //   const lng = event.latLng.lng()
-      //   const latlng = {lat: parseFloat(lat), lng: parseFloat(lng)}
-      //   // console.log('IN CLICK:', event.latLng.lat())
-      //     console.log(this.props)
-      //
-      //   geocoder.geocode({location: latlng}, function(results, status) {
-      //     if (status === google.maps.GeocoderStatus.OK) {
-      //       if (results[1]) {
-      //                   console.log(this)
-      //
-      //         // this.props.dispatch({type: ADD_PLACE_PREVIEW, place: results[1]})
-      //         // if (this.props.places.length > 0) {
-      //         //   directions(
-      //         //     this.props.places[this.props.places.length - 1].place_id,
-      //         //     results[1].place_id,
-      //         //     this.props.dispatch,
-      //         //     'WALKING',
-      //         //     'PREVIEW_SEGMENT'
-      //         //   )
-      //         // }
-      //         // console.log(results[1].place_id);
-      //       } else {
-      //         window.alert('No results found')
-      //       }
-      //     } else {
-      //       window.alert('Geocoder failed due to: ' + status)
-      //     }
-      //   })
-      // }
+      //for store access have to pass in props below in arrow function
+      onClickHandler: async (event, props) => {
+        console.log(event, props)
+        if (event.placeId) {
+          console.log('hi')
+          // const placesService = new google.maps.places.PlacesService(refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+          // placesService.findPlaceFromQuery({bounds: this.state.bounds, type: ['hotel']}, (results,status) => {
+          //   if (status == google.maps.places.PlacesServiceStatus.OK) {
+          //     console.log(results);
+          //   } else {
+          //     console.log('didnt work')
+          //   }
+          // })
+          // props.dispatch({type: ADD_PLACE_PREVIEW, place: [results[1]]})
+          // if (props.places.length > 0) {
+          //   directions(
+          //     props.places[props.places.length - 1].place_id,
+          //     event.placeId,
+          //     props.dispatch,
+          //     'WALKING',
+          //     'PREVIEW_SEGMENT'
+          //   )
+          // }
+        } else {
+          const geocoder = new google.maps.Geocoder()
+          const lat = event.latLng.lat()
+          const lng = event.latLng.lng()
+          const latlng = {lat: parseFloat(lat), lng: parseFloat(lng)}
+          await geocoder.geocode({location: latlng}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+              if (results[1]) {
+                console.log(results[1])
+                // console.log(placesService.getPlaceInformation(results[1].placeId))
+
+                //
+                // props.dispatch({type: ADD_PLACE_PREVIEW, place: [results[1]]})
+                // if (props.places.length > 0) {
+                //   directions(
+                //     props.places[props.places.length - 1].place_id,
+                //     results[1].place_id,
+                //     props.dispatch,
+                //     'WALKING',
+                //     'PREVIEW_SEGMENT'
+                //   )
+                // }
+              } else {
+                console.log('No results found')
+              }
+            } else {
+              console.log('Geocoder failed due to: ' + status)
+            }
+          })
+        }
+      }
     })
   }
   render() {
@@ -143,7 +128,7 @@ export class MyMapComponent extends Component {
         defaultCenter={{lat: 41.85258, lng: -87.65138}}
         center={this.state.center}
         onIdle={this.state.onIdle}
-        onClick={event => this.onClickHandler(event, this.props)}
+        onClick={event => this.state.onClickHandler(event, this.props)}
       >
         <SearchBox
           ref={this.state.onSearchBoxMounted}
