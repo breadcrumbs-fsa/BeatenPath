@@ -5,7 +5,6 @@ import {colorPicker} from '../utils/colorPicker'
 
 export const RouteView = () => {
   const [state, dispatch] = useContext(StoreContext)
-  console.log('SEGMENTS: ', state.segments)
   return (
     <RouteViewer
       segments={state.segments}

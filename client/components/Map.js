@@ -5,6 +5,7 @@ import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
 import MarkerView from './MarkerView'
 import RouteView from './RouteView'
 import {directions} from '../utils/directions'
+import {multiJourneys} from '../utils/multiJourneys'
 import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
 import {ADD_REF} from '../hooks-store/search/searchReducer'
 
@@ -34,8 +35,6 @@ export class MyMapComponent extends Component {
       onPlacesChanged: () => {
         const places = refs.searchBox.getPlaces()
 
-        console.log('props: ', this.props)
-
         const nextMarkers = places.map(place => ({
           position: place.geometry.location
         }))
@@ -62,8 +61,12 @@ export class MyMapComponent extends Component {
         // refs.input.value=''
       }
     })
+
+    multiJourneys(this.props.dispatch)
+    console.log('hello')
   }
   render() {
+    console.log('map journeys: ', this.props.journeys)
     return (
       <GoogleMap
         defaultOptions={{
