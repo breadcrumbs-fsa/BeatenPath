@@ -16,16 +16,16 @@ async function seed() {
     createdAt: '2019-07-03 14:15:01.193-05'
   })
 
-  let journeyTwo = await Journey.create({
-    // id: 3,
-    journeyEnd: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
-    updatedAt: '2019-07-03 14:25:15.949-05',
-    name: 'Afternoon',
-    journeyStart: 'ChIJ2y7xkU0rDogR3KSIsJbbrNA',
-    createdAt: '2019-07-03 14:25:15.949-05'
-  })
+  // let journeyTwo = await Journey.create({
+  //   // id: 3,
+  //   journeyEnd: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
+  //   updatedAt: '2019-07-03 14:25:15.949-05',
+  //   name: 'Afternoon',
+  //   journeyStart: 'ChIJ2y7xkU0rDogR3KSIsJbbrNA',
+  //   createdAt: '2019-07-03 14:25:15.949-05'
+  // })
 
-  let journeyThree = await Journey.create({
+  let journeyTwo = await Journey.create({
     // id: 4,
     journeyEnd: 'ChIJeRTPP8fSD4gRl4sybR1EJmY',
     updatedAt: '2019-07-03 14:29:29.317-05',
@@ -82,56 +82,56 @@ async function seed() {
     createdAt: '2019-07-03 15:19:00.222-05'
   })
 
-  let segFive = await Segment.create({
-    journeyId: 2,
-    segmentEnd: 'ChIJr-ihyFbTD4gR81mealSWir4',
-    // id: 5,
-    order: 0,
-    transportation: 'WALKING',
-    placeId: null,
-    segmentStart: 'ChIJ2y7xkU0rDogR2KSIsJbbrNA',
-    updatedAt: '2019-07-03 15:25:52.692-05',
-    createdAt: '2019-07-03 15:25:52.692-05'
-  })
+  // let segFive = await Segment.create({
+  //   journeyId: 2,
+  //   segmentEnd: 'ChIJr-ihyFbTD4gR81mealSWir4',
+  //   // id: 5,
+  //   order: 0,
+  //   transportation: 'WALKING',
+  //   placeId: null,
+  //   segmentStart: 'ChIJ2y7xkU0rDogR2KSIsJbbrNA',
+  //   updatedAt: '2019-07-03 15:25:52.692-05',
+  //   createdAt: '2019-07-03 15:25:52.692-05'
+  // })
 
-  let segSix = await Segment.create({
-    journeyId: 2,
-    segmentEnd: 'ChIJD-dqScYsDogRF6FSDLxT3H8',
-    // id: 6,
-    order: 1,
-    transportation: 'WALKING',
-    placeId: null,
-    segmentStart: 'ChIJr-ihyFbTD4gR81mealSWir4',
-    updatedAt: '2019-07-03 15:26:01.89-05',
-    createdAt: '2019-07-03 15:26:01.89-05'
-  })
+  // let segSix = await Segment.create({
+  //   journeyId: 2,
+  //   segmentEnd: 'ChIJD-dqScYsDogRF6FSDLxT3H8',
+  //   // id: 6,
+  //   order: 1,
+  //   transportation: 'WALKING',
+  //   placeId: null,
+  //   segmentStart: 'ChIJr-ihyFbTD4gR81mealSWir4',
+  //   updatedAt: '2019-07-03 15:26:01.89-05',
+  //   createdAt: '2019-07-03 15:26:01.89-05'
+  // })
 
-  let segSeven = await Segment.create({
-    journeyId: 2,
-    segmentEnd: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
-    // id: 7,
-    order: 2,
-    transportation: 'WALKING',
-    placeId: null,
-    segmentStart: 'ChIJD-dqScYsDogRF6FSDLxT3H8',
-    updatedAt: '2019-07-03 15:26:10.557-05',
-    createdAt: '2019-07-03 15:26:10.557-05'
-  })
+  // let segSeven = await Segment.create({
+  //   journeyId: 2,
+  //   segmentEnd: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
+  //   // id: 7,
+  //   order: 2,
+  //   transportation: 'WALKING',
+  //   placeId: null,
+  //   segmentStart: 'ChIJD-dqScYsDogRF6FSDLxT3H8',
+  //   updatedAt: '2019-07-03 15:26:10.557-05',
+  //   createdAt: '2019-07-03 15:26:10.557-05'
+  // })
 
-  let segEight = await Segment.create({
-    journeyId: 2,
-    segmentEnd: 'ChIJ7ZBcatgsDogRVeUuWDAD0TM',
-    // id: 8,
-    order: 3,
-    transportation: 'WALKING',
-    placeId: null,
-    segmentStart: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
-    updatedAt: '2019-07-03 15:26:18.973-05',
-    createdAt: '2019-07-03 15:26:18.973-05'
-  })
+  // let segEight = await Segment.create({
+  //   journeyId: 2,
+  //   segmentEnd: 'ChIJ7ZBcatgsDogRVeUuWDAD0TM',
+  //   // id: 8,
+  //   order: 3,
+  //   transportation: 'WALKING',
+  //   placeId: null,
+  //   segmentStart: 'ChIJ78NyRsUsDogR6AqyYoPrts4',
+  //   updatedAt: '2019-07-03 15:26:18.973-05',
+  //   createdAt: '2019-07-03 15:26:18.973-05'
+  // })
 
   let segNine = await Segment.create({
-    journeyId: 3,
+    journeyId: 2,
     segmentEnd: 'ChIJ2dxMprjSD4gRvUWbdblbV1w',
     // id: 9,
     order: 0,
@@ -143,7 +143,7 @@ async function seed() {
   })
 
   let segTen = await Segment.create({
-    journeyId: 3,
+    journeyId: 2,
     segmentEnd: 'ChIJazuRe8fSD4gRJeLBiMM_Izg',
     // id: 10,
     order: 1,
@@ -155,7 +155,7 @@ async function seed() {
   })
 
   let segEleven = await Segment.create({
-    journeyId: 3,
+    journeyId: 2,
     segmentEnd: 'ChIJzx42AsfSD4gRpemze8L8nO4',
     // id: 11,
     order: 2,
@@ -166,17 +166,17 @@ async function seed() {
     createdAt: '2019-07-03 15:38:33.527-05'
   })
 
-  let segTwelve = await Segment.create({
-    journeyId: 3,
-    segmentEnd: 'ChIJ7ZBcatgsDogRVeUuWDAD0TM',
-    // id: 12,
-    order: 3,
-    transportation: 'WALKING',
-    placeId: null,
-    segmentStart: 'ChIJzx42AsfSD4gRpemze8L8nO4',
-    updatedAt: '2019-07-03 15:38:42.165-05',
-    createdAt: '2019-07-03 15:38:42.165-05'
-  })
+  // let segTwelve = await Segment.create({
+  //   journeyId: 2,
+  //   segmentEnd: 'ChIJ7ZBcatgsDogRVeUuWDAD0TM',
+  //   // id: 12,
+  //   order: 3,
+  //   transportation: 'WALKING',
+  //   placeId: null,
+  //   segmentStart: 'ChIJzx42AsfSD4gRpemze8L8nO4',
+  //   updatedAt: '2019-07-03 15:38:42.165-05',
+  //   createdAt: '2019-07-03 15:38:42.165-05'
+  // })
 
   console.log(`seeded successfully`)
 }
@@ -184,6 +184,7 @@ async function seed() {
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
+
 async function runSeed() {
   console.log('seeding...')
   try {
