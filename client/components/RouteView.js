@@ -15,7 +15,6 @@ export const RouteView = () => {
 }
 
 const RouteViewer = props => {
-  console.log(props.segmentPreview)
   return (
     <div>
       {props.segmentPreview.length !== 0 &&

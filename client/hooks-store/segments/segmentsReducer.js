@@ -41,11 +41,8 @@ const segmentReducer = (segmentState, action) => {
     case DELETE_FIRST_OR_LAST:
       if (segmentState.length > 0) {
         if (action.index === 0) {
-          console.log('removing first')
           return segmentState.slice(1)
         } else if (action.index === segmentState.length) {
-          console.log('removing last')
-
           return segmentState.slice(0, segmentState.length - 2)
         }
       }
