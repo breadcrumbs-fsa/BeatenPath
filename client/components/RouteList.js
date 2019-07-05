@@ -65,7 +65,6 @@ const RouteLister = props => {
     deletePlace(props.places, props.segments, index, props.dispatch)
   }
   function handleClickPreview() {
-    console.log('HITTING PREVIEW')
     props.dispatch({type: 'DELETE_PREVIEW'})
   }
   return (

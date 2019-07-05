@@ -20,7 +20,6 @@ const segmentPreviewReducer = (segmentPreviewState, action) => {
     case PLACE_PREVIEW_TO_FIRST:
       return []
     case PLACE_PREVIEW_TO_NTH:
-      console.log('PREVIEW TO NTH')
       return []
     case DELETE_PREVIEW:
       return []

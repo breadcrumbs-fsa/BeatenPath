@@ -2,6 +2,7 @@ import {DirectionsRenderer} from 'react-google-maps'
 import React, {Component, createContext, useContext} from 'react'
 import {StoreContext} from '../app'
 import {colorPicker} from '../utils/colorPicker'
+import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 
 export const RouteView = () => {
   const [state, dispatch] = useContext(StoreContext)

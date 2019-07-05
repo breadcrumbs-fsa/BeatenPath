@@ -8,6 +8,11 @@ export const addSegment1 = segment => ({
   segment
 })
 
+export const allSegments = journeyId => ({
+  type: ALL_SEGMENTS,
+  journeyId
+})
+
 export const placePreviewToNth = segment => ({
   type: ADD_SEGMENT_1,
   segment

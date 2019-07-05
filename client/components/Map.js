@@ -8,6 +8,8 @@ import {directions} from '../utils/directions'
 import {multiJourneys} from '../utils/multiJourneys'
 import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
 import {ADD_REF} from '../hooks-store/search/searchReducer'
+import {ALL_SEGMENTS} from '../hooks-store/segments/segmentsReducer'
+import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -117,11 +119,12 @@ export class MyMapComponent extends Component {
       }
     })
 
+    //TODO: make useEffect hook for both of these in command bar
     multiJourneys(this.props.dispatch)
-    console.log('hello')
+
+    fetchSingleJourney(1, this.props.dispatch)
   }
   render() {
-    console.log('map journeys: ', this.props.journeys)
     return (
       <GoogleMap
         defaultOptions={{
