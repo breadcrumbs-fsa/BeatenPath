@@ -1,19 +1,14 @@
 const router = require('express').Router()
 // const { } = require('../db/models') TODO: Add models
 const Journey = require('../db/models/journey')
+const Segment = require('../db/models/segment')
 
 module.exports = router
 
 // Get all journeys
 router.get('/', async (req, res, next) => {
   try {
-    const journey = await Journey.findAll({
-      include: [
-        {
-          model: JourneyCategory
-        }
-      ]
-    })
+    const journey = await Journey.findAll({include: [{model: Segment}]})
     res.json(journey)
   } catch (err) {
     next(err)

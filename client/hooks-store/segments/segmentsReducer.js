@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 export const ADD_SEGMENT_1 = 'ADD_SEGMENT_1'
 export const DELETE_PLACE = 'DELETE_PLACE'
 export const DELETE_FIRST_OR_LAST = 'DELETE_FIRST_OR_LAST'

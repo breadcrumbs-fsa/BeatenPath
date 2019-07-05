@@ -4,6 +4,7 @@ import '../../secrets'
 import {StoreContext} from '../app'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import CommandBar from './CommandBar'
+import {multiJourneys} from '../utils/multiJourneys'
 
 const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
@@ -24,6 +25,7 @@ const MapContainer = props => {
           segmentPreview={state.segmentPreview}
           segements={state.segements}
           searchInput={state.searchInput}
+          journeys={state.journeys}
         />
       </div>
       <div>

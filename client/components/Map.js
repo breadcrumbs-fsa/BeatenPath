@@ -5,6 +5,7 @@ import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
 import MarkerView from './MarkerView'
 import RouteView from './RouteView'
 import {directions} from '../utils/directions'
+import {multiJourneys} from '../utils/multiJourneys'
 import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
 import {ADD_REF} from '../hooks-store/search/searchReducer'
 
@@ -118,8 +119,12 @@ export class MyMapComponent extends Component {
         }
       }
     })
+
+    multiJourneys(this.props.dispatch)
+    console.log('hello')
   }
   render() {
+    console.log('map journeys: ', this.props.journeys)
     return (
       <GoogleMap
         defaultOptions={{
