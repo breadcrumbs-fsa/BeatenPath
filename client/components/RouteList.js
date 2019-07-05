@@ -77,9 +77,14 @@ const RouteLister = props => {
             {/* Avatar with text and icon */}
           </Typography>
           <div className={classes.demo}>
-            <List dense={dense}>
+            <List dense={dense} style={{marginBottom: '4px'}}>
               {props.placePreview[0] ? (
-                <ListItem>
+                <ListItem
+                  style={{
+                    outline: `2px solid ${colorPicker(-1)} `,
+                    marginBottom: '4px'
+                  }}
+                >
                   <ListItemIcon style={{color: colorPicker(-1)}}>
                     <LocationOnIcon />
                   </ListItemIcon>
@@ -90,6 +95,9 @@ const RouteLister = props => {
                         : props.placePreview[0].formatted_address
                     }
                     secondary={secondary ? 'Secondary text' : null}
+                  />
+                  <ListItemText
+                    primary={props.placePreview[0].types[0].replace('_', ' ')}
                   />
                   <ListItemSecondaryAction>
                     <IconButton
@@ -102,7 +110,12 @@ const RouteLister = props => {
                   </ListItemSecondaryAction>
                 </ListItem>
               ) : (
-                <ListItem>
+                <ListItem
+                  style={{
+                    outline: `2px solid ${colorPicker(-1)} `,
+                    marginBottom: '4px'
+                  }}
+                >
                   <ListItemText
                     primary="Add a place!"
                     secondary={secondary ? 'Secondary text' : null}
@@ -114,7 +127,13 @@ const RouteLister = props => {
                   .slice()
                   .reverse()
                   .map((place, index) => (
-                    <ListItem key={index}>
+                    <ListItem
+                      key={index}
+                      style={{
+                        outline: `2px solid ${colorPicker(index)} `,
+                        marginBottom: '4px'
+                      }}
+                    >
                       <ListItemIcon style={{color: colorPicker(index)}}>
                         <LocationOnIcon />
                       </ListItemIcon>
@@ -123,6 +142,10 @@ const RouteLister = props => {
                           place.name ? place.name : place.formatted_address
                         }
                         secondary={secondary ? 'Secondary text' : null}
+                      />
+
+                      <ListItemText
+                        primary={place.types[0].replace('_', ' ')}
                       />
 
                       <ListItemSecondaryAction>
