@@ -12,6 +12,8 @@ export const StoreContext = createContext()
 import {useReducer} from 'react'
 import logger from 'use-reducer-logger'
 
+console.log('PROCESS.ENBV')
+
 const App = () => {
   // const store = useReducer(logger(rootReducer), initialState)
   const store = useReducer(rootReducer, initialState)
