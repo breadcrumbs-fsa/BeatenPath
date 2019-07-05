@@ -5,6 +5,7 @@ import {StoreContext} from '../app'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import {directions} from '../utils/directions'
 import {saveJourney} from '../utils/saveJourney'
+import {multiJourneys} from '../utils/multiJourneys'
 import {
   DELETE_FIRST_OR_LAST,
   DELETE_SEGMENT
@@ -26,11 +27,13 @@ export const CommandBar = () => {
       dispatch={dispatch}
       placePreview={state.placePreview}
       places={state.places}
+      journeys={state.journeys}
     />
   )
 }
 
 const CommandBarView = props => {
+  console.log('command bar journeys: ', props.journeys)
   return (
     <div>
       <Grid item xs={12}>
@@ -45,6 +48,10 @@ const CommandBarView = props => {
                   place: props.placePreview[0]
                 })
               } else if (props.places.length > 0) {
+                props.dispatch({
+                  type: PLACE_PREVIEW_TO_NTH,
+                  place: props.placePreview[0]
+                })
                 directions(
                   props.places[props.places.length - 1].place_id,
                   props.placePreview[0].place_id,
@@ -52,10 +59,6 @@ const CommandBarView = props => {
                   'WALKING',
                   'ADD_SEGMENT_1'
                 )
-                props.dispatch({
-                  type: PLACE_PREVIEW_TO_NTH,
-                  place: props.placePreview[0]
-                })
               }
             }}
           >
@@ -74,6 +77,29 @@ const CommandBarView = props => {
             <button type="submit">Save</button>
           </div>
         </form>
+        <ButtonGroup fullWidth aria-label="Full width outlined button group">
+          <Button
+            type="button"
+            onClick={function() {
+              multiJourneys(props.dispatch)
+              props.journeys.map(journey => {
+                console.log('journey: ', journey)
+                return journey.segments.map(segment => {
+                  console.log('segment: ', segment)
+                  return directions(
+                    segment.segmentStart,
+                    segment.segmentEnd,
+                    props.dispatch
+                  )
+                })
+              })
+            }}
+          >
+            View All Journeys
+          </Button>
+          {/* <Button>width</Button>
+          <Button>ButtonGroup</Button> */}
+        </ButtonGroup>
       </Grid>
     </div>
   )

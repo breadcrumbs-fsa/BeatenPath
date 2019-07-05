@@ -4,6 +4,10 @@ export const PLACE_PREVIEW_TO_FIRST = 'PLACE_PREVIEW_TO_FIRST'
 
 export const PLACE_PREVIEW_TO_NTH = 'PLACE_PREVIEW_TO_NTH'
 
+export const DELETE_FIRST_OR_LAST = 'DELETE_FIRST_OR_LAST'
+
+export const DELETE_PREVIEW = 'DELETE_PREVIEW'
+
 export const previewSegment = segment => ({
   type: PREVIEW_SEGMENT,
   segment
@@ -16,6 +20,9 @@ const segmentPreviewReducer = (segmentPreviewState, action) => {
     case PLACE_PREVIEW_TO_FIRST:
       return []
     case PLACE_PREVIEW_TO_NTH:
+      console.log('PREVIEW TO NTH')
+      return []
+    case DELETE_PREVIEW:
       return []
     default:
       return segmentPreviewState

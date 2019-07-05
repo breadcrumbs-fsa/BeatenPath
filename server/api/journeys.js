@@ -8,13 +8,7 @@ module.exports = router
 // Get all journeys
 router.get('/', async (req, res, next) => {
   try {
-    const journey = await Journey.findAll({
-      include: [
-        {
-          model: JourneyCategory
-        }
-      ]
-    })
+    const journey = await Journey.findAll({include: [{model: Segment}]})
     res.json(journey)
   } catch (err) {
     next(err)

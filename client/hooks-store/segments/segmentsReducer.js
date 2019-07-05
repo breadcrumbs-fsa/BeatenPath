@@ -1,6 +1,6 @@
+/* eslint-disable complexity */
 export const ADD_SEGMENT_1 = 'ADD_SEGMENT_1'
-export const ALL_SEGMENTS = 'ALL_SEGMENTS'
-export const DELETE_SEGMENT = 'DELETE_SEGMENT'
+export const DELETE_PLACE = 'DELETE_PLACE'
 export const DELETE_FIRST_OR_LAST = 'DELETE_FIRST_OR_LAST'
 
 export const addSegment1 = segment => ({
@@ -17,8 +17,8 @@ export const placePreviewToNth = segment => ({
   type: ADD_SEGMENT_1,
   segment
 })
-export const deleteSegment = (segment, index) => ({
-  type: DELETE_SEGMENT,
+export const deletePlace = (segment, index) => ({
+  type: DELETE_PLACE,
   segment,
   index
 })
@@ -33,27 +33,26 @@ const segmentReducer = (segmentState, action) => {
     case ADD_SEGMENT_1:
       return [...segmentState, action.segment]
 
-    case ALL_SEGMENTS:
-      return []
-    case DELETE_SEGMENT:
+    case DELETE_PLACE:
       const newArr = []
       for (let i = 0; i < segmentState.length; i++) {
-        if (i == action.index) {
+        if (i == action.index - 1) {
           newArr.push(action.segment)
-        } else if (i !== action.index + 1) {
+        } else if (i !== action.index) {
           newArr.push(segmentState[i])
         }
       }
       return newArr
     case DELETE_FIRST_OR_LAST:
-      //TODO fix this case, delete places instead of routes and recalculate routes
-      if (action.index === 0) {
-        console.log('removing first')
-        return segmentState.slice(1)
-      } else if (action.index === segmentState.length) {
-        console.log('removing last')
+      if (segmentState.length > 0) {
+        if (action.index === 0) {
+          console.log('removing first')
+          return segmentState.slice(1)
+        } else if (action.index === segmentState.length) {
+          console.log('removing last')
 
-        return segmentState.slice(-1)
+          return segmentState.slice(0, segmentState.length - 2)
+        }
       }
     default:
       return segmentState
