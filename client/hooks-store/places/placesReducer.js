@@ -6,6 +6,7 @@ export const PLACE_PREVIEW_TO_NTH = 'PLACE_PREVIEW_TO_NTH'
 
 export const DELETE_FIRST_OR_LAST = 'DELETE_FIRST_OR_LAST'
 export const DELETE_PLACE = 'DELETE_PLACE'
+export const CLEAR_PLACES = 'CLEAR_PLACES'
 
 export const placePreviewToFirst = place => ({
   type: PLACE_PREVIEW_TO_FIRST,
@@ -20,6 +21,10 @@ export const deleteFirstOrLast = index => ({
 export const deletePlace = index => ({
   type: DELETE_PLACE,
   index
+})
+
+export const clearPlaces = () => ({
+  type: CLEAR_PLACES
 })
 
 const placesReducer = (placesState, action) => {
@@ -40,6 +45,9 @@ const placesReducer = (placesState, action) => {
 
     case PLACE_PREVIEW_TO_NTH:
       return [...placesState, action.place]
+
+    case CLEAR_PLACES:
+      return []
 
     default:
       return placesState

@@ -73,9 +73,14 @@ const CommandBarView = props => {
           <Button>ButtonGroup</Button> */}
         </ButtonGroup>
         <form
-          onSubmit={event =>
-            saveJourney(event.target.content.value, props.segments)
-          }
+          onSubmit={event => {
+            event.preventDefault()
+            saveJourney(
+              event.target.content.value,
+              props.segments,
+              props.dispatch
+            )
+          }}
         >
           <div>
             <input type="text" name="content" placeholder="Untitled Journey" />
@@ -118,6 +123,16 @@ const CommandBarView = props => {
             }}
           >
             View Date Night
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup fullWidth aria-label="Full width outlined button group">
+          <Button
+            type="button"
+            onClick={function() {
+              props.dispatch({type: 'CLEAR_PLACES'})
+            }}
+          >
+            Start New Journey / CLEAR MAP
           </Button>
         </ButtonGroup>
       </Grid>
