@@ -34,7 +34,7 @@ const segmentReducer = (segmentState, action) => {
       return [...segmentState, action.segment]
 
     case ALL_SEGMENTS:
-      return []  
+      return []
     case DELETE_SEGMENT:
       const newArr = []
       for (let i = 0; i < segmentState.length; i++) {

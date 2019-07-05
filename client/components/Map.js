@@ -19,14 +19,13 @@ export class MyMapComponent extends Component {
     }
   }
 
-
   componentDidMount() {
     const refs = {}
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
       },
-      
+
       onIdle: () => {
         this.setState({
           bounds: refs.map.getBounds(),
@@ -66,8 +65,6 @@ export class MyMapComponent extends Component {
         // console.log(refs.input)
         // refs.input.value=''
       }
-
-
     })
   }
   render() {
