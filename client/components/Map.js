@@ -19,19 +19,23 @@ export class MyMapComponent extends Component {
 
   componentDidMount() {
     const refs = {}
+
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
       },
+
       onIdle: () => {
         this.setState({
           bounds: refs.map.getBounds(),
           center: refs.map.getCenter()
         })
       },
+
       onSearchBoxMounted: ref => {
         refs.searchBox = ref
       },
+
       onPlacesChanged: () => {
         const places = refs.searchBox.getPlaces()
 
@@ -64,24 +68,29 @@ export class MyMapComponent extends Component {
         console.log(event, props)
         if (event.placeId) {
           console.log('hi')
-          // const placesService = new google.maps.places.PlacesService(refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-          // placesService.findPlaceFromQuery({bounds: this.state.bounds, type: ['hotel']}, (results,status) => {
-          //   if (status == google.maps.places.PlacesServiceStatus.OK) {
-          //     console.log(results);
-          //   } else {
-          //     console.log('didnt work')
-          //   }
-          // })
-          // props.dispatch({type: ADD_PLACE_PREVIEW, place: [results[1]]})
-          // if (props.places.length > 0) {
-          //   directions(
-          //     props.places[props.places.length - 1].place_id,
-          //     event.placeId,
-          //     props.dispatch,
-          //     'WALKING',
-          //     'PREVIEW_SEGMENT'
-          //   )
-          // }
+          const placesService = new google.maps.places.PlacesService(
+            refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+          )
+          await placesService.getDetails(
+            {placeId: event.placeId},
+            (results, status) => {
+              if (status == google.maps.places.PlacesServiceStatus.OK) {
+                console.log(results)
+                props.dispatch({type: ADD_PLACE_PREVIEW, place: [results]})
+                if (props.places.length > 0) {
+                  directions(
+                    props.places[props.places.length - 1].place_id,
+                    results.placeId,
+                    props.dispatch,
+                    'WALKING',
+                    'PREVIEW_SEGMENT'
+                  )
+                }
+              } else {
+                console.log('placesQuery Failed: ', status)
+              }
+            }
+          )
         } else {
           const geocoder = new google.maps.Geocoder()
           const lat = event.latLng.lat()
@@ -91,19 +100,17 @@ export class MyMapComponent extends Component {
             if (status === google.maps.GeocoderStatus.OK) {
               if (results[1]) {
                 console.log(results[1])
-                // console.log(placesService.getPlaceInformation(results[1].placeId))
 
-                //
-                // props.dispatch({type: ADD_PLACE_PREVIEW, place: [results[1]]})
-                // if (props.places.length > 0) {
-                //   directions(
-                //     props.places[props.places.length - 1].place_id,
-                //     results[1].place_id,
-                //     props.dispatch,
-                //     'WALKING',
-                //     'PREVIEW_SEGMENT'
-                //   )
-                // }
+                props.dispatch({type: ADD_PLACE_PREVIEW, place: [results[1]]})
+                if (props.places.length > 0) {
+                  directions(
+                    props.places[props.places.length - 1].place_id,
+                    results[1].place_id,
+                    props.dispatch,
+                    'WALKING',
+                    'PREVIEW_SEGMENT'
+                  )
+                }
               } else {
                 console.log('No results found')
               }
