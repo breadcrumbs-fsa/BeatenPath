@@ -1,10 +1,16 @@
 export const ADD_SEGMENT_1 = 'ADD_SEGMENT_1'
+export const ALL_SEGMENTS = 'ALL_SEGMENTS'
 export const DELETE_SEGMENT = 'DELETE_SEGMENT'
 export const DELETE_FIRST_OR_LAST = 'DELETE_FIRST_OR_LAST'
 
 export const addSegment1 = segment => ({
   type: ADD_SEGMENT_1,
   segment
+})
+
+export const allSegments = journeyId => ({
+  type: ALL_SEGMENTS,
+  journeyId
 })
 
 export const placePreviewToNth = segment => ({
@@ -27,6 +33,8 @@ const segmentReducer = (segmentState, action) => {
     case ADD_SEGMENT_1:
       return [...segmentState, action.segment]
 
+    case ALL_SEGMENTS:
+      return []  
     case DELETE_SEGMENT:
       const newArr = []
       for (let i = 0; i < segmentState.length; i++) {

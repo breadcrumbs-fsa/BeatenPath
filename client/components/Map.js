@@ -7,6 +7,8 @@ import RouteView from './RouteView'
 import {directions} from '../utils/directions'
 import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
 import {ADD_REF} from '../hooks-store/search/searchReducer'
+import {ALL_SEGMENTS} from '../hooks-store/segments/segmentsReducer'
+import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -16,12 +18,15 @@ export class MyMapComponent extends Component {
       center: {lat: 41.851, lng: -87.6513}
     }
   }
+
+
   componentDidMount() {
     const refs = {}
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
       },
+      
       onIdle: () => {
         this.setState({
           bounds: refs.map.getBounds(),
@@ -61,6 +66,8 @@ export class MyMapComponent extends Component {
         // console.log(refs.input)
         // refs.input.value=''
       }
+
+
     })
   }
   render() {

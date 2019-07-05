@@ -1,6 +1,7 @@
 const router = require('express').Router()
 // const { } = require('../db/models') TODO: Add models
 const Journey = require('../db/models/journey')
+const Segment = require('../db/models/segment')
 
 module.exports = router
 
@@ -23,7 +24,7 @@ router.get('/', async (req, res, next) => {
 // Get all journeys within one place category
 router.get('/', async (req, res, next) => {
   try {
-    const categorizedJourneys = await Segments.findByPk({
+    const categorizedJourneys = await Segment.findByPk({
       //TODO eager load place categories so this is a search
     })
     if (categorizedJourneys) {
@@ -37,29 +38,29 @@ router.get('/', async (req, res, next) => {
 })
 
 // Get all journeys within one journey category
-router.get('/:categoryId', async (req, res, next) => {
-  try {
-    const categorizedJourneys = await Segments.findAll({
-      where: {categoryId: req.params.categoryId}
-    })
-    if (categorizedJourneys) {
-      res.json(categorizedJourneys)
-    } else {
-      res.send('there are no journeys in this category!')
-    }
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get('/:categoryId', async (req, res, next) => {
+//   try {
+//     const categorizedJourneys = await Segment.findAll({
+//       where: {categoryId: req.params.categoryId}
+//     })
+//     if (categorizedJourneys) {
+//       res.json(categorizedJourneys)
+//     } else {
+//       res.send('there are no journeys in this category!')
+//     }
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 // Get one journey
 router.get('/:journeyId', async (req, res, next) => {
   try {
-    const segments = await Segments.findAll({
-      where: {journeyId: req.params.journeyId}
+    const journey = await Journey.findByPk(req.params.journeyId, {
+      include: [{model: Segment}]
     })
-    if (segments) {
-      res.json(segments)
+    if (journey) {
+      res.json(journey)
     } else {
       res.send('this journey is no longer around :(')
     }
