@@ -17,7 +17,7 @@ export const MarkerView = () => {
 }
 
 const MarkerViewer = props => {
-  console.log('MARKER VIEW: ', props.placePreview)
+  console.log(props.places)
   return (
     <div>
       {props.placePreview[0] && (
