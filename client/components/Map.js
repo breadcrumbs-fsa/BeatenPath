@@ -39,7 +39,6 @@ export class MyMapComponent extends Component {
       onPlacesChanged: () => {
         const places = refs.searchBox.getPlaces()
 
-        console.log(places)
         const nextMarkers = places.map(place => ({
           position: place.geometry.location
         }))
@@ -67,7 +66,6 @@ export class MyMapComponent extends Component {
       onClickHandler: async (event, props) => {
         console.log(event, props)
         if (event.placeId) {
-          console.log('hi')
           const placesService = new google.maps.places.PlacesService(
             refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
           )
@@ -75,7 +73,6 @@ export class MyMapComponent extends Component {
             {placeId: event.placeId},
             (results, status) => {
               if (status == google.maps.places.PlacesServiceStatus.OK) {
-                console.log(results)
                 props.dispatch({type: ADD_PLACE_PREVIEW, place: [results]})
                 if (props.places.length > 0) {
                   directions(

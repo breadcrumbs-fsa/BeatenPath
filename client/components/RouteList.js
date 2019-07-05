@@ -21,8 +21,7 @@ import {StoreContext} from '../app'
 import {DirectionsRenderer} from 'react-google-maps'
 import {colorPicker} from '../utils/colorPicker'
 import {directions} from '../utils/directions'
-import {DELETE_SEGMENT} from '../hooks-store/segments/segmentsReducer'
-import {DELETE_FIRST_OR_LAST} from '../hooks-store/segments/segmentsReducer'
+import {deletePlace} from '../utils/deletePlace'
 
 export const RouteList = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -62,30 +61,16 @@ const RouteLister = props => {
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
 
+  function handleClick(index) {
+    deletePlace(props.places, props.segments, index, props.dispatch)
+  }
+  function handleClickPreview() {
+    console.log('HITTING PREVIEW')
+    props.dispatch({type: 'DELETE_PREVIEW'})
+  }
   return (
     <div className={classes.root}>
       <FormGroup row />
-
-      {/* <Grid item xs={12} md={6}>
-          <Typography variant="h6" className={classes.title}>
-            Icon with text
-          </Typography>
-          <div className={classes.demo}>
-            <List dense={dense}>
-              {generate(
-                <ListItem>
-                  <ListItemIcon>
-                    <FolderIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                </ListItem>,
-              )}
-            </List>
-          </div>
-        </Grid> */}
       <Grid>
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title}>
@@ -98,12 +83,6 @@ const RouteLister = props => {
                   <ListItemIcon style={{color: colorPicker(-1)}}>
                     <LocationOnIcon />
                   </ListItemIcon>
-
-                  {/* <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar> */}
                   <ListItemText
                     primary={
                       props.placePreview[0].name
@@ -113,39 +92,32 @@ const RouteLister = props => {
                     secondary={secondary ? 'Secondary text' : null}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="Delete">
+                    <IconButton
+                      onClick={() => handleClickPreview()}
+                      edge="end"
+                      aria-label="Delete"
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
               ) : (
                 <ListItem>
-                  {/* <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar> */}
                   <ListItemText
                     primary="Add a place!"
                     secondary={secondary ? 'Secondary text' : null}
                   />
                 </ListItem>
               )}
-              {console.log(props.places)}
               {props.places &&
                 props.places
                   .slice()
                   .reverse()
                   .map((place, index) => (
-                    <ListItem key={place.id}>
+                    <ListItem key={index}>
                       <ListItemIcon style={{color: colorPicker(index)}}>
                         <LocationOnIcon />
                       </ListItemIcon>
-                      {/* <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar> */}
                       <ListItemText
                         primary={
                           place.name ? place.name : place.formatted_address
@@ -154,7 +126,11 @@ const RouteLister = props => {
                       />
 
                       <ListItemSecondaryAction>
-                        <IconButton edge="end" aria-label="Delete">
+                        <IconButton
+                          onClick={() => handleClick(index)}
+                          edge="end"
+                          aria-label="Delete"
+                        >
                           <DeleteIcon />
                         </IconButton>
                       </ListItemSecondaryAction>

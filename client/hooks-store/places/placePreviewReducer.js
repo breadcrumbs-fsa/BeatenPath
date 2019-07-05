@@ -1,10 +1,8 @@
-import {ADD_SEGMENT_1} from '../segments/segmentsReducer'
-
 export const ADD_PLACE_PREVIEW = 'ADD_PLACE_PREVIEW'
 export const PLACE_PREVIEW_TO_FIRST = 'PLACE_PREVIEW_TO_FIRST'
 export const PLACE_PREVIEW_TO_NTH = 'PLACE_PREVIEW_TO_NTH'
 
-export const DELETE_PLACE_PREVIEW = 'DELETE_PLACE_PREVIEW'
+export const DELETE_PREVIEW = 'DELETE_PREVIEW'
 
 export const addPlacePreview = place => ({
   type: ADD_PLACE_PREVIEW,
@@ -20,7 +18,7 @@ const placePreviewReducer = (placePreviewState, action) => {
 
     case PLACE_PREVIEW_TO_NTH:
       return []
-    case DELETE_PLACE_PREVIEW:
+    case DELETE_PREVIEW:
       return []
     default:
       return placePreviewState
