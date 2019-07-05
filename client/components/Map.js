@@ -67,7 +67,6 @@ export class MyMapComponent extends Component {
 
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
-        console.log(event, props)
         if (event.placeId) {
           const placesService = new google.maps.places.PlacesService(
             refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
@@ -99,8 +98,6 @@ export class MyMapComponent extends Component {
           await geocoder.geocode({location: latlng}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
               if (results[1]) {
-                console.log(results[1])
-
                 props.dispatch({type: ADD_PLACE_PREVIEW, place: [results[1]]})
                 if (props.places.length > 0) {
                   directions(
@@ -122,11 +119,12 @@ export class MyMapComponent extends Component {
       }
     })
 
+    //TODO: make useEffect hook for both of these in command bar
     multiJourneys(this.props.dispatch)
-    console.log('hello')
+
+    fetchSingleJourney(1, this.props.dispatch)
   }
   render() {
-    console.log('map journeys: ', this.props.journeys)
     return (
       <GoogleMap
         defaultOptions={{

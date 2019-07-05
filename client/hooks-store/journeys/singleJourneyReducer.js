@@ -5,12 +5,12 @@ export const setSingleJourney = journey => ({
   journey
 })
 
-const journeyReducer = (journeyView, action) => {
+const journeyReducer = (journeyState, action) => {
   switch (action.type) {
     case SET_SINGLE_JOURNEY:
       return action.journey
     default:
-      return journeyView
+      return journeyState
   }
 }
 

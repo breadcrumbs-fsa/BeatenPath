@@ -27,7 +27,6 @@ const searchReducer = (searchInput, action) => {
       searchInput.value = ''
       return searchInput
     case ADD_REF:
-      console.log('action ref: ', action.ref)
       return action.ref
     default:
       return searchInput

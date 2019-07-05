@@ -14,7 +14,7 @@ export const initialState = {
   placePreview: [],
   places: [],
   searchInput: {},
-  journeyView: []
+  journey: {}
 }
 
 export const rootReducer = combineReducers({
@@ -24,5 +24,5 @@ export const rootReducer = combineReducers({
   placePreview: placePreviewReducer,
   places: placesPreviewReducer,
   searchInput: searchReducer,
-  journeyView: singleJourneyReducer
+  journey: singleJourneyReducer
 })

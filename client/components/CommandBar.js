@@ -18,9 +18,11 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
+import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
+  console.log('re-rendering: ', state)
   return (
     <CommandBarView
       segments={state.segments}
@@ -28,12 +30,15 @@ export const CommandBar = () => {
       placePreview={state.placePreview}
       places={state.places}
       journeys={state.journeys}
+      journey={state.journey}
     />
   )
 }
 
+// useEffect with props.journey
+
 const CommandBarView = props => {
-  console.log('command bar journeys: ', props.journeys)
+  console.log('single journey ', props)
   return (
     <div>
       <Grid item xs={12}>
@@ -82,11 +87,10 @@ const CommandBarView = props => {
             type="button"
             onClick={function() {
               multiJourneys(props.dispatch)
-              props.journeys.map(journey => {
-                console.log('journey: ', journey)
-                return journey.segments.map(segment => {
-                  console.log('segment: ', segment)
-                  return directions(
+              console.log('first props: ', props.journeys)
+              props.journeys.forEach(journey => {
+                journey.segments.forEach(segment => {
+                  directions(
                     segment.segmentStart,
                     segment.segmentEnd,
                     props.dispatch
@@ -97,8 +101,24 @@ const CommandBarView = props => {
           >
             View All Journeys
           </Button>
-          {/* <Button>width</Button>
-          <Button>ButtonGroup</Button> */}
+        </ButtonGroup>
+        <ButtonGroup fullWidth aria-label="Full width outlined button group">
+          <Button
+            type="button"
+            onClick={function() {
+              fetchSingleJourney(1, props.dispatch)
+              console.log('props: ', props.journey)
+              props.journey.segments.forEach(segment =>
+                directions(
+                  segment.segmentStart,
+                  segment.segmentEnd,
+                  props.dispatch
+                )
+              )
+            }}
+          >
+            View Date Night
+          </Button>
         </ButtonGroup>
       </Grid>
     </div>

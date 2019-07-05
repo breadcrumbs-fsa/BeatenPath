@@ -6,7 +6,6 @@ export async function directions(
   dispatchType = 'ADD_SEGMENT_1',
   index = null
 ) {
-  console.log(placeId1, placeId2)
   const DirectionsService = new google.maps.DirectionsService()
   await DirectionsService.route(
     {

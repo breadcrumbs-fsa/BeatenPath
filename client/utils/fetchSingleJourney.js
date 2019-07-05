@@ -7,7 +7,6 @@ export async function fetchSingleJourney(
 ) {
   try {
     const {data: singleJourney} = await axios.get(`/api/journeys/${journeyId}`)
-    console.log('did it hit at least?')
     dispatch({
       type: dispatchType,
       journey: singleJourney
