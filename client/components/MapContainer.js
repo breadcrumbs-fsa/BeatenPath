@@ -4,7 +4,6 @@ import {StoreContext} from '../app'
 import {mapjs} from '../config'
 import CommandBar from './CommandBar'
 import {multiJourneys} from '../utils/multiJourneys'
-console.log(mapjs)
 const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   return (
