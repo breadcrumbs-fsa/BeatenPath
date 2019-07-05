@@ -48,6 +48,10 @@ const CommandBarView = props => {
                   place: props.placePreview[0]
                 })
               } else if (props.places.length > 0) {
+                props.dispatch({
+                  type: PLACE_PREVIEW_TO_NTH,
+                  place: props.placePreview[0]
+                })
                 directions(
                   props.places[props.places.length - 1].place_id,
                   props.placePreview[0].place_id,
@@ -55,10 +59,6 @@ const CommandBarView = props => {
                   'WALKING',
                   'ADD_SEGMENT_1'
                 )
-                props.dispatch({
-                  type: PLACE_PREVIEW_TO_NTH,
-                  place: props.placePreview[0]
-                })
               }
             }}
           >
