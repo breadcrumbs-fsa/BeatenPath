@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, {Component} from 'react'
-import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps'
+import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
 import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
 import MarkerView from './MarkerView'
 import RouteView from './RouteView'
@@ -10,14 +10,20 @@ import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
 import {ADD_REF} from '../hooks-store/search/searchReducer'
 import {ALL_SEGMENTS} from '../hooks-store/segments/segmentsReducer'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
+import {colorPicker} from '../utils/colorPicker'
 
 export class MyMapComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
       bounds: null,
-      center: {lat: 41.851, lng: -87.6513}
+      center: {lat: 41.851, lng: -87.6513},
+      user: null
     }
+  }
+
+  componentDidUpdate() {
+    this.state.getLocation()
   }
 
   componentDidMount() {
@@ -26,6 +32,27 @@ export class MyMapComponent extends Component {
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
+      },
+
+      getLocation: () => {
+        if (navigator.geolocation) {
+          return navigator.geolocation.getCurrentPosition(position => {
+            console.log(position)
+            this.setState({
+              user: {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              }
+              // center: {lat:position.coords.latitude, lng: position.coords.longitude}
+            })
+            return {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            }
+          })
+        } else {
+          console.log('Geolocation is not supported by this browser.')
+        }
       },
 
       onIdle: () => {
@@ -164,6 +191,7 @@ export class MyMapComponent extends Component {
             }}
           />
         </SearchBox>
+        <Marker position={this.state.user} />
         <MarkerView />
         <RouteView />
       </GoogleMap>
