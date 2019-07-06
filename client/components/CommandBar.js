@@ -38,7 +38,6 @@ export const CommandBar = () => {
 // useEffect with props.journey
 
 const CommandBarView = props => {
-  console.log('single journey ', props)
   return (
     <div>
       <Grid item xs={12}>
