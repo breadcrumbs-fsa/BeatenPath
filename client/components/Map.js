@@ -11,6 +11,7 @@ import {ADD_REF} from '../hooks-store/search/searchReducer'
 import {ALL_SEGMENTS} from '../hooks-store/segments/segmentsReducer'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 import {colorPicker} from '../utils/colorPicker'
+import MapControl from './MapControl'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -92,6 +93,11 @@ export class MyMapComponent extends Component {
         this.props.dispatch({type: 'ADD_REF', ref: ref})
       },
 
+      onMe: () => {
+        this.setState({
+          center: this.state.user
+        })
+      },
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
         if (event.placeId) {
@@ -157,7 +163,8 @@ export class MyMapComponent extends Component {
         defaultOptions={{
           mapTypeControl: false,
           fullscreenControl: false,
-          zoomControl: false
+          zoomControl: false,
+          streetViewControl: false
         }}
         ref={this.state.onMapMounted}
         defaultZoom={14}
@@ -166,6 +173,22 @@ export class MyMapComponent extends Component {
         onIdle={this.state.onIdle}
         onClick={event => this.state.onClickHandler(event, this.props)}
       >
+        <MapControl position={google.maps.ControlPosition.RIGHT_BOTTOM}>
+          <button
+            style={{
+              backgroundColor: 'red',
+              border: 'none',
+              color: 'white',
+              display: 'inline-block',
+              marginBottom: '10px',
+              marginRight: '10px',
+              fontSize: '14px'
+            }}
+            onClick={() => this.state.onMe()}
+          >
+            ME
+          </button>
+        </MapControl>
         <SearchBox
           ref={this.state.onSearchBoxMounted}
           bounds={this.state.bounds}
@@ -191,7 +214,18 @@ export class MyMapComponent extends Component {
             }}
           />
         </SearchBox>
-        <Marker position={this.state.user} />
+        <Marker
+          icon={{
+            path:
+              'M21,3H3v18h6l3,3l3-3h6V3z M12,6c1.7,0,3,1.3,3,3s-1.3,3-3,3s-3-1.3-3-3S10.3,6,12,6z M18,18H6c0,0,0-0.585,0-1 c0-1.571,2.722-3,6-3s6,1.429,6,3C18,17.415,18,18,18,18z',
+            strokeColor: 'black',
+            fillColor: 'red',
+            fillOpacity: 1,
+            strokeOpacity: 0,
+            scale: 1.3
+          }}
+          position={this.state.user}
+        />
         <MarkerView />
         <RouteView />
       </GoogleMap>
