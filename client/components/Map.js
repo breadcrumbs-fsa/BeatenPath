@@ -164,7 +164,8 @@ export class MyMapComponent extends Component {
           mapTypeControl: false,
           fullscreenControl: false,
           zoomControl: false,
-          streetViewControl: false
+          streetViewControl: false,
+          gestureHandling: 'greedy'
         }}
         ref={this.state.onMapMounted}
         defaultZoom={14}
@@ -212,6 +213,10 @@ export class MyMapComponent extends Component {
               outline: `none`,
               textOverflow: `ellipses`
             }}
+            // onClick={(event) => )}
+            onDoubleClick={event =>
+              event.target.setSelectionRange(0, event.target.value.length)
+            }
           />
         </SearchBox>
         <Marker
