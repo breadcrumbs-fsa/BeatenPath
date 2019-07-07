@@ -6,3 +6,5 @@ secrets.js
 npm-debug.log
 yarn-error.log
 .idea/
+public/service_worker.js
+public/precache-manifest*
