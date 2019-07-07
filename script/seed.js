@@ -14,7 +14,6 @@ async function seed() {
   })
 
   let journeyTwo = await Journey.create({
-    // id: 3,
     journeyEnd: 'ChIJ8QYgD44rDogRNTv_lZJjxrI',
     name: 'tourist',
     journeyStart: 'ChIJlUbZ4qMsDogR3tCinMzzKUg'

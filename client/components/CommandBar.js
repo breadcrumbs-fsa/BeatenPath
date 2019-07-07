@@ -44,6 +44,7 @@ const CommandBarView = props => {
   //   fetchSingleJourney(1, props.dispatch)
   // })
   // useEffect(fetchSingleJourney(1, props.dispatch))
+  console.log(props.places)
   return (
     <div>
       <Grid item xs={12}>

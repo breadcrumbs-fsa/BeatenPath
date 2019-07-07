@@ -29,50 +29,7 @@ export class MyMapComponent extends Component {
 
   componentDidMount() {
     const refs = {}
-    let placeIdArray = []
-    console.log('hello')
 
-    if (this.props.segments.length > 0 && this.props.places.length === 0) {
-      console.log('hi')
-      const placesService = new google.maps.places.PlacesService(
-        refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
-      )
-
-      placeIdArray.push(
-        this.props.segments[0].geocoded_waypoints[0].place_id,
-        this.props.segments[0].geocoded_waypoints[1].place_id
-      )
-      if (this.props.segments.length > 1) {
-        if (this.props.segments.length > 2) {
-          for (let i = 1; i < placeIdArray.length - 2; i++) {
-            placeIdArray.push(
-              this.props.segments[i].geocoded_waypoints[1].place_id
-            )
-          }
-        }
-        placeIdArray.push(
-          this.props.segments[this.props.segments.length - 1]
-            .geocoded_waypoints[1].place_id
-        )
-      }
-
-      placeIdArray.forEach(async placeID => {
-        await placesService.getDetails(
-          {placeId: placeID},
-          (results, status) => {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-              this.props.dispatch({
-                type: PLACE_PREVIEW_TO_FIRST,
-                place: [results]
-              })
-            } else {
-              console.log('placesQuery Failed: ', status)
-            }
-          }
-        )
-      })
-    }
-    console.log('placeIdArray: ', placeIdArray)
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
@@ -179,9 +136,6 @@ export class MyMapComponent extends Component {
     fetchSingleJourney(2, this.props.dispatch)
   }
   render() {
-    console.log('places:     ', this.props.places)
-    console.log('segments:     ', this.props.segments)
-
     return (
       <GoogleMap
         defaultOptions={{
