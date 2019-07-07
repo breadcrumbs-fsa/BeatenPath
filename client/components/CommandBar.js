@@ -39,6 +39,7 @@ export const CommandBar = () => {
 // useEffect with props.journey
 
 const CommandBarView = props => {
+  console.log(props.places)
   return (
     <div>
       <Grid item xs={12}>
@@ -143,9 +144,9 @@ const CommandBarView = props => {
                 placeIdArray.forEach(async placeID => {
                   await props.placesService.getDetails(
                     {placeId: placeID},
-                    (results, status) => {
+                    async (results, status) => {
                       if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        props.dispatch({
+                        await props.dispatch({
                           type: 'PLACE_PREVIEW_TO_NTH',
                           place: results
                         })
