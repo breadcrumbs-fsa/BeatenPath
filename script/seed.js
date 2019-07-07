@@ -56,7 +56,7 @@ async function seed() {
     segmentStart: 'ChIJZTa9XjgsDogRhJhoNLqx6A0'
   })
 
-  let segFive = await Segment.create({
+  let segFour = await Segment.create({
     journeyId: 2,
     segmentEnd: 'ChIJV0AwM30rDogR2sd-X0cgErU',
     order: 0,
@@ -65,7 +65,7 @@ async function seed() {
     segmentStart: 'ChIJlUbZ4qMsDogR3tCinMzzKUg'
   })
 
-  let segSix = await Segment.create({
+  let segFive = await Segment.create({
     journeyId: 2,
     segmentEnd: 'ChIJ-XW3X2MrDogR3_tQ3-OdBTI',
     order: 1,
@@ -74,7 +74,7 @@ async function seed() {
     segmentStart: 'ChIJV0AwM30rDogR2sd-X0cgErU'
   })
 
-  let segSeven = await Segment.create({
+  let segSix = await Segment.create({
     journeyId: 2,
     segmentEnd: 'ChIJtRSxt28rDogRpo4hEqqjIGk',
     order: 2,
@@ -83,7 +83,7 @@ async function seed() {
     segmentStart: 'ChIJ-XW3X2MrDogR3_tQ3-OdBTI'
   })
 
-  let segEight = await Segment.create({
+  let segSeven = await Segment.create({
     journeyId: 2,
     segmentEnd: 'ChIJ8QYgD44rDogRNTv_lZJjxrI',
     order: 3,
@@ -91,54 +91,6 @@ async function seed() {
     placeId: null,
     segmentStart: 'ChIJtRSxt28rDogRpo4hEqqjIGk'
   })
-
-  // let segNine = await Segment.create({
-  //   journeyId: 2,
-  //   segmentEnd: 'ChIJ2dxMprjSD4gRvUWbdblbV1w',
-  //   // id: 9,
-  //   order: 0,
-  //   transportation: 'WALKING',
-  //   placeId: null,
-  //   segmentStart: 'ChIJk6WVC5XSD4gRxhZ8j-A-loE',
-  //   updatedAt: '2019-07-03 15:38:18.059-05',
-  //   createdAt: '2019-07-03 15:38:18.059-05'
-  // })
-
-  // let segTen = await Segment.create({
-  //   journeyId: 2,
-  //   segmentEnd: 'ChIJazuRe8fSD4gRJeLBiMM_Izg',
-  //   // id: 10,
-  //   order: 1,
-  //   transportation: 'WALKING',
-  //   placeId: null,
-  //   segmentStart: 'ChIJ2dxMprjSD4gRvUWbdblbV1w',
-  //   updatedAt: '2019-07-03 15:38:26.491-05',
-  //   createdAt: '2019-07-03 15:38:26.491-05'
-  // })
-
-  // let segEleven = await Segment.create({
-  //   journeyId: 2,
-  //   segmentEnd: 'ChIJzx42AsfSD4gRpemze8L8nO4',
-  //   // id: 11,
-  //   order: 2,
-  //   transportation: 'WALKING',
-  //   placeId: null,
-  //   segmentStart: 'ChIJazuRe8fSD4gRJeLBiMM_Izg',
-  //   updatedAt: '2019-07-03 15:38:33.527-05',
-  //   createdAt: '2019-07-03 15:38:33.527-05'
-  // })
-
-  // let segTwelve = await Segment.create({
-  //   journeyId: 2,
-  //   segmentEnd: 'ChIJ7ZBcatgsDogRVeUuWDAD0TM',
-  //   // id: 12,
-  //   order: 3,
-  //   transportation: 'WALKING',
-  //   placeId: null,
-  //   segmentStart: 'ChIJzx42AsfSD4gRpemze8L8nO4',
-  //   updatedAt: '2019-07-03 15:38:42.165-05',
-  //   createdAt: '2019-07-03 15:38:42.165-05'
-  // })
 
   console.log(`seeded successfully`)
 }

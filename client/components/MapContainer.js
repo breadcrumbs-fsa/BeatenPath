@@ -23,9 +23,10 @@ const MapContainer = props => {
           placePreview={state.placePreview}
           places={state.places}
           segmentPreview={state.segmentPreview}
-          segements={state.segements}
+          segments={state.segments}
           searchInput={state.searchInput}
           journeys={state.journeys}
+          placesService={state.placesService}
         />
       </div>
       <div>

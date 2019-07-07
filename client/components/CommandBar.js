@@ -1,7 +1,8 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Map from './Map'
 import '../../secrets'
 import {StoreContext} from '../app'
+import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import {directions} from '../utils/directions'
 import {saveJourney} from '../utils/saveJourney'
@@ -22,7 +23,6 @@ import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
-  console.log('re-rendering: ', state)
   return (
     <CommandBarView
       segments={state.segments}
@@ -31,6 +31,7 @@ export const CommandBar = () => {
       places={state.places}
       journeys={state.journeys}
       journey={state.journey}
+      placesService={state.placesService}
     />
   )
 }
@@ -38,7 +39,11 @@ export const CommandBar = () => {
 // useEffect with props.journey
 
 const CommandBarView = props => {
-  console.log('single journey ', props)
+  // useEffect(() => {
+  //   multiJourneys(props.dispatch)
+  //   fetchSingleJourney(1, props.dispatch)
+  // })
+  // useEffect(fetchSingleJourney(1, props.dispatch))
   return (
     <div>
       <Grid item xs={12}>
@@ -92,7 +97,6 @@ const CommandBarView = props => {
             type="button"
             onClick={function() {
               multiJourneys(props.dispatch)
-              console.log('first props: ', props.journeys)
               props.journeys.forEach(journey => {
                 journey.segments.forEach(segment => {
                   directions(
@@ -112,7 +116,6 @@ const CommandBarView = props => {
             type="button"
             onClick={function() {
               fetchSingleJourney(1, props.dispatch)
-              console.log('props: ', props.journey)
               props.journey.segments.forEach(segment =>
                 directions(
                   segment.segmentStart,
@@ -120,6 +123,44 @@ const CommandBarView = props => {
                   props.dispatch
                 )
               )
+              let placeIdArray = []
+              if (props.journey.segments.length > 0) {
+                placeIdArray.push(
+                  props.journey.segments[0].segmentStart,
+                  props.journey.segments[0].segmentEnd
+                )
+                if (props.journey.segments.length > 1) {
+                  if (props.journey.segments.length > 2) {
+                    for (
+                      let i = 1;
+                      i < props.journey.segments.length - 1;
+                      i++
+                    ) {
+                      placeIdArray.push(props.journey.segments[i].segmentEnd)
+                    }
+                  }
+                  placeIdArray.push(
+                    props.journey.segments[props.journey.segments.length - 1]
+                      .segmentEnd
+                  )
+                }
+                console.log(placeIdArray)
+                placeIdArray.forEach(async placeID => {
+                  await props.placesService.getDetails(
+                    {placeId: placeID},
+                    (results, status) => {
+                      if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        props.dispatch({
+                          type: 'PLACE_PREVIEW_TO_NTH',
+                          place: results
+                        })
+                      } else {
+                        console.log('placesQuery Failed: ', status)
+                      }
+                    }
+                  )
+                })
+              }
             }}
           >
             View Date Night

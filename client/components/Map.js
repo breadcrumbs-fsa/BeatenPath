@@ -6,10 +6,17 @@ import MarkerView from './MarkerView'
 import RouteView from './RouteView'
 import {directions} from '../utils/directions'
 import {multiJourneys} from '../utils/multiJourneys'
-import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
+import {
+  ADD_PLACE_PREVIEW,
+  PLACE_PREVIEW_TO_FIRST
+} from '../hooks-store/places/placePreviewReducer'
 import {ADD_REF} from '../hooks-store/search/searchReducer'
 import {ALL_SEGMENTS} from '../hooks-store/segments/segmentsReducer'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
+
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -22,10 +29,60 @@ export class MyMapComponent extends Component {
 
   componentDidMount() {
     const refs = {}
+    let placeIdArray = []
+    console.log('hello')
 
+    if (this.props.segments.length > 0 && this.props.places.length === 0) {
+      console.log('hi')
+      const placesService = new google.maps.places.PlacesService(
+        refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+      )
+
+      placeIdArray.push(
+        this.props.segments[0].geocoded_waypoints[0].place_id,
+        this.props.segments[0].geocoded_waypoints[1].place_id
+      )
+      if (this.props.segments.length > 1) {
+        if (this.props.segments.length > 2) {
+          for (let i = 1; i < placeIdArray.length - 2; i++) {
+            placeIdArray.push(
+              this.props.segments[i].geocoded_waypoints[1].place_id
+            )
+          }
+        }
+        placeIdArray.push(
+          this.props.segments[this.props.segments.length - 1]
+            .geocoded_waypoints[1].place_id
+        )
+      }
+
+      placeIdArray.forEach(async placeID => {
+        await placesService.getDetails(
+          {placeId: placeID},
+          (results, status) => {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+              this.props.dispatch({
+                type: PLACE_PREVIEW_TO_FIRST,
+                place: [results]
+              })
+            } else {
+              console.log('placesQuery Failed: ', status)
+            }
+          }
+        )
+      })
+    }
+    console.log('placeIdArray: ', placeIdArray)
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
+        const placesService = new google.maps.places.PlacesService(
+          refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+        )
+        this.props.dispatch({
+          type: 'ADD_PLACES_SERVICE',
+          placesService: placesService
+        })
       },
 
       onIdle: () => {
@@ -68,10 +125,7 @@ export class MyMapComponent extends Component {
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
         if (event.placeId) {
-          const placesService = new google.maps.places.PlacesService(
-            refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
-          )
-          await placesService.getDetails(
+          await this.props.placesService.getDetails(
             {placeId: event.placeId},
             (results, status) => {
               if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -122,9 +176,12 @@ export class MyMapComponent extends Component {
     //TODO: make useEffect hook for both of these in command bar
     multiJourneys(this.props.dispatch)
 
-    fetchSingleJourney(1, this.props.dispatch)
+    fetchSingleJourney(2, this.props.dispatch)
   }
   render() {
+    console.log('places:     ', this.props.places)
+    console.log('segments:     ', this.props.segments)
+
     return (
       <GoogleMap
         defaultOptions={{
@@ -164,7 +221,7 @@ export class MyMapComponent extends Component {
             }}
           />
         </SearchBox>
-        <MarkerView />
+        <MarkerView placesService={this.placesService} />
         <RouteView />
       </GoogleMap>
     )
