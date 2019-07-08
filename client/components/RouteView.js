@@ -18,19 +18,17 @@ export const RouteView = () => {
 const RouteViewer = props => {
   return (
     <div>
-      {props.segmentPreview.length !== 0 &&
-        (console.log('inside'),
-        (
-          <DirectionsRenderer
-            key={-1}
-            directions={props.segmentPreview[0]}
-            options={{
-              suppressMarkers: true,
-              polylineOptions: {strokeColor: colorPicker(-1)},
-              preserveViewport: true
-            }}
-          />
-        ))}
+      {props.segmentPreview.length !== 0 && (
+        <DirectionsRenderer
+          key={-1}
+          directions={props.segmentPreview[0]}
+          options={{
+            suppressMarkers: true,
+            polylineOptions: {strokeColor: colorPicker(-1)},
+            preserveViewport: true
+          }}
+        />
+      )}
       {props.segments &&
         props.segments.map((segment, index) => (
           <DirectionsRenderer

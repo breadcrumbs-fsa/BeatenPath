@@ -119,7 +119,11 @@ const RouteLister = props => {
                         outline: `2px solid lightslategray`
                       }}
                     >
-                      <ListItemIcon style={{color: colorPicker(index)}}>
+                      <ListItemIcon
+                        style={{
+                          color: colorPicker(props.places.length - 1 - index)
+                        }}
+                      >
                         <LocationOnIcon />
                       </ListItemIcon>
                       <ListItemText

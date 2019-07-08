@@ -39,11 +39,16 @@ const segmentReducer = (segmentState, action) => {
       return [...segmentState, action.segment]
 
     case DELETE_PLACE:
+      console.log(segmentState, action.index)
       const newArr = []
       for (let i = 0; i < segmentState.length; i++) {
-        if (i == action.index - 1) {
+        if (i == action.index) {
+          console.log('NEW: ', segmentState[i])
+
           newArr.push(action.segment)
-        } else if (i !== action.index) {
+        } else if (i !== action.index + 1) {
+          console.log('OLD: ', segmentState[i])
+
           newArr.push(segmentState[i])
         }
       }

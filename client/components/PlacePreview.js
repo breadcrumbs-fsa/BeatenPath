@@ -79,6 +79,7 @@ const RouteLister = props => {
 
   function handleAdd() {
     if (props.places.length === 0) {
+      console.log(props.places.length)
       props.dispatch({
         type: PLACE_PREVIEW_TO_FIRST,
         place: props.placePreview[0]
