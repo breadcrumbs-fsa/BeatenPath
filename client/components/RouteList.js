@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import {withRouter} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -22,9 +23,17 @@ import {DirectionsRenderer} from 'react-google-maps'
 import {colorPicker} from '../utils/colorPicker'
 import {directions} from '../utils/directions'
 import {deletePlace} from '../utils/deletePlace'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 export const RouteList = () => {
   const [state, dispatch] = useContext(StoreContext)
+  if (location.pathname.match('/homepage')) {
+    return null
+  }
+
   return (
     <RouteLister
       segments={state.segments}
@@ -45,6 +54,10 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2)
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular
   }
 }))
 
@@ -60,13 +73,22 @@ const RouteLister = props => {
   const classes = useStyles()
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
+  const {location} = props
+  // if (location.pathname.match("/homepage")) {
+  //   return null;
+  // }
 
   function handleClick(index) {
     deletePlace(props.places, props.segments, index, props.dispatch)
   }
+
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
   }
+  console.log('shtuff ', props)
+  // console.log('place stuff: ', props.places[0].rating)
+  // console.log('place stuff: ', props.places.reviews[0].text)
+  // console.log('price ', props.places.plus_code.price_level)
   return (
     <div className={classes.root}>
       <FormGroup row />
@@ -111,7 +133,7 @@ const RouteLister = props => {
               ) : (
                 <ListItem
                   style={{
-                    outline: `2px solid ${colorPicker(-1)} `,
+                    // outline: `2px solid ${colorPicker(-1)} `,
                     marginBottom: '4px'
                   }}
                 >
@@ -129,7 +151,7 @@ const RouteLister = props => {
                     <ListItem
                       key={index}
                       style={{
-                        outline: `2px solid ${colorPicker(index)} `,
+                        outline: '2px solid lightgray',
                         marginBottom: '4px'
                       }}
                     >
@@ -145,7 +167,13 @@ const RouteLister = props => {
 
                       <ListItemText
                         primary={place.types[0].replace('_', ' ')}
+                        // primary={props.places[0].rating}
+                        // primary={props.places[0].price_level}
                       />
+
+                      {/* <ListItemText
+                  primary={props.places[0].price_level}
+                /> */}
 
                       <ListItemSecondaryAction>
                         <IconButton
@@ -166,4 +194,4 @@ const RouteLister = props => {
   )
 }
 
-export default RouteList
+export default withRouter(RouteList)

@@ -5,9 +5,15 @@ import {StoreContext} from '../app'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import CommandBar from './CommandBar'
 import {multiJourneys} from '../utils/multiJourneys'
+import {withRouter} from 'react-router-dom'
 
 const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
+  const {location} = props
+  if (location.pathname.match('/homepage')) {
+    return null
+  }
+
   return (
     <div>
       <div>
@@ -35,4 +41,4 @@ const MapContainer = props => {
   )
 }
 
-export default MapContainer
+export default withRouter(MapContainer)

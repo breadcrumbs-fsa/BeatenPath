@@ -22,7 +22,7 @@ import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
-  console.log('re-rendering: ', state)
+
   return (
     <CommandBarView
       segments={state.segments}
@@ -38,7 +38,6 @@ export const CommandBar = () => {
 // useEffect with props.journey
 
 const CommandBarView = props => {
-  console.log('single journey ', props)
   return (
     <div>
       <Grid item xs={12}>
@@ -87,6 +86,7 @@ const CommandBarView = props => {
             <button type="submit">Save</button>
           </div>
         </form>
+        ALL JOURNEYS
         <ButtonGroup fullWidth aria-label="Full width outlined button group">
           <Button
             type="button"
