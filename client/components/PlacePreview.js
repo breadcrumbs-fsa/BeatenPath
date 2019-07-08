@@ -25,6 +25,7 @@ import {directions} from '../utils/directions'
 import {deletePlace} from '../utils/deletePlace'
 import {saveJourney} from '../utils/saveJourney'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
+import Divider from '@material-ui/core/Divider'
 import Button from '@material-ui/core/Button'
 import {multiJourneys} from '../utils/multiJourneys'
 import {
@@ -111,9 +112,9 @@ const RouteLister = props => {
             <List dense={dense}>
               {props.placePreview[0] ? (
                 <ListItem
-                  style={{
-                    outline: `2px solid lightslategray `
-                  }}
+                // style={{
+                //   outline: `2px solid lightslategray `
+                // }}
                 >
                   <ListItemIcon style={{color: colorPicker(-1)}}>
                     <LocationOnIcon />
@@ -152,12 +153,17 @@ const RouteLister = props => {
                 </ListItem>
               ) : (
                 <ListItem
-                  style={{
-                    outline: `2px solid lightslategray `
-                  }}
+                // style={{
+                //   outline: `1px solid gainsboro`
+
+                // }}
                 >
                   <ListItemText
-                    primary="Add a place!"
+                    style={{
+                      color: 'silver',
+                      fontStyle: 'italic'
+                    }}
+                    primary="Use the search box above to add a place!"
                     secondary={secondary ? 'Secondary text' : null}
                   />
                 </ListItem>
