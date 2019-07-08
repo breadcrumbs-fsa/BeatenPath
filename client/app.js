@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {withRouter, Route, Switch} from 'react-router-dom'
 import {AppBar} from './components'
 import Routes from './routes'
 import MapContainer from './components/MapContainer'
@@ -11,6 +12,7 @@ export const StoreContext = createContext()
 
 import {useReducer} from 'react'
 import logger from 'use-reducer-logger'
+import HomePage from './components/HomePage'
 
 const App = () => {
   // const store = useReducer(logger(rootReducer), initialState)
@@ -19,6 +21,7 @@ const App = () => {
     <StoreContext.Provider value={store}>
       <div>
         <AppBar />
+        <HomePage />
         <MapContainer />
         <RouteList />
       </div>

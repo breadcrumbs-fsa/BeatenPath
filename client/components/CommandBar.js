@@ -24,6 +24,7 @@ import axios from 'axios'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
+
   return (
     <CommandBarView
       segments={state.segments}
@@ -128,6 +129,7 @@ const CommandBarView = props => {
             <button type="submit">Save</button>
           </div>
         </form>
+        ALL JOURNEYS
         <ButtonGroup fullWidth aria-label="Full width outlined button group">
           <Button
             type="button"
