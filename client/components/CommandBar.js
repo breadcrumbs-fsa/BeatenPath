@@ -150,8 +150,7 @@ const CommandBarView = props => {
         <ButtonGroup fullWidth aria-label="Full width outlined button group">
           <Button
             type="button"
-            onClick={function() {
-              fetchSingleJourney(1, props.dispatch)
+            onClick={async function() {
               props.journey.segments.forEach(segment =>
                 directions(
                   segment.segmentStart,
@@ -181,21 +180,38 @@ const CommandBarView = props => {
                   )
                 }
                 console.log(placeIdArray)
-                placeIdArray.forEach(async placeID => {
-                  await props.placesService.getDetails(
-                    {placeId: placeID},
-                    async (results, status) => {
-                      if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        await props.dispatch({
-                          type: 'PLACE_PREVIEW_TO_NTH',
-                          place: results
-                        })
-                      } else {
-                        console.log('placesQuery Failed: ', status)
+                // placeIdArray.reverse()
+                const placesPromises = placeIdArray.map(placeID => {
+                  let executor = (resolve, reject) =>
+                    props.placesService.getDetails(
+                      {placeId: placeID},
+                      (results, status) => {
+                        if (
+                          status == google.maps.places.PlacesServiceStatus.OK
+                        ) {
+                          console.log(results)
+                          resolve(results)
+                        } else {
+                          reject(status)
+                          console.log('placesQuery Failed: ', status)
+                        }
                       }
-                    }
-                  )
+                    )
+                  return new Promise(executor)
                 })
+
+                console.log(placesPromises)
+
+                try {
+                  const placesArray = await Promise.all(placesPromises)
+                  console.log('placesArray: ', placesArray)
+                  await props.dispatch({
+                    type: 'ADD_PLACES_ARRAY',
+                    places: placesArray
+                  })
+                } catch (error) {
+                  console.log(error)
+                }
               }
             }}
           >
