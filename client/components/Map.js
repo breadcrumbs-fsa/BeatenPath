@@ -164,9 +164,9 @@ export class MyMapComponent extends Component {
     })
 
     //TODO: make useEffect hook for both of these in command bar
-    multiJourneys(this.props.dispatch)
+    // multiJourneys(this.props.dispatch)
 
-    fetchSingleJourney(2, this.props.dispatch)
+    // fetchSingleJourney(2, this.props.dispatch)
   }
   render() {
     return (

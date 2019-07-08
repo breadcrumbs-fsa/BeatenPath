@@ -20,6 +20,7 @@ import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
+import axios from 'axios'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -39,6 +40,45 @@ export const CommandBar = () => {
 // useEffect with props.journey
 
 const CommandBarView = props => {
+  useEffect(() => {
+    async function fetchJourney(
+      journeyId,
+      dispatch,
+      dispatchType = 'SET_SINGLE_JOURNEY'
+    ) {
+      try {
+        const {data: singleJourney} = await axios.get(
+          `/api/journeys/${journeyId}`
+        )
+        dispatch({
+          type: dispatchType,
+          journey: singleJourney
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchJourney(2, props.dispatch)
+  }, [])
+
+  useEffect(() => {
+    async function fetchMultiJourneys(
+      dispatch,
+      dispatchType = 'GET_MULTIPLE_JOURNEYS'
+    ) {
+      try {
+        const {data: multipleJourneys} = await axios.get('/api/journeys')
+        dispatch({
+          type: dispatchType,
+          journeys: multipleJourneys
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchMultiJourneys(props.dispatch)
+  }, [])
+
   console.log(props.places)
   return (
     <div>
