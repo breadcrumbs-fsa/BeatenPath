@@ -8,16 +8,16 @@ module.exports = {
     '@babel/polyfill', // enables async-await
     './client/index.js'
   ],
-  plugins: [
-    new WorkboxPlugin.GenerateSW({
-      // these options encourage the ServiceWorkers to get in there fast
-      // and not allow any straggling "old" SWs to hang around
-      clientsClaim: true,
-      skipWaiting: true,
-      cleanupOutdatedCaches: true,
-      swDest: 'service-worker.js'
-    })
-  ],
+  // plugins: [
+  //   new WorkboxPlugin.GenerateSW({
+  //     // these options encourage the ServiceWorkers to get in there fast
+  //     // and not allow any straggling "old" SWs to hang around
+  //     clientsClaim: true,
+  //     skipWaiting: true,
+  //     cleanupOutdatedCaches: true,
+  //     swDest: 'service-worker.js'
+  //   })
+  // ],
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'

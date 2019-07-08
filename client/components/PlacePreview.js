@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import {withRouter} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -32,17 +31,9 @@ import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-export const RouteList = () => {
+export const PlacePreview = () => {
   const [state, dispatch] = useContext(StoreContext)
-  if (location.pathname.match('/homepage')) {
-    return null
-  }
-
   return (
     <RouteLister
       segments={state.segments}
@@ -60,15 +51,10 @@ const useStyles = makeStyles(theme => ({
   },
   demo: {
     backgroundColor: theme.palette.background.paper
-  },
-  title: {
-    // margin: theme.spacing(0, 0, 0)
-    margin: theme.spacing(4, 0, 2)
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
   }
+  // title: {
+  //   margin: theme.spacing(0, 0, 0)
+  // }
 }))
 
 // function generate(element) {
@@ -83,21 +69,17 @@ const RouteLister = props => {
   const classes = useStyles()
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
-  const {location} = props
-  // if (location.pathname.match("/homepage")) {
-  //   return null;
-  // }
 
   function handleClick(index) {
     deletePlace(props.places, props.segments, index, props.dispatch)
   }
-
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
   }
 
   function handleAdd() {
     if (props.places.length === 0) {
+      console.log(props.places.length)
       props.dispatch({
         type: PLACE_PREVIEW_TO_FIRST,
         place: props.placePreview[0]
@@ -118,7 +100,7 @@ const RouteLister = props => {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <FormGroup row />
       <Grid>
         <Grid item xs={12}>
@@ -127,52 +109,78 @@ const RouteLister = props => {
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
-              {props.places &&
-                props.places
-                  .slice()
-                  .reverse()
-                  .map((place, index) => (
-                    <ListItem
-                      key={index}
-                      style={{
-                        outline: `2px solid lightslategray`
-                      }}
+              {props.placePreview[0] ? (
+                <ListItem
+                  style={{
+                    outline: `2px solid lightslategray `
+                  }}
+                >
+                  <ListItemIcon style={{color: colorPicker(-1)}}>
+                    <LocationOnIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      props.placePreview[0].name
+                        ? props.placePreview[0].name
+                        : props.placePreview[0].formatted_address
+                    }
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                  <ListItemText
+                    primary={props.placePreview[0].types[0].replace('_', ' ')}
+                  />
+
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      onClick={() => handleAdd()}
+                      edge="end"
+                      aria-label="Add"
                     >
-                      <ListItemIcon
-                        style={{
-                          color: colorPicker(props.places.length - 1 - index)
-                        }}
-                      >
-                        <LocationOnIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          place.name ? place.name : place.formatted_address
-                        }
-                        secondary={secondary ? 'Secondary text' : null}
-                      />
+                      <AddIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
 
-                      <ListItemText
-                        primary={place.types[0].replace('_', ' ')}
-                        // primary={props.places[0].rating}
-                        // primary={props.places[0].price_level}
-                      />
-
-                      {/* <ListItemText
-                  primary={props.places[0].price_level}
-                /> */}
-
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          onClick={() => handleClick(index)}
-                          edge="end"
-                          aria-label="Delete"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  ))}
+                  {/*<ListItemSecondaryAction>*/}
+                  {/*  <IconButton*/}
+                  {/*    onClick={() => handleClickPreview()}*/}
+                  {/*    edge="false"*/}
+                  {/*    aria-label="Delete"*/}
+                  {/*  >*/}
+                  {/*    <DeleteIcon />*/}
+                  {/*  </IconButton>*/}
+                  {/*</ListItemSecondaryAction>*/}
+                </ListItem>
+              ) : (
+                <ListItem
+                  style={{
+                    outline: `2px solid lightslategray `
+                  }}
+                >
+                  <ListItemText
+                    primary="Add a place!"
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                </ListItem>
+              )}
+              <form
+                onSubmit={event => {
+                  event.preventDefault()
+                  saveJourney(
+                    event.target.content.value,
+                    props.segments,
+                    props.dispatch
+                  )
+                }}
+              >
+                <div>
+                  <input
+                    type="text"
+                    name="content"
+                    placeholder="Untitled Journey"
+                  />
+                  <button type="submit">Save</button>
+                </div>
+              </form>
             </List>
           </div>
         </Grid>
@@ -180,5 +188,3 @@ const RouteLister = props => {
     </div>
   )
 }
-
-export default withRouter(RouteList)

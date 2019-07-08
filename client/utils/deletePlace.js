@@ -3,10 +3,11 @@ export async function deletePlace(places, segments, placeIndex, dispatch) {
     dispatch({type: 'DELETE_FIRST_OR_LAST', index: placeIndex})
   } else {
     const DirectionsService = new google.maps.DirectionsService()
+    console.log(places, placeIndex)
     await DirectionsService.route(
       {
-        origin: {placeId: places[placeIndex - 1].place_id},
-        destination: {placeId: places[placeIndex + 1].place_id},
+        origin: {placeId: places[placeIndex].place_id},
+        destination: {placeId: places[placeIndex + 2].place_id},
         travelMode: 'WALKING'
       },
       (result, status) => {
