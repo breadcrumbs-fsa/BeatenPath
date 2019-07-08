@@ -42,7 +42,7 @@ const App = () => {
           {/*  <AppBar />*/}
           {/*</div>*/}
           <MapContainer />
-          <HomePage />
+          {/*<HomePage />*/}
           <PlacePreview />
           <div style={{overflowY: 'auto'}}>
             <RouteList style={{overflowY: 'auto'}} />
