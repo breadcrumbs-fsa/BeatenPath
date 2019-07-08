@@ -25,6 +25,7 @@ import axios from 'axios'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
+
   return (
     <CommandBarView
       segments={state.segments}
