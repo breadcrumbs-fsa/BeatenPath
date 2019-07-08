@@ -1,6 +1,11 @@
 import axios from 'axios'
 
-export async function saveJourney(journeyName, segmentArray, dispatch) {
+export async function saveJourney(
+  journeyName,
+  segmentArray,
+  placesArray,
+  dispatch
+) {
   try {
     console.log('segmentArray ', segmentArray)
     const {data: newJourney} = await axios.post('/api/journeys', {
@@ -18,6 +23,7 @@ export async function saveJourney(journeyName, segmentArray, dispatch) {
         order: index,
         transportation: segment.request.travelMode
       })
+
       console.log(newSegment)
     })
 

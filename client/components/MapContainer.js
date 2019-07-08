@@ -1,8 +1,7 @@
 import React, {useContext} from 'react'
 import Map from './Map'
-import '../../secrets'
 import {StoreContext} from '../app'
-const mapkey = process.env.GOOGLE_MAPJS_API
+import {mapjs} from '../config'
 import CommandBar from './CommandBar'
 import {multiJourneys} from '../utils/multiJourneys'
 import {withRouter} from 'react-router-dom'
@@ -19,9 +18,7 @@ const MapContainer = props => {
       <div>
         <Map
           isMarkerShown
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${
-            process.env.GOOGLE_MAPJS_API
-          }&js?v=3.exp&libraries=geometry,drawing,places`}
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapjs}&js?v=3.exp&libraries=geometry,drawing,places`}
           loadingElement={<div style={{height: `100%`}} />}
           containerElement={<div style={{height: `400px`}} />}
           mapElement={<div style={{height: `100%`}} />}
@@ -29,9 +26,10 @@ const MapContainer = props => {
           placePreview={state.placePreview}
           places={state.places}
           segmentPreview={state.segmentPreview}
-          segements={state.segements}
+          segments={state.segments}
           searchInput={state.searchInput}
           journeys={state.journeys}
+          placesService={state.placesService}
         />
       </div>
       <div>

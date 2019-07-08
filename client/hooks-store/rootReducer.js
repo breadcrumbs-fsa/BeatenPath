@@ -6,6 +6,7 @@ import segmentPreviewReducer from './segments/segmentPreviewReducer'
 import searchReducer from './search/searchReducer'
 import singleJourneyReducer from './journeys/singleJourneyReducer'
 import journeysReducer from './journeys/journeysReducer'
+import placesServiceReducer from './search/placesService'
 
 export const initialState = {
   journeys: [],
@@ -14,7 +15,8 @@ export const initialState = {
   placePreview: [],
   places: [],
   searchInput: {},
-  journey: {}
+  journey: {},
+  placesService: {}
 }
 
 export const rootReducer = combineReducers({
@@ -24,5 +26,6 @@ export const rootReducer = combineReducers({
   placePreview: placePreviewReducer,
   places: placesPreviewReducer,
   searchInput: searchReducer,
-  journey: singleJourneyReducer
+  journey: singleJourneyReducer,
+  placesService: placesServiceReducer
 })

@@ -1,7 +1,8 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Map from './Map'
 import '../../secrets'
 import {StoreContext} from '../app'
+import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps'
 const mapkey = process.env.GOOGLE_MAPJS_API
 import {directions} from '../utils/directions'
 import {saveJourney} from '../utils/saveJourney'
@@ -19,6 +20,7 @@ import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
+import axios from 'axios'
 
 export const CommandBar = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -31,6 +33,7 @@ export const CommandBar = () => {
       places={state.places}
       journeys={state.journeys}
       journey={state.journey}
+      placesService={state.placesService}
     />
   )
 }
@@ -38,6 +41,46 @@ export const CommandBar = () => {
 // useEffect with props.journey
 
 const CommandBarView = props => {
+  useEffect(() => {
+    async function fetchJourney(
+      journeyId,
+      dispatch,
+      dispatchType = 'SET_SINGLE_JOURNEY'
+    ) {
+      try {
+        const {data: singleJourney} = await axios.get(
+          `/api/journeys/${journeyId}`
+        )
+        dispatch({
+          type: dispatchType,
+          journey: singleJourney
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchJourney(2, props.dispatch)
+  }, [])
+
+  useEffect(() => {
+    async function fetchMultiJourneys(
+      dispatch,
+      dispatchType = 'GET_MULTIPLE_JOURNEYS'
+    ) {
+      try {
+        const {data: multipleJourneys} = await axios.get('/api/journeys')
+        dispatch({
+          type: dispatchType,
+          journeys: multipleJourneys
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchMultiJourneys(props.dispatch)
+  }, [])
+
+  console.log(props.places)
   return (
     <div>
       <Grid item xs={12}>
@@ -92,7 +135,6 @@ const CommandBarView = props => {
             type="button"
             onClick={function() {
               multiJourneys(props.dispatch)
-              console.log('first props: ', props.journeys)
               props.journeys.forEach(journey => {
                 journey.segments.forEach(segment => {
                   directions(
@@ -112,7 +154,6 @@ const CommandBarView = props => {
             type="button"
             onClick={function() {
               fetchSingleJourney(1, props.dispatch)
-              console.log('props: ', props.journey)
               props.journey.segments.forEach(segment =>
                 directions(
                   segment.segmentStart,
@@ -120,6 +161,44 @@ const CommandBarView = props => {
                   props.dispatch
                 )
               )
+              let placeIdArray = []
+              if (props.journey.segments.length > 0) {
+                placeIdArray.push(
+                  props.journey.segments[0].segmentStart,
+                  props.journey.segments[0].segmentEnd
+                )
+                if (props.journey.segments.length > 1) {
+                  if (props.journey.segments.length > 2) {
+                    for (
+                      let i = 1;
+                      i < props.journey.segments.length - 1;
+                      i++
+                    ) {
+                      placeIdArray.push(props.journey.segments[i].segmentEnd)
+                    }
+                  }
+                  placeIdArray.push(
+                    props.journey.segments[props.journey.segments.length - 1]
+                      .segmentEnd
+                  )
+                }
+                console.log(placeIdArray)
+                placeIdArray.forEach(async placeID => {
+                  await props.placesService.getDetails(
+                    {placeId: placeID},
+                    async (results, status) => {
+                      if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        await props.dispatch({
+                          type: 'PLACE_PREVIEW_TO_NTH',
+                          place: results
+                        })
+                      } else {
+                        console.log('placesQuery Failed: ', status)
+                      }
+                    }
+                  )
+                })
+              }
             }}
           >
             View Date Night
