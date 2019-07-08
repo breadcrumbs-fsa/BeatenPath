@@ -10,6 +10,9 @@ import Switch from '@material-ui/core/Switch'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
+  },
+  title: {
+    flexGrow: 1
   }
 }))
 
@@ -24,8 +27,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             BeatenPath
           </Typography>
-          <Switch />
-          {/*<ProfileMenu />*/}
+          <ProfileMenu />
         </Toolbar>
       </AppBar>
     </div>

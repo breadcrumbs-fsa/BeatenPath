@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {withRouter, Route, Switch} from 'react-router-dom'
 import {AppBar} from './components'
 import Routes from './routes'
 import MapContainer from './components/MapContainer'
 import RouteList from './components/RouteList'
-import {PlacePreview} from './components/PlacePreview'
 
 import {rootReducer, initialState} from './hooks-store/rootReducer'
 import {createContext} from 'react'
@@ -12,6 +12,8 @@ export const StoreContext = createContext()
 
 import {useReducer} from 'react'
 import logger from 'use-reducer-logger'
+import HomePage from './components/HomePage'
+import {PlacePreview} from './components/PlacePreview'
 
 const App = () => {
   // const store = useReducer(logger(rootReducer), initialState)
@@ -40,6 +42,7 @@ const App = () => {
           {/*  <AppBar />*/}
           {/*</div>*/}
           <MapContainer />
+          <HomePage />
           <PlacePreview />
           <div style={{overflowY: 'auto'}}>
             <RouteList style={{overflowY: 'auto'}} />

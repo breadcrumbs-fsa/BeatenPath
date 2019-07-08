@@ -31,9 +31,17 @@ import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 export const RouteList = () => {
   const [state, dispatch] = useContext(StoreContext)
+  if (location.pathname.match('/homepage')) {
+    return null
+  }
+
   return (
     <RouteLister
       segments={state.segments}
@@ -54,6 +62,11 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     // margin: theme.spacing(0, 0, 0)
+    margin: theme.spacing(4, 0, 2)
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular
   }
 }))
 
@@ -69,10 +82,15 @@ const RouteLister = props => {
   const classes = useStyles()
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
+  const {location} = props
+  // if (location.pathname.match("/homepage")) {
+  //   return null;
+  // }
 
   function handleClick(index) {
     deletePlace(props.places, props.segments, index, props.dispatch)
   }
+
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
   }
@@ -135,7 +153,13 @@ const RouteLister = props => {
 
                       <ListItemText
                         primary={place.types[0].replace('_', ' ')}
+                        // primary={props.places[0].rating}
+                        // primary={props.places[0].price_level}
                       />
+
+                      {/* <ListItemText
+                  primary={props.places[0].price_level}
+                /> */}
 
                       <ListItemSecondaryAction>
                         <IconButton

@@ -25,7 +25,9 @@ JourneyCategory.belongsToMany(Journey, {through: 'journey-join-category'})
 Journey.belongsToMany(JourneyCategory, {through: 'journey-join-category'})
 // Journey.hasMany(JourneyCategory)
 
-Segment.belongsTo(Place)
+Segment.hasMany(Place) // 2 places to 1 segment
+Place.belongsTo(Segment)
+// belongs to many?
 // Place.belongsTo(Segment)
 
 Segment.belongsTo(Journey)
