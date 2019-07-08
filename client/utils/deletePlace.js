@@ -6,8 +6,8 @@ export async function deletePlace(places, segments, placeIndex, dispatch) {
     console.log(places, placeIndex)
     await DirectionsService.route(
       {
-        origin: {placeId: places[placeIndex].place_id},
-        destination: {placeId: places[placeIndex + 2].place_id},
+        origin: {placeId: places[places.length - 2 - placeIndex].place_id},
+        destination: {placeId: places[places.length - placeIndex].place_id},
         travelMode: 'WALKING'
       },
       (result, status) => {
@@ -15,7 +15,7 @@ export async function deletePlace(places, segments, placeIndex, dispatch) {
           dispatch({
             type: 'DELETE_PLACE',
             segment: result,
-            index: placeIndex
+            index: places.length - 1 - placeIndex
           })
         } else {
           console.error(`error fetching directions ${result}`)
