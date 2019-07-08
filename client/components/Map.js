@@ -6,12 +6,19 @@ import MarkerView from './MarkerView'
 import RouteView from './RouteView'
 import {directions} from '../utils/directions'
 import {multiJourneys} from '../utils/multiJourneys'
-import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
+import {
+  ADD_PLACE_PREVIEW,
+  PLACE_PREVIEW_TO_FIRST
+} from '../hooks-store/places/placePreviewReducer'
 import {ADD_REF} from '../hooks-store/search/searchReducer'
 import {ALL_SEGMENTS} from '../hooks-store/segments/segmentsReducer'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 import {colorPicker} from '../utils/colorPicker'
 import MapControl from './MapControl'
+
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -33,6 +40,13 @@ export class MyMapComponent extends Component {
     this.setState({
       onMapMounted: ref => {
         refs.map = ref
+        const placesService = new google.maps.places.PlacesService(
+          refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
+        )
+        this.props.dispatch({
+          type: 'ADD_PLACES_SERVICE',
+          placesService: placesService
+        })
       },
 
       getLocation: () => {
@@ -101,10 +115,7 @@ export class MyMapComponent extends Component {
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
         if (event.placeId) {
-          const placesService = new google.maps.places.PlacesService(
-            refs.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
-          )
-          await placesService.getDetails(
+          await this.props.placesService.getDetails(
             {placeId: event.placeId},
             (results, status) => {
               if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -153,9 +164,9 @@ export class MyMapComponent extends Component {
     })
 
     //TODO: make useEffect hook for both of these in command bar
-    multiJourneys(this.props.dispatch)
+    // multiJourneys(this.props.dispatch)
 
-    fetchSingleJourney(1, this.props.dispatch)
+    // fetchSingleJourney(2, this.props.dispatch)
   }
   render() {
     return (
@@ -219,6 +230,7 @@ export class MyMapComponent extends Component {
             }
           />
         </SearchBox>
+        <MarkerView placesService={this.placesService} />
         <Marker
           icon={{
             path:

@@ -12,19 +12,8 @@ const Place = db.define('places', {
     allowNull: false,
     unique: true
   },
-
-  lat: {
-    //TODO Geography dataType
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
-  long: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
-  price: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+  priceLevel: {
+    type: Sequelize.INTEGER
   }
 })
 

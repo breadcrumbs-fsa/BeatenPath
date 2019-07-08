@@ -12,6 +12,7 @@ export const MarkerView = () => {
       segmentPreview={state.segmentPreview}
       placePreview={state.placePreview}
       places={state.places}
+      journeys={state.journeys}
     />
   )
 }

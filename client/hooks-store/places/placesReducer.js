@@ -13,6 +13,11 @@ export const placePreviewToFirst = place => ({
   place
 })
 
+export const placePreviewToNth = place => ({
+  type: PLACE_PREVIEW_TO_NTH,
+  place
+})
+
 export const deleteFirstOrLast = index => ({
   type: DELETE_FIRST_OR_LAST,
   index
