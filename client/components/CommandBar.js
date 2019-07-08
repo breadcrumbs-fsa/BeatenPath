@@ -79,7 +79,7 @@ const CommandBarView = props => {
     fetchMultiJourneys(props.dispatch)
   }, [])
 
-  console.log(props.places)
+  console.log('journeys: ', props.journeys)
   return (
     <div>
       <Grid item xs={12}>
@@ -110,8 +110,6 @@ const CommandBarView = props => {
           >
             Add to journey
           </Button>
-          {/* <Button>width</Button>
-          <Button>ButtonGroup</Button> */}
         </ButtonGroup>
         <form
           onSubmit={event => {
@@ -132,9 +130,9 @@ const CommandBarView = props => {
           <Button
             type="button"
             onClick={function() {
-              multiJourneys(props.dispatch)
               props.journeys.forEach(journey => {
                 journey.segments.forEach(segment => {
+                  console.log('each seg:   ', segment)
                   directions(
                     segment.segmentStart,
                     segment.segmentEnd,
@@ -179,7 +177,6 @@ const CommandBarView = props => {
                       .segmentEnd
                   )
                 }
-                console.log(placeIdArray)
                 // placeIdArray.reverse()
                 const placesPromises = placeIdArray.map(placeID => {
                   let executor = (resolve, reject) =>
@@ -189,7 +186,6 @@ const CommandBarView = props => {
                         if (
                           status == google.maps.places.PlacesServiceStatus.OK
                         ) {
-                          console.log(results)
                           resolve(results)
                         } else {
                           reject(status)
@@ -200,11 +196,8 @@ const CommandBarView = props => {
                   return new Promise(executor)
                 })
 
-                console.log(placesPromises)
-
                 try {
                   const placesArray = await Promise.all(placesPromises)
-                  console.log('placesArray: ', placesArray)
                   await props.dispatch({
                     type: 'ADD_PLACES_ARRAY',
                     places: placesArray
