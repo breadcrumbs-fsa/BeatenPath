@@ -25,9 +25,9 @@ const MapContainer = props => {
           placesService={state.placesService}
         />
       </div>
-      <div>
-        <CommandBar />
-      </div>
+      {/*<div>*/}
+      {/*  <CommandBar />*/}
+      {/*</div>*/}
     </div>
   )
 }

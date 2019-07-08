@@ -32,7 +32,7 @@ import {
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
 
-export const RouteList = () => {
+export const PlacePreview = () => {
   const [state, dispatch] = useContext(StoreContext)
   return (
     <RouteLister
@@ -51,10 +51,10 @@ const useStyles = makeStyles(theme => ({
   },
   demo: {
     backgroundColor: theme.palette.background.paper
-  },
-  title: {
-    // margin: theme.spacing(0, 0, 0)
   }
+  // title: {
+  //   margin: theme.spacing(0, 0, 0)
+  // }
 }))
 
 // function generate(element) {
@@ -99,7 +99,7 @@ const RouteLister = props => {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <FormGroup row />
       <Grid>
         <Grid item xs={12}>
@@ -108,42 +108,78 @@ const RouteLister = props => {
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
-              {props.places &&
-                props.places
-                  .slice()
-                  .reverse()
-                  .map((place, index) => (
-                    <ListItem
-                      key={index}
-                      style={{
-                        outline: `2px solid lightslategray`
-                      }}
+              {props.placePreview[0] ? (
+                <ListItem
+                  style={{
+                    outline: `2px solid lightslategray `
+                  }}
+                >
+                  <ListItemIcon style={{color: colorPicker(-1)}}>
+                    <LocationOnIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      props.placePreview[0].name
+                        ? props.placePreview[0].name
+                        : props.placePreview[0].formatted_address
+                    }
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                  <ListItemText
+                    primary={props.placePreview[0].types[0].replace('_', ' ')}
+                  />
+
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      onClick={() => handleAdd()}
+                      edge="end"
+                      aria-label="Add"
                     >
-                      <ListItemIcon style={{color: colorPicker(index)}}>
-                        <LocationOnIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          place.name ? place.name : place.formatted_address
-                        }
-                        secondary={secondary ? 'Secondary text' : null}
-                      />
+                      <AddIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
 
-                      <ListItemText
-                        primary={place.types[0].replace('_', ' ')}
-                      />
-
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          onClick={() => handleClick(index)}
-                          edge="end"
-                          aria-label="Delete"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  ))}
+                  {/*<ListItemSecondaryAction>*/}
+                  {/*  <IconButton*/}
+                  {/*    onClick={() => handleClickPreview()}*/}
+                  {/*    edge="false"*/}
+                  {/*    aria-label="Delete"*/}
+                  {/*  >*/}
+                  {/*    <DeleteIcon />*/}
+                  {/*  </IconButton>*/}
+                  {/*</ListItemSecondaryAction>*/}
+                </ListItem>
+              ) : (
+                <ListItem
+                  style={{
+                    outline: `2px solid lightslategray `
+                  }}
+                >
+                  <ListItemText
+                    primary="Add a place!"
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                </ListItem>
+              )}
+              <form
+                onSubmit={event => {
+                  event.preventDefault()
+                  saveJourney(
+                    event.target.content.value,
+                    props.segments,
+                    props.dispatch
+                  )
+                }}
+              >
+                <div>
+                  <input
+                    type="text"
+                    name="content"
+                    placeholder="Untitled Journey"
+                  />
+                  <button type="submit">Save</button>
+                </div>
+              </form>
             </List>
           </div>
         </Grid>
@@ -151,5 +187,3 @@ const RouteLister = props => {
     </div>
   )
 }
-
-export default RouteList

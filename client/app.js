@@ -4,6 +4,7 @@ import {AppBar} from './components'
 import Routes from './routes'
 import MapContainer from './components/MapContainer'
 import RouteList from './components/RouteList'
+import {PlacePreview} from './components/PlacePreview'
 
 import {rootReducer, initialState} from './hooks-store/rootReducer'
 import {createContext} from 'react'
@@ -18,9 +19,32 @@ const App = () => {
   return (
     <StoreContext.Provider value={store}>
       <div>
-        <AppBar />
-        <MapContainer />
-        <RouteList />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100vh',
+            width: '100%'
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: 'black',
+              display: 'flex',
+              height: '2rem',
+              width: '100%'
+            }}
+          >
+            <AppBar style={{alignItems: 'stretch'}} />
+          </div>
+          {/*  <AppBar />*/}
+          {/*</div>*/}
+          <MapContainer />
+          <PlacePreview />
+          <div style={{overflowY: 'auto'}}>
+            <RouteList style={{overflowY: 'auto'}} />
+          </div>
+        </div>
       </div>
     </StoreContext.Provider>
   )
