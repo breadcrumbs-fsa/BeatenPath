@@ -20,6 +20,7 @@ import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
+import {singleJourneyPlaces} from '../utils/singleJourneyPlaces'
 import axios from 'axios'
 
 export const CommandBar = () => {
@@ -126,91 +127,29 @@ const CommandBarView = props => {
             <button type="submit">Save</button>
           </div>
         </form>
-        <ButtonGroup fullWidth aria-label="Full width outlined button group">
-          <Button
-            type="button"
-            onClick={function() {
-              props.journeys.forEach(journey => {
-                journey.segments.forEach(segment => {
-                  console.log('each seg:   ', segment)
-                  directions(
-                    segment.segmentStart,
-                    segment.segmentEnd,
+
+        {props.journeys.length > 0 &&
+          props.journeys.map(journey => (
+            <ButtonGroup
+              fullWidth
+              aria-label="Full width outlined button group"
+              key={journey.id}
+            >
+              <Button
+                type="button"
+                onClick={function() {
+                  singleJourneyPlaces(
+                    journey.segments,
+                    props.placesService,
                     props.dispatch
                   )
-                })
-              })
-            }}
-          >
-            View All Journeys
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup fullWidth aria-label="Full width outlined button group">
-          <Button
-            type="button"
-            onClick={async function() {
-              props.journey.segments.forEach(segment =>
-                directions(
-                  segment.segmentStart,
-                  segment.segmentEnd,
-                  props.dispatch
-                )
-              )
-              let placeIdArray = []
-              if (props.journey.segments.length > 0) {
-                placeIdArray.push(
-                  props.journey.segments[0].segmentStart,
-                  props.journey.segments[0].segmentEnd
-                )
-                if (props.journey.segments.length > 1) {
-                  if (props.journey.segments.length > 2) {
-                    for (
-                      let i = 1;
-                      i < props.journey.segments.length - 1;
-                      i++
-                    ) {
-                      placeIdArray.push(props.journey.segments[i].segmentEnd)
-                    }
-                  }
-                  placeIdArray.push(
-                    props.journey.segments[props.journey.segments.length - 1]
-                      .segmentEnd
-                  )
-                }
-                // placeIdArray.reverse()
-                const placesPromises = placeIdArray.map(placeID => {
-                  let executor = (resolve, reject) =>
-                    props.placesService.getDetails(
-                      {placeId: placeID},
-                      (results, status) => {
-                        if (
-                          status == google.maps.places.PlacesServiceStatus.OK
-                        ) {
-                          resolve(results)
-                        } else {
-                          reject(status)
-                          console.log('placesQuery Failed: ', status)
-                        }
-                      }
-                    )
-                  return new Promise(executor)
-                })
+                }}
+              >
+                {journey.name} {journey.segments.length + 1}
+              </Button>
+            </ButtonGroup>
+          ))}
 
-                try {
-                  const placesArray = await Promise.all(placesPromises)
-                  await props.dispatch({
-                    type: 'ADD_PLACES_ARRAY',
-                    places: placesArray
-                  })
-                } catch (error) {
-                  console.log(error)
-                }
-              }
-            }}
-          >
-            View Date Night
-          </Button>
-        </ButtonGroup>
         <ButtonGroup fullWidth aria-label="Full width outlined button group">
           <Button
             type="button"
