@@ -85,7 +85,6 @@ const RouteLister = props => {
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
   }
-  console.log('shtuff ', props)
   // console.log('place stuff: ', props.places[0].rating)
   // console.log('place stuff: ', props.places.reviews[0].text)
   // console.log('price ', props.places.plus_code.price_level)

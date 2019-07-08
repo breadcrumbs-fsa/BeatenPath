@@ -21,7 +21,8 @@ const App = () => {
     <StoreContext.Provider value={store}>
       <div>
         <AppBar />
-        <HomePage />
+        <Routes />
+        {/* <HomePage /> */}
         <MapContainer />
         <RouteList />
       </div>
