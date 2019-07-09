@@ -19,7 +19,7 @@ import MapControl from './MapControl'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
-import {mapStyle, mapFlags} from './MapFilter'
+import MapFilter from './MapFilter'
 import {addBounds} from '../hooks-store/search/boundsReducer'
 import {addCenter} from '../hooks-store/search/centerReducer'
 // import mapFilter from './MapFilter'
@@ -118,8 +118,6 @@ export class MyMapComponent extends Component {
         this.props.dispatch({type: 'CLEAR_PLACES'})
         this.props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
       },
-      mapStyle: mapStyle,
-      mapFlags: mapFlags,
 
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
@@ -231,10 +229,8 @@ export class MyMapComponent extends Component {
             <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAzMiAzMiIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48ZyBpZD0ic3VyZmFjZTEiPjxwYXRoIHN0eWxlPSIgIiBkPSJNIDE2IDQgQyAxMC44ODY3MTkgNCA2LjYxNzE4OCA3LjE2MDE1NiA0Ljg3NSAxMS42MjUgTCA2LjcxODc1IDEyLjM3NSBDIDguMTc1NzgxIDguNjQwNjI1IDExLjcxMDkzOCA2IDE2IDYgQyAxOS4yNDIxODggNiAyMi4xMzI4MTMgNy41ODk4NDQgMjMuOTM3NSAxMCBMIDIwIDEwIEwgMjAgMTIgTCAyNyAxMiBMIDI3IDUgTCAyNSA1IEwgMjUgOC4wOTM3NSBDIDIyLjgwODU5NCA1LjU4MjAzMSAxOS41NzAzMTMgNCAxNiA0IFogTSAyNS4yODEyNSAxOS42MjUgQyAyMy44MjQyMTkgMjMuMzU5Mzc1IDIwLjI4OTA2MyAyNiAxNiAyNiBDIDEyLjcyMjY1NiAyNiA5Ljg0Mzc1IDI0LjM4NjcxOSA4LjAzMTI1IDIyIEwgMTIgMjIgTCAxMiAyMCBMIDUgMjAgTCA1IDI3IEwgNyAyNyBMIDcgMjMuOTA2MjUgQyA5LjE4NzUgMjYuMzg2NzE5IDEyLjM5NDUzMSAyOCAxNiAyOCBDIDIxLjExMzI4MSAyOCAyNS4zODI4MTMgMjQuODM5ODQ0IDI3LjEyNSAyMC4zNzUgWiAiPjwvcGF0aD48L2c+PC9zdmc+" />
           </button>
         </MapControl>
-        <MapControl position={google.maps.ControlPosition.left_TOP}>
-          <button onClick={() => this.props.dispatch({type: 'TOGGLE_ALL'})}>
-            X
-          </button>
+        <MapControl position={google.maps.ControlPosition.TOP_LEFT}>
+          <MapFilter />
         </MapControl>
         <SearchBox
           ref={this.state.onSearchBoxMounted}
