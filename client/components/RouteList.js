@@ -53,6 +53,7 @@ export const RouteList = () => {
       dispatch={dispatch}
       mode={state.mode}
       journey={state.journey}
+      center={state.center}
     />
   )
 }
@@ -120,6 +121,9 @@ const RouteLister = props => {
       )
     }
   }
+  console.log('singlejourney props: ', props)
+  props.segments.length > 0 &&
+    console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
   return (
     <div>
       <FormGroup row />
