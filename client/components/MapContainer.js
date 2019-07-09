@@ -18,38 +18,41 @@ export const MapContainer = props => {
   // }
 
   return (
-    <div>
-      {state.mode === 'home' ? (
-        <div>
-          <HomePage />
+    console.log(state.segments),
+    (
+      <div>
+        {state.mode === 'home' ? (
+          <div>
+            <HomePage />
+          </div>
+        ) : (
+          <div>
+            <Map
+              isMarkerShown
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapjs}&js?v=3.exp&libraries=geometry,drawing,places`}
+              loadingElement={<div style={{height: `100%`}} />}
+              containerElement={<div style={{height: `400px`}} />}
+              mapElement={<div style={{height: `100%`}} />}
+              dispatch={dispatch}
+              center={state.center}
+              placePreview={state.placePreview}
+              places={state.places}
+              segmentPreview={state.segmentPreview}
+              segments={state.segments}
+              searchInput={state.searchInput}
+              journeys={state.journeys}
+              placesService={state.placesService}
+              mode={state.mode}
+            />
+            <PlacePreview />
+          </div>
+        )}
+        <div style={{overflowY: 'auto'}}>
+          {state.mode === 'create' && <RouteList style={{overflowY: 'auto'}} />}
+          {state.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
         </div>
-      ) : (
-        <div>
-          <Map
-            isMarkerShown
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapjs}&js?v=3.exp&libraries=geometry,drawing,places`}
-            loadingElement={<div style={{height: `100%`}} />}
-            containerElement={<div style={{height: `400px`}} />}
-            mapElement={<div style={{height: `100%`}} />}
-            dispatch={dispatch}
-            center={state.center}
-            placePreview={state.placePreview}
-            places={state.places}
-            segmentPreview={state.segmentPreview}
-            segments={state.segments}
-            searchInput={state.searchInput}
-            journeys={state.journeys}
-            placesService={state.placesService}
-            mode={state.mode}
-          />
-          <PlacePreview />
-        </div>
-      )}
-      <div style={{overflowY: 'auto'}}>
-        {props.mode === 'create' && <RouteList style={{overflowY: 'auto'}} />}
-        {props.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
       </div>
-    </div>
+    )
   )
 }
 
