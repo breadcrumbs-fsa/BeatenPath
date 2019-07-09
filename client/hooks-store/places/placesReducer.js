@@ -49,9 +49,7 @@ const placesReducer = (placesState, action) => {
         return placesState.slice(-1)
       }
     case DELETE_PLACE: {
-      return placesState.filter(
-        (item, index) => index !== placesState.length - 1 - action.index
-      )
+      return placesState.filter((item, index) => index !== action.index)
     }
 
     case PLACE_PREVIEW_TO_NTH:
