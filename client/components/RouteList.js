@@ -18,6 +18,7 @@ import FolderIcon from '@material-ui/icons/Folder'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import {Store} from '../app'
 import {StoreContext} from '../app'
 import {DirectionsRenderer} from 'react-google-maps'
@@ -50,6 +51,8 @@ export const RouteList = () => {
       placePreview={state.placePreview}
       places={state.places}
       dispatch={dispatch}
+      mode={state.mode}
+      journey={state.journey}
     />
   )
 }
@@ -117,7 +120,6 @@ const RouteLister = props => {
       )
     }
   }
-
   return (
     <div>
       <FormGroup row />
@@ -128,6 +130,27 @@ const RouteLister = props => {
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
+              {props.journey.name && (
+                <ListItem>
+                  <ListItemText primary={props.journey.name} />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      onClick={() => {
+                        props.dispatch({type: 'CLEAR_PLACES'})
+                        props.dispatch({
+                          type: 'SET_SINGLE_JOURNEY',
+                          journey: {}
+                        })
+                        props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
+                      }}
+                      edge="end"
+                      aria-label="arrow_back"
+                    >
+                      <ArrowBackIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              )}
               <Divider />
               {props.places &&
                 props.places
@@ -160,10 +183,6 @@ const RouteLister = props => {
                         // primary={props.places[0].rating}
                         // primary={props.places[0].price_level}
                       />
-
-                      {/* <ListItemText
-                  primary={props.places[0].price_level}
-                /> */}
 
                       <ListItemSecondaryAction>
                         <IconButton
