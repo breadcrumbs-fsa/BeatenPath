@@ -14,6 +14,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItem from '@material-ui/core/ListItem'
 
+import {addCenter} from '../hooks-store/search/centerReducer'
+
 export const JourneyList = () => {
   const [state, dispatch] = useContext(StoreContext)
 
@@ -22,6 +24,8 @@ export const JourneyList = () => {
       journeys={state.journeys}
       dispatch={dispatch}
       placesService={state.placesService}
+      center={state.center}
+      segments={state.segments}
     />
   )
 }
@@ -44,6 +48,9 @@ export const JourneyListView = props => {
     }
     fetchMultiJourneys(props.dispatch)
   }, [])
+  props.segments.length > 0 && console.log('segments: ', props.segments)
+  props.segments.length > 0 &&
+    console.log('overviewpath ', props.segments[0].routes[0].overview_path[0])
   return (
     <div>
       <Grid>
@@ -63,13 +70,17 @@ export const JourneyListView = props => {
                 /> */}
 
               <IconButton
-                onClick={() =>
-                  singleJourneyPlaces(
+                onClick={async () => {
+                  await singleJourneyPlaces(
                     journey.segments,
                     props.placesService,
                     props.dispatch
                   )
-                }
+                  ;(await props.segments.length) > 0 &&
+                    props.dispatch(
+                      addCenter(props.segments[0].routes[0].overview_path[0])
+                    )
+                }}
                 aria-label="map"
               >
                 <MapIcon />
@@ -86,7 +97,7 @@ export const JourneyListView = props => {
                       type: 'SET_SINGLE_JOURNEY',
                       journey: journey
                     })
-                    props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
+                    props.dispatch({type: 'CHANGE_MODE', mode: 'viewOnly'})
                   }}
                   edge="end"
                   aria-label="arrow_forward"

@@ -13,28 +13,14 @@ import {HomePage} from '../components/HomePage'
 export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
-  if (location.pathname.match('/homepage')) {
-    return null
-  }
+
+  // if (location.pathname.match('/homepage')) {
+  //   return null
+  // }
 
   return (
-    <MapContainerView
-      dispatch={dispatch}
-      placePreview={state.placePreview}
-      places={state.places}
-      segmentPreview={state.segmentPreview}
-      segments={state.segments}
-      searchInput={state.searchInput}
-      journeys={state.journeys}
-      placesService={state.placesService}
-      mode={state.mode}
-    />
-  )
-}
-export const MapContainerView = props => {
-  return (
     <div>
-      {props.mode === 'home' ? (
+      {state.mode === 'home' ? (
         <div>
           <HomePage />
         </div>
@@ -46,21 +32,33 @@ export const MapContainerView = props => {
             loadingElement={<div style={{height: `100%`}} />}
             containerElement={<div style={{height: `400px`}} />}
             mapElement={<div style={{height: `100%`}} />}
-            dispatch={props.dispatch}
-            placePreview={props.placePreview}
-            places={props.places}
-            segmentPreview={props.segmentPreview}
-            segments={props.segments}
-            searchInput={props.searchInput}
-            journeys={props.journeys}
-            placesService={props.placesService}
+            dispatch={dispatch}
+            center={state.center}
+            placePreview={state.placePreview}
+            places={state.places}
+            segmentPreview={state.segmentPreview}
+            segments={state.segments}
+            searchInput={state.searchInput}
+            journeys={state.journeys}
+            placesService={state.placesService}
+            mode={state.mode}
+            bounds={state.bounds}
           />
-          <PlacePreview />
         </div>
       )}
       <div style={{overflowY: 'auto'}}>
-        {props.mode === 'create' && <RouteList style={{overflowY: 'auto'}} />}
-        {props.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
+        {state.mode === 'viewOnly' && (
+          <div>
+            <RouteList style={{overflowY: 'auto'}} />
+          </div>
+        )}
+        {state.mode === 'create' && (
+          <div>
+            <PlacePreview />
+            <RouteList style={{overflowY: 'auto'}} />
+          </div>
+        )}
+        {state.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
       </div>
     </div>
   )

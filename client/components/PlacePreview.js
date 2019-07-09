@@ -35,6 +35,8 @@ import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
 
 export const PlacePreview = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -85,8 +87,12 @@ const RouteLister = props => {
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
   const [values, setValues] = React.useState({
-    // name: ''
+    title: ''
   })
+  const handleChange = name => event => {
+    console.log('event on handlechange', event)
+    setValues({...values, [name]: event.target.value})
+  }
 
   function handleClick(index) {
     deletePlace(props.places, props.segments, index, props.dispatch)
@@ -185,26 +191,30 @@ const RouteLister = props => {
                   />
                 </ListItem>
               )}
-              <form className={classes.container} noValidate autoComplete="off">
+              <form
+                className={classes.container}
+                noValidate
+                autoComplete="off"
+                onSubmit={event => {
+                  console.log(event)
+                  event.preventDefault()
+                }}
+              >
                 <TextField
                   id="standard-name"
                   label="Title"
+                  value={values.title}
                   className={classes.textField}
-                  value={values.name}
                   margin="normal"
-                  onSubmit={event => {
-                    event.preventDefault()
-                    saveJourney(
-                      event.target.content.value,
-                      props.segments,
-                      props.dispatch
-                    )
-                  }}
+                  onChange={handleChange('title')}
                 />
                 <Button
                   variant="contained"
                   type="submit"
                   className={classes.button}
+                  onClick={() => {
+                    saveJourney(values.title, props.segments, props.dispatch)
+                  }}
                 >
                   Save
                 </Button>

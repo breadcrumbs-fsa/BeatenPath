@@ -108,21 +108,6 @@ export const HomePageView = props => {
             onClick={function() {
               props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
             }}
-            // onClick={function() {
-            //   setMode('find')
-            //   modeFlag === 'find' &&
-            //     (multiJourneys(props.dispatch),
-            //     // console.log('first props: ', props.journeys)
-            //     props.journeys.forEach(journey => {
-            //       journey.segments.forEach(segment => {
-            //         directions(
-            //           segment.segmentStart,
-            //           segment.segmentEnd,
-            //           props.dispatch
-            //         )
-            //       })
-            //     }))
-            // }}
           >
             Find Your Path
           </Button>
@@ -137,39 +122,9 @@ export const HomePageView = props => {
               props.dispatch({type: 'CLEAR_PLACES'})
               props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
             }}
-
-            // onClick={function() {
-            //   setMode('create'),
-            //   modeFlag === 'create'
-            //   if (props.places.length === 0) {
-            //     props.dispatch({
-            //       type: PLACE_PREVIEW_TO_FIRST,
-            //       place: props.placePreview[0]
-            //     })
-            //   } else if (props.places.length > 0) {
-            //     props.dispatch({
-            //       type: PLACE_PREVIEW_TO_NTH,
-            //       place: props.placePreview[0]
-            //     })
-            //     directions(
-            //       props.places[props.places.length - 1].place_id,
-            //       props.placePreview[0].place_id,
-            //       props.dispatch,
-            //       'WALKING',
-            //       'ADD_SEGMENT_1'
-            //     )
-            //   }
-            // }}
           >
             Create Your Path
           </Button>
-
-          {/* <Button
-        onClick={() => testClick()}
-      >
-        Test
-      </Button>
-      {modeFlag=='test' ? <div>hello!</div> : <div>goodbye</div>} */}
         </Grid>
       </Box>
     </div>

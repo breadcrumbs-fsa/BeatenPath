@@ -97,7 +97,7 @@ const CommandBarView = props => {
         </ButtonGroup>
         <form
           onSubmit={event => {
-            event.preventDefault()
+            // event.preventDefault()
             saveJourney(
               event.target.content.value,
               props.segments,
