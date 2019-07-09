@@ -13,6 +13,7 @@ import {HomePage} from '../components/HomePage'
 export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
+
   // if (location.pathname.match('/homepage')) {
   //   return null
   // }
@@ -41,6 +42,7 @@ export const MapContainer = props => {
             journeys={state.journeys}
             placesService={state.placesService}
             mode={state.mode}
+            bounds={state.bounds}
           />
         </div>
       )}

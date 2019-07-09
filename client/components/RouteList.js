@@ -54,6 +54,7 @@ export const RouteList = () => {
       mode={state.mode}
       journey={state.journey}
       center={state.center}
+      bounds={state.bounds}
     />
   )
 }

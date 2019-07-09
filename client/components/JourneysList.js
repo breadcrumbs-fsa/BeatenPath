@@ -15,17 +15,21 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItem from '@material-ui/core/ListItem'
 
 import {addCenter} from '../hooks-store/search/centerReducer'
+import {addBounds} from '../hooks-store/search/boundsReducer'
 
 export const JourneyList = () => {
   const [state, dispatch] = useContext(StoreContext)
 
   return (
     <JourneyListView
+      state={state}
       journeys={state.journeys}
       dispatch={dispatch}
       placesService={state.placesService}
       center={state.center}
       segments={state.segments}
+      places={state.places}
+      bounds={state.bounds}
     />
   )
 }
@@ -48,7 +52,7 @@ export const JourneyListView = props => {
     }
     fetchMultiJourneys(props.dispatch)
   }, [])
-  props.segments.length > 0 && console.log('segments: ', props.segments)
+  console.log('journeylist props: ', props)
   return (
     <div>
       <Grid>
@@ -64,14 +68,19 @@ export const JourneyListView = props => {
               <ListItemText primary={journey.name} />
 
               <IconButton
-                onClick={() => {
+                onClick={async () => {
                   props.dispatch({type: 'CLEAR_PLACES'})
                   props.dispatch({type: 'DELETE_PREVIEW'})
                   props.dispatch({type: 'CLEAR_SEGMENTS'})
-                  singleJourneyPlaces(
+                  await singleJourneyPlaces(
                     journey.segments,
                     props.placesService,
-                    props.dispatch
+                    props.dispatch,
+                    props.state
+                  )
+
+                  await props.dispatch(
+                    addBounds(props.segments[0].routes[0].bounds)
                   )
                 }}
                 aria-label="map"
@@ -87,7 +96,8 @@ export const JourneyListView = props => {
                     singleJourneyPlaces(
                       journey.segments,
                       props.placesService,
-                      props.dispatch
+                      props.dispatch,
+                      props.state
                     )
                     props.dispatch({
                       type: 'SET_SINGLE_JOURNEY',
