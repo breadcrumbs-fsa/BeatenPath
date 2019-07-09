@@ -5,7 +5,7 @@ import {mapjs} from '../config'
 import CommandBar from './CommandBar'
 import {multiJourneys} from '../utils/multiJourneys'
 import {withRouter} from 'react-router-dom'
-
+import mapStyle from '../utils/mapStyle'
 const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
@@ -23,6 +23,7 @@ const MapContainer = props => {
           containerElement={<div style={{height: `400px`}} />}
           mapElement={<div style={{height: `100%`}} />}
           dispatch={dispatch}
+          center={state.center}
           placePreview={state.placePreview}
           places={state.places}
           segmentPreview={state.segmentPreview}
