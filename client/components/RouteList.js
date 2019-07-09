@@ -53,6 +53,7 @@ export const RouteList = () => {
       dispatch={dispatch}
       mode={state.mode}
       journey={state.journey}
+      center={state.center}
     />
   )
 }
@@ -120,6 +121,9 @@ const RouteLister = props => {
       )
     }
   }
+  console.log('singlejourney props: ', props)
+  props.segments.length > 0 &&
+    console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
   return (
     <div>
       <FormGroup row />
@@ -128,6 +132,19 @@ const RouteLister = props => {
           <Typography variant="h6" className={classes.title}>
             {/* Avatar with text and icon */}
           </Typography>
+          {props.mode === 'viewOnly' && (
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={function() {
+                props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
+              }}
+            >
+              Customize
+            </Button>
+          )}
+
           <div className={classes.demo}>
             <List dense={dense}>
               {props.journey.name && (
@@ -184,15 +201,17 @@ const RouteLister = props => {
                         // primary={props.places[0].price_level}
                       />
 
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          onClick={() => handleClick(index)}
-                          edge="end"
-                          aria-label="Delete"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
+                      {props.mode === 'create' && (
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            onClick={() => handleClick(index)}
+                            edge="end"
+                            aria-label="Delete"
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )}
                     </ListItem>
                   ))}
             </List>
