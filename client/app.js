@@ -14,6 +14,7 @@ import {useReducer} from 'react'
 import logger from 'use-reducer-logger'
 import HomePage from './components/HomePage'
 import {PlacePreview} from './components/PlacePreview'
+import JourneyList from './components/JourneysList'
 
 const App = () => {
   // const store = useReducer(logger(rootReducer), initialState)
@@ -46,6 +47,7 @@ const App = () => {
           <PlacePreview />
           <div style={{overflowY: 'auto'}}>
             <RouteList style={{overflowY: 'auto'}} />
+            <JourneyList style={{overflowY: 'auto'}} />
           </div>
         </div>
       </div>

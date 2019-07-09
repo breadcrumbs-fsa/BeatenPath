@@ -5,8 +5,6 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import {singleJourneyPlaces} from '../utils/singleJourneyPlaces'
-import ArrowForwardIcon from 'material-design-icons/ArrowForward'
-import {ListItemIcon} from '@material-ui/core'
 
 export const JourneyList = () => {
   const [state, dispatch] = useContext(StoreContext)
