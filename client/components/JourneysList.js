@@ -86,7 +86,7 @@ export const JourneyListView = props => {
                       type: 'SET_SINGLE_JOURNEY',
                       journey: journey
                     })
-                    props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
+                    props.dispatch({type: 'CHANGE_MODE', mode: 'viewOnly'})
                   }}
                   edge="end"
                   aria-label="arrow_forward"

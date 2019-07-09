@@ -18,7 +18,7 @@ export const MapContainer = props => {
   // }
 
   return (
-    console.log(state.segments),
+    console.log(state.mode),
     (
       <div>
         {state.mode === 'home' ? (
@@ -47,6 +47,11 @@ export const MapContainer = props => {
           </div>
         )}
         <div style={{overflowY: 'auto'}}>
+          {state.mode === 'viewOnly' && (
+            <div>
+              <RouteList style={{overflowY: 'auto'}} />
+            </div>
+          )}
           {state.mode === 'create' && (
             <div>
               <PlacePreview />
