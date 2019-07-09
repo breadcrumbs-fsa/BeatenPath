@@ -68,7 +68,7 @@ export const mapStyle = [
     elementType: 'all',
     stylers: [
       {
-        visibility: 'on'
+        visibility: 'off'
       }
     ]
   },

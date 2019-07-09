@@ -13,6 +13,7 @@ import {HomePage} from '../components/HomePage'
 export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
+
   // if (location.pathname.match('/homepage')) {
   //   return null
   // }

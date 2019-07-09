@@ -19,16 +19,15 @@ import MapControl from './MapControl'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
-import {mapStyle} from '../components/mapFilter'
+import {mapStyle, mapFlags} from '../components/mapFilter'
 import {addBounds} from '../hooks-store/search/boundsReducer'
 import {addCenter} from '../hooks-store/search/centerReducer'
-import mapFilter from './MapFilter'
+// import mapFilter from './MapFilter'
 
 export class MyMapComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      bounds: null,
       user: null
     }
   }
@@ -119,6 +118,8 @@ export class MyMapComponent extends Component {
         this.props.dispatch({type: 'CLEAR_PLACES'})
         this.props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
       },
+      mapStyle: mapStyle,
+      mapFlags: mapFlags,
 
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
@@ -177,6 +178,7 @@ export class MyMapComponent extends Component {
     // fetchSingleJourney(2, this.props.dispatch)
   }
   render() {
+    console.log('rendering')
     return (
       <GoogleMap
         options={{
