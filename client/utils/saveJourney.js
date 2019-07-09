@@ -30,6 +30,7 @@ export async function saveJourney(
     await dispatch({
       type: 'CLEAR_PLACES'
     })
+    await dispatch({type: 'CLEAR_SEGMENTS'})
   } catch (error) {
     console.log(error)
   }

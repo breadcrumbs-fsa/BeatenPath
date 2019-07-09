@@ -122,8 +122,8 @@ const RouteLister = props => {
     }
   }
   console.log('singlejourney props: ', props)
-  props.segments.length > 0 &&
-    console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
+  // props.segments.length > 0 &&
+  // console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
   return (
     <div>
       <FormGroup row />
@@ -154,6 +154,7 @@ const RouteLister = props => {
                     <IconButton
                       onClick={() => {
                         props.dispatch({type: 'CLEAR_PLACES'})
+                        props.dispatch({type: 'CLEAR_SEGMENTS'})
                         props.dispatch({
                           type: 'SET_SINGLE_JOURNEY',
                           journey: {}

@@ -87,6 +87,7 @@ export const HomePageView = props => {
           onClick={function() {
             props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
             props.dispatch({type: 'CLEAR_PLACES'})
+            props.dispatch({type: 'CLEAR_SEGMENTS'})
             props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
           }}
         >

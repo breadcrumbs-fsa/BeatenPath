@@ -49,8 +49,6 @@ export const JourneyListView = props => {
     fetchMultiJourneys(props.dispatch)
   }, [])
   props.segments.length > 0 && console.log('segments: ', props.segments)
-  props.segments.length > 0 &&
-    console.log('overviewpath ', props.segments[0].routes[0].overview_path[0])
   return (
     <div>
       <Grid>
@@ -65,21 +63,16 @@ export const JourneyListView = props => {
             >
               <ListItemText primary={journey.name} />
 
-              {/* <ListItemText
-                  primary={props.places[0].price_level}
-                /> */}
-
               <IconButton
-                onClick={async () => {
-                  await singleJourneyPlaces(
+                onClick={() => {
+                  props.dispatch({type: 'CLEAR_PLACES'})
+                  props.dispatch({type: 'DELETE_PREVIEW'})
+                  props.dispatch({type: 'CLEAR_SEGMENTS'})
+                  singleJourneyPlaces(
                     journey.segments,
                     props.placesService,
                     props.dispatch
                   )
-                  ;(await props.segments.length) > 0 &&
-                    props.dispatch(
-                      addCenter(props.segments[0].routes[0].overview_path[0])
-                    )
                 }}
                 aria-label="map"
               >
@@ -88,6 +81,9 @@ export const JourneyListView = props => {
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
+                    props.dispatch({type: 'CLEAR_PLACES'})
+                    props.dispatch({type: 'DELETE_PREVIEW'})
+                    props.dispatch({type: 'CLEAR_SEGMENTS'})
                     singleJourneyPlaces(
                       journey.segments,
                       props.placesService,
@@ -106,24 +102,6 @@ export const JourneyListView = props => {
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
-            // <ButtonGroup
-            //   fullWidth
-            //   aria-label="Full width outlined button group"
-            //   key={journey.id}
-            // >
-            // <Button
-            //   type="button"
-            //   onClick={function() {
-            //     singleJourneyPlaces(
-            //       journey.segments,
-            //       props.placesService,
-            //       props.dispatch
-            //     )
-            //   }}
-            // >
-            //     {journey.name} {journey.segments.length + 1}
-            //   </Button>
-            // </ButtonGroup>
           ))}
       </Grid>
     </div>

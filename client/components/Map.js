@@ -114,6 +114,7 @@ export class MyMapComponent extends Component {
 
       onClear: () => {
         this.props.dispatch({type: 'CLEAR_PLACES'})
+        this.props.dispatch({type: 'CLEAR_SEGMENTS'})
         this.props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
       },
 
