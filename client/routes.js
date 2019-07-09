@@ -8,6 +8,7 @@ import {HomePage} from './components/HomePage'
 // import SignIn from '../old/components/SignIn'
 // import SignUp from './components/NavBar/SignUp'
 import {me} from './store'
+import {MapContainer} from './components/MapContainer'
 
 /**
  * COMPONENT
