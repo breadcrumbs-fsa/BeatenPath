@@ -27,6 +27,7 @@ export const HomePage = () => {
       places={state.places}
       journeys={state.journeys}
       journey={state.journey}
+      mode={state.mode}
     />
   )
 }
@@ -59,7 +60,7 @@ export const HomePageView = props => {
   // const map = mapBackground
 
   return (
-    <div style={{backgroundImage: `url('/map4.jpg')`, height: '95vh'}}>
+    <div style={{backgroundImage: `url('/bookMap3.jpg')`, height: '95vh'}}>
       <Box
         height="50vh"
         display="flex"
@@ -72,6 +73,9 @@ export const HomePageView = props => {
           // size="large"
           color="primary"
           className={classes.button}
+          onClick={function() {
+            props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
+          }}
           // onClick={function() {
           //   setMode('find')
           //   modeFlag === 'find' &&
@@ -96,6 +100,12 @@ export const HomePageView = props => {
           color="secondary"
           // size="large"
           className={classes.button}
+          onClick={function() {
+            props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
+            props.dispatch({type: 'CLEAR_PLACES'})
+            props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
+          }}
+
           // onClick={function() {
           //   setMode('create'),
           //   modeFlag === 'create'

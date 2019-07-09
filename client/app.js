@@ -14,6 +14,7 @@ import {useReducer} from 'react'
 import logger from 'use-reducer-logger'
 import HomePage from './components/HomePage'
 import {PlacePreview} from './components/PlacePreview'
+import JourneyList from './components/JourneysList'
 
 const App = () => {
   // const store = useReducer(logger(rootReducer), initialState)
@@ -39,14 +40,13 @@ const App = () => {
           >
             <AppBar style={{alignItems: 'stretch'}} />
           </div>
-          {/*  <AppBar />*/}
-          {/*</div>*/}
+          {/* <HomePage /> */}
           <MapContainer />
-          {/*<HomePage />*/}
-          <PlacePreview />
+          {/* <PlacePreview />
           <div style={{overflowY: 'auto'}}>
             <RouteList style={{overflowY: 'auto'}} />
-          </div>
+            <JourneyList style={{overflowY: 'auto'}} />
+          </div> */}
         </div>
       </div>
     </StoreContext.Provider>

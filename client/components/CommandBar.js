@@ -20,6 +20,7 @@ import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
 import {fetchSingleJourney} from '../utils/fetchSingleJourney'
+import {singleJourneyPlaces} from '../utils/singleJourneyPlaces'
 import axios from 'axios'
 
 export const CommandBar = () => {
@@ -62,25 +63,7 @@ const CommandBarView = props => {
     fetchJourney(2, props.dispatch)
   }, [])
 
-  useEffect(() => {
-    async function fetchMultiJourneys(
-      dispatch,
-      dispatchType = 'GET_MULTIPLE_JOURNEYS'
-    ) {
-      try {
-        const {data: multipleJourneys} = await axios.get('/api/journeys')
-        dispatch({
-          type: dispatchType,
-          journeys: multipleJourneys
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    fetchMultiJourneys(props.dispatch)
-  }, [])
-
-  console.log(props.places)
+  console.log('journeys: ', props.journeys)
   return (
     <div>
       <Grid item xs={12}>
@@ -111,8 +94,6 @@ const CommandBarView = props => {
           >
             Add to journey
           </Button>
-          {/* <Button>width</Button>
-          <Button>ButtonGroup</Button> */}
         </ButtonGroup>
         <form
           onSubmit={event => {
@@ -129,90 +110,38 @@ const CommandBarView = props => {
             <button type="submit">Save</button>
           </div>
         </form>
-        ALL JOURNEYS
-        <ButtonGroup fullWidth aria-label="Full width outlined button group">
-          <Button
-            type="button"
-            onClick={function() {
-              multiJourneys(props.dispatch)
-              props.journeys.forEach(journey => {
-                journey.segments.forEach(segment => {
-                  directions(
-                    segment.segmentStart,
-                    segment.segmentEnd,
+
+        {props.journeys.length > 0 &&
+          props.journeys.map(journey => (
+            <ButtonGroup
+              fullWidth
+              aria-label="Full width outlined button group"
+              key={journey.id}
+            >
+              <Button
+                type="button"
+                onClick={function() {
+                  singleJourneyPlaces(
+                    journey.segments,
+                    props.placesService,
                     props.dispatch
                   )
-                })
-              })
-            }}
-          >
-            View All Journeys
-          </Button>
-        </ButtonGroup>
+                }}
+              >
+                {journey.name} {journey.segments.length + 1}
+              </Button>
+            </ButtonGroup>
+          ))}
+
         <ButtonGroup fullWidth aria-label="Full width outlined button group">
-          <Button
-            type="button"
-            onClick={function() {
-              fetchSingleJourney(1, props.dispatch)
-              props.journey.segments.forEach(segment =>
-                directions(
-                  segment.segmentStart,
-                  segment.segmentEnd,
-                  props.dispatch
-                )
-              )
-              let placeIdArray = []
-              if (props.journey.segments.length > 0) {
-                placeIdArray.push(
-                  props.journey.segments[0].segmentStart,
-                  props.journey.segments[0].segmentEnd
-                )
-                if (props.journey.segments.length > 1) {
-                  if (props.journey.segments.length > 2) {
-                    for (
-                      let i = 1;
-                      i < props.journey.segments.length - 1;
-                      i++
-                    ) {
-                      placeIdArray.push(props.journey.segments[i].segmentEnd)
-                    }
-                  }
-                  placeIdArray.push(
-                    props.journey.segments[props.journey.segments.length - 1]
-                      .segmentEnd
-                  )
-                }
-                console.log(placeIdArray)
-                placeIdArray.forEach(async placeID => {
-                  await props.placesService.getDetails(
-                    {placeId: placeID},
-                    async (results, status) => {
-                      if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        await props.dispatch({
-                          type: 'PLACE_PREVIEW_TO_NTH',
-                          place: results
-                        })
-                      } else {
-                        console.log('placesQuery Failed: ', status)
-                      }
-                    }
-                  )
-                })
-              }
-            }}
-          >
-            View Date Night
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup fullWidth aria-label="Full width outlined button group">
-          <Button
+          {/* <Button
             type="button"
             onClick={function() {
               props.dispatch({type: 'CLEAR_PLACES'})
             }}
           >
             Start New Journey / CLEAR MAP
-          </Button>
+          </Button> */}
         </ButtonGroup>
       </Grid>
     </div>
