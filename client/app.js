@@ -45,8 +45,9 @@ const App = () => {
           <MapContainer />
           <HomePage />
           <PlacePreview />
+          <RouteList />
           <div style={{overflowY: 'auto'}}>
-            <RouteList style={{overflowY: 'auto'}} />
+            {/* <RouteList style={{overflowY: 'auto'}} /> */}
             <JourneyList style={{overflowY: 'auto'}} />
           </div>
         </div>
