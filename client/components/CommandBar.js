@@ -63,24 +63,6 @@ const CommandBarView = props => {
     fetchJourney(2, props.dispatch)
   }, [])
 
-  useEffect(() => {
-    async function fetchMultiJourneys(
-      dispatch,
-      dispatchType = 'GET_MULTIPLE_JOURNEYS'
-    ) {
-      try {
-        const {data: multipleJourneys} = await axios.get('/api/journeys')
-        dispatch({
-          type: dispatchType,
-          journeys: multipleJourneys
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    fetchMultiJourneys(props.dispatch)
-  }, [])
-
   console.log('journeys: ', props.journeys)
   return (
     <div>

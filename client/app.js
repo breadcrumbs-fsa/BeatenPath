@@ -34,22 +34,19 @@ const App = () => {
             style={{
               backgroundColor: 'black',
               display: 'flex',
-              height: '2rem',
-              width: '100%'
+              height: '4.5vh',
+              width: '100%',
+              alignItems: 'center'
             }}
           >
-            <AppBar style={{alignItems: 'stretch'}} />
+            <AppBar />
           </div>
-          {/* <AppBar /> */}
-          {/*</div>*/}
+          {/* <HomePage /> */}
           <MapContainer />
-          <HomePage />
-          <PlacePreview />
-          <RouteList />
+          {/* <PlacePreview />
           <div style={{overflowY: 'auto'}}>
             {/* <RouteList style={{overflowY: 'auto'}} /> */}
-            <JourneyList style={{overflowY: 'auto'}} />
-          </div>
+          {/* <JourneyList style={{overflowY: 'auto'}} /> */}
         </div>
       </div>
     </StoreContext.Provider>

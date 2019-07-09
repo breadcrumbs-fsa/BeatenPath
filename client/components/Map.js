@@ -115,6 +115,7 @@ export class MyMapComponent extends Component {
 
       onClear: () => {
         this.props.dispatch({type: 'CLEAR_PLACES'})
+        this.props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
       },
 
       //for store access have to pass in props below in arrow function
