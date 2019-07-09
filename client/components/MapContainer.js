@@ -43,6 +43,7 @@ export const MapContainer = props => {
               journeys={state.journeys}
               placesService={state.placesService}
               mode={state.mode}
+              bounds={state.bounds}
             />
             <PlacePreview />
           </div>
