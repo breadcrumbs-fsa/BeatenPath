@@ -13,55 +13,54 @@ import {HomePage} from '../components/HomePage'
 export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
+
   // if (location.pathname.match('/homepage')) {
   //   return null
   // }
 
   return (
-    console.log(state.mode),
-    (
-      <div>
-        {state.mode === 'home' ? (
+    <div>
+      {state.mode === 'home' ? (
+        <div>
+          <HomePage />
+        </div>
+      ) : (
+        <div>
+          <Map
+            isMarkerShown
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapjs}&js?v=3.exp&libraries=geometry,drawing,places`}
+            loadingElement={<div style={{height: `100%`}} />}
+            containerElement={<div style={{height: `400px`}} />}
+            mapElement={<div style={{height: `100%`}} />}
+            dispatch={dispatch}
+            center={state.center}
+            placePreview={state.placePreview}
+            places={state.places}
+            segmentPreview={state.segmentPreview}
+            segments={state.segments}
+            searchInput={state.searchInput}
+            journeys={state.journeys}
+            placesService={state.placesService}
+            mode={state.mode}
+            bounds={state.bounds}
+          />
+        </div>
+      )}
+      <div style={{overflowY: 'auto'}}>
+        {state.mode === 'viewOnly' && (
           <div>
-            <HomePage />
-          </div>
-        ) : (
-          <div>
-            <Map
-              isMarkerShown
-              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapjs}&js?v=3.exp&libraries=geometry,drawing,places`}
-              loadingElement={<div style={{height: `100%`}} />}
-              containerElement={<div style={{height: `400px`}} />}
-              mapElement={<div style={{height: `100%`}} />}
-              dispatch={dispatch}
-              center={state.center}
-              placePreview={state.placePreview}
-              places={state.places}
-              segmentPreview={state.segmentPreview}
-              segments={state.segments}
-              searchInput={state.searchInput}
-              journeys={state.journeys}
-              placesService={state.placesService}
-              mode={state.mode}
-            />
+            <RouteList style={{overflowY: 'auto'}} />
           </div>
         )}
-        <div style={{overflowY: 'auto'}}>
-          {state.mode === 'viewOnly' && (
-            <div>
-              <RouteList style={{overflowY: 'auto'}} />
-            </div>
-          )}
-          {state.mode === 'create' && (
-            <div>
-              <PlacePreview />
-              <RouteList style={{overflowY: 'auto'}} />
-            </div>
-          )}
-          {state.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
-        </div>
+        {state.mode === 'create' && (
+          <div>
+            <PlacePreview />
+            <RouteList style={{overflowY: 'auto'}} />
+          </div>
+        )}
+        {state.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
       </div>
-    )
+    </div>
   )
 }
 

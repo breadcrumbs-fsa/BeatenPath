@@ -1,6 +1,6 @@
-export const mapFlags = {
-  all: 'on'
-}
+import {DirectionsRenderer, GoogleMap, Marker} from 'react-google-maps'
+import React, {Component, createContext, useContext} from 'react'
+import {StoreContext} from '../app'
 
 export const mapStyle = [
   {
@@ -68,7 +68,7 @@ export const mapStyle = [
     elementType: 'all',
     stylers: [
       {
-        visibility: Flags.on
+        visibility: 'off'
       }
     ]
   },
@@ -382,3 +382,13 @@ export const mapStyle = [
     ]
   }
 ]
+
+//
+// const MapFilter = props => {
+//     const [state, dispatch] = useContext(StoreContext)
+//   return (
+// <button onClick={()=>console.log( mapStyle[0]}>F</button>
+//   )
+// }
+
+// export default MapFilter
