@@ -1,5 +1,8 @@
 import React, {useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
+import clsx from 'clsx'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
@@ -52,6 +55,17 @@ const useStyles = makeStyles(theme => ({
   },
   demo: {
     backgroundColor: theme.palette.background.paper
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+    topMargin: 0
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'baseline'
   }
   // title: {
   //   margin: theme.spacing(0, 0, 0)
@@ -70,6 +84,9 @@ const RouteLister = props => {
   const classes = useStyles()
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
+  const [values, setValues] = React.useState({
+    // name: ''
+  })
 
   function handleClick(index) {
     deletePlace(props.places, props.segments, index, props.dispatch)
@@ -168,7 +185,32 @@ const RouteLister = props => {
                   />
                 </ListItem>
               )}
-              <form
+              <form className={classes.container} noValidate autoComplete="off">
+                <TextField
+                  id="standard-name"
+                  label="Title"
+                  className={classes.textField}
+                  value={values.name}
+                  margin="normal"
+                  onSubmit={event => {
+                    event.preventDefault()
+                    saveJourney(
+                      event.target.content.value,
+                      props.segments,
+                      props.dispatch
+                    )
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className={classes.button}
+                >
+                  Save
+                </Button>
+              </form>
+
+              {/* <form
                 onSubmit={event => {
                   event.preventDefault()
                   saveJourney(
@@ -186,7 +228,7 @@ const RouteLister = props => {
                   />
                   <button type="submit">Save</button>
                 </div>
-              </form>
+              </form> */}
             </List>
           </div>
         </Grid>
