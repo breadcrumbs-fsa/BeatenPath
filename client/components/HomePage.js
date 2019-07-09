@@ -59,7 +59,7 @@ export const HomePageView = props => {
   // const map = mapBackground
 
   return (
-    <div style={{backgroundImage: `url('/map4.jpg')`, height: '95vh'}}>
+    <div style={{backgroundImage: `url('/bookMap3.jpg')`, height: '95vh'}}>
       <Box
         height="50vh"
         display="flex"
