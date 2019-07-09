@@ -36,6 +36,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Divider from '@material-ui/core/Divider'
 
 export const RouteList = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -127,6 +128,7 @@ const RouteLister = props => {
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
+              <Divider />
               {props.places &&
                 props.places
                   .slice()
@@ -135,7 +137,8 @@ const RouteLister = props => {
                     <ListItem
                       key={index}
                       style={{
-                        outline: `2px solid lightslategray`
+                        divider: true
+                        // outline: `2px solid lightslategray`
                       }}
                     >
                       <ListItemIcon

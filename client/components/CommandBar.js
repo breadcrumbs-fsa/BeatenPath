@@ -152,14 +152,14 @@ const CommandBarView = props => {
           ))}
 
         <ButtonGroup fullWidth aria-label="Full width outlined button group">
-          <Button
+          {/* <Button
             type="button"
             onClick={function() {
               props.dispatch({type: 'CLEAR_PLACES'})
             }}
           >
             Start New Journey / CLEAR MAP
-          </Button>
+          </Button> */}
         </ButtonGroup>
       </Grid>
     </div>
