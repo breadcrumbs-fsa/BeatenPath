@@ -18,7 +18,7 @@ export const initialState = {
   searchInput: {},
   journey: {},
   placesService: {},
-  mode: {}
+  mode: 'home'
 }
 
 export const rootReducer = combineReducers({
