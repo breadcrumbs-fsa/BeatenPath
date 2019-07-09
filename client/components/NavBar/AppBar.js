@@ -14,13 +14,21 @@ import {defaultProps} from 'recompose'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+    background: '#3e526a'
+    // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
   },
   title: {
     flexGrow: 1
   },
   margin: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    backgroundColor: '#a4bb99',
+    color: '#303f50'
+  },
+  margin2: {
+    margin: theme.spacing(1),
+    backgroundColor: '#f19367',
+    color: '#303f50'
   }
 }))
 
@@ -50,15 +58,14 @@ export function ButtonAppBarView(props) {
           {/*<NavMenu />*/}
 
           <Typography variant="h6" className={classes.title}>
-            {<img src="/BeatenPath.png" height="25px" />}
+            {<img src="/BeatenPath2.png" height="25px" />}
           </Typography>
           <div style={{marginBottom: '1vh'}}>
             {(props.mode === 'find' || props.mode === 'viewOnly') && (
               <Button
                 variant="contained"
                 size="small"
-                color="primary"
-                className={classes.margin}
+                className={classes.margin2}
                 onClick={function() {
                   props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
                   props.dispatch({type: 'CLEAR_PLACES'})
@@ -73,7 +80,6 @@ export function ButtonAppBarView(props) {
               <Button
                 variant="contained"
                 size="small"
-                color="primary"
                 className={classes.margin}
                 onClick={function() {
                   props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
