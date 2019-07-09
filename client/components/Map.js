@@ -19,13 +19,14 @@ import MapControl from './MapControl'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
+import {mapStyle} from '../utils/mapStyle'
+import {addCenter} from '../hooks-store/search/centerReducer'
 
 export class MyMapComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
       bounds: null,
-      center: {lat: 41.851, lng: -87.6513},
       user: null
     }
   }
@@ -35,6 +36,8 @@ export class MyMapComponent extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.center)
+
     const refs = {}
 
     this.setState({
@@ -58,7 +61,6 @@ export class MyMapComponent extends Component {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
               }
-              // center: {lat:position.coords.latitude, lng: position.coords.longitude}
             })
             return {
               lat: position.coords.latitude,
@@ -72,9 +74,9 @@ export class MyMapComponent extends Component {
 
       onIdle: () => {
         this.setState({
-          bounds: refs.map.getBounds(),
-          center: refs.map.getCenter()
+          bounds: refs.map.getBounds()
         })
+        this.props.dispatch(addCenter(refs.map.getCenter()))
       },
 
       onSearchBoxMounted: ref => {
@@ -87,10 +89,9 @@ export class MyMapComponent extends Component {
         const nextMarkers = places.map(place => ({
           position: place.geometry.location
         }))
-        const nextCenter = _.get(nextMarkers, '0.position', this.state.center)
-        this.setState({
-          center: nextCenter
-        })
+        const nextCenter = _.get(nextMarkers, '0.position', this.props.center)
+
+        this.props.dispatch(addCenter(nextCenter))
         this.props.dispatch({type: ADD_PLACE_PREVIEW, place: places})
         if (this.props.places.length > 0) {
           directions(
@@ -108,9 +109,7 @@ export class MyMapComponent extends Component {
       },
 
       onMe: () => {
-        this.setState({
-          center: this.state.user
-        })
+        this.props.dispatch(addCenter(this.state.user))
       },
 
       onClear: () => {
@@ -182,12 +181,13 @@ export class MyMapComponent extends Component {
           fullscreenControl: false,
           zoomControl: false,
           streetViewControl: false,
-          gestureHandling: 'greedy'
+          gestureHandling: 'greedy',
+          styles: mapStyle
         }}
         ref={this.state.onMapMounted}
         defaultZoom={14}
         defaultCenter={{lat: 41.85258, lng: -87.65138}}
-        center={this.state.center}
+        center={this.props.center}
         onIdle={this.state.onIdle}
         onClick={event => this.state.onClickHandler(event, this.props)}
       >
