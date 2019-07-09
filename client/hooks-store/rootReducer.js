@@ -7,6 +7,7 @@ import searchReducer from './search/searchReducer'
 import singleJourneyReducer from './journeys/singleJourneyReducer'
 import journeysReducer from './journeys/journeysReducer'
 import placesServiceReducer from './search/placesService'
+import centerReducer from './search/centerReducer'
 import {modeReducer} from './mode/modeReducer'
 
 export const initialState = {
@@ -18,6 +19,7 @@ export const initialState = {
   searchInput: {},
   journey: {},
   placesService: {},
+  center: {lat: 41.851, lng: -87.6513},
   mode: 'home'
 }
 
@@ -30,5 +32,6 @@ export const rootReducer = combineReducers({
   searchInput: searchReducer,
   journey: singleJourneyReducer,
   placesService: placesServiceReducer,
+  center: centerReducer,
   mode: modeReducer
 })
