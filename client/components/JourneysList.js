@@ -66,6 +66,14 @@ export const JourneyListView = props => {
               }}
             >
               <ListItemText primary={journey.name} />
+              <ListItemText
+                primary={(
+                  journey.segments.reduce(
+                    (accum, currentSeg) => accum + currentSeg.distance,
+                    0
+                  ) / 1609.344
+                ).toFixed(1)}
+              />
 
               <IconButton
                 onClick={async () => {
