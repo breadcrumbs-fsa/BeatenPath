@@ -40,6 +40,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 
 export const PlacePreview = () => {
   const [state, dispatch] = useContext(StoreContext)
+
   return (
     <RouteLister
       segments={state.segments}
@@ -89,6 +90,7 @@ const RouteLister = props => {
   const [values, setValues] = React.useState({
     title: ''
   })
+  const [saved, setSaved] = React.useState(false)
   const handleChange = name => event => {
     console.log('event on handlechange', event)
     setValues({...values, [name]: event.target.value})
@@ -214,10 +216,16 @@ const RouteLister = props => {
                   className={classes.button}
                   onClick={() => {
                     saveJourney(values.title, props.segments, props.dispatch)
+                    setSaved(true)
                   }}
                 >
                   Save
                 </Button>
+                {saved === true && (
+                  <span style={{marginLeft: '13px', color: 'green'}}>
+                    Saved!
+                  </span>
+                )}
               </form>
 
               {/* <form
