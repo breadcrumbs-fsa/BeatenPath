@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 import {makeStyles} from '@material-ui/core/styles'
 
 import Typography from '@material-ui/core/Typography'
@@ -86,7 +87,6 @@ export const JourneyListView = props => {
                   <Typography variant="h6" className={classes.title}>
                     {journey.name}
                   </Typography>
-                  <ListItemText primary="Single-line item" />
                   <ListItemText
                     primary={(
                       journey.segments.reduce(
@@ -99,25 +99,25 @@ export const JourneyListView = props => {
                   {/* <ListItemText
                   primary={props.places[0].price_level}
                 /> */}
-
-                  <IconButton
-                    onClick={async () => {
-                      props.dispatch({type: 'CLEAR_PLACES'})
-                      props.dispatch({type: 'DELETE_PREVIEW'})
-                      props.dispatch({type: 'CLEAR_SEGMENTS'})
-                      await singleJourneyPlaces(
-                        journey.segments,
-                        props.placesService,
-                        props.dispatch,
-                        props.state
-                      )
-                    }}
-                    aria-label="map"
-                  >
-                    <MapIcon />
-                  </IconButton>
+                  <ListItemIcon>
+                    <IconButton
+                      onClick={async () => {
+                        props.dispatch({type: 'CLEAR_PLACES'})
+                        props.dispatch({type: 'DELETE_PREVIEW'})
+                        props.dispatch({type: 'CLEAR_SEGMENTS'})
+                        await singleJourneyPlaces(
+                          journey.segments,
+                          props.placesService,
+                          props.dispatch,
+                          props.state
+                        )
+                      }}
+                      aria-label="map"
+                    >
+                      <MapIcon />
+                    </IconButton>
+                  </ListItemIcon>
                   {/* </ListItem> */}
-                  {/* <Divider /> */}
                   <ListItemSecondaryAction>
                     <IconButton
                       onClick={() => {
@@ -143,6 +143,7 @@ export const JourneyListView = props => {
                     </IconButton>
                   </ListItemSecondaryAction>
                   {/* </ListItem> */}
+                  {/* <Divider /> */}
                 </List>
               ))}
           </div>
