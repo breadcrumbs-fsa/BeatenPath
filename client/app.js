@@ -32,7 +32,6 @@ const App = () => {
         >
           <div
             style={{
-              backgroundColor: 'black',
               display: 'flex',
               height: '4.5vh',
               width: '100%',
@@ -42,6 +41,7 @@ const App = () => {
             <AppBar />
           </div>
           {/* <HomePage /> */}
+
           <MapContainer />
           {/* <PlacePreview />
           <div style={{overflowY: 'auto'}}>

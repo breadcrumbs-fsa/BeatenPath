@@ -50,22 +50,50 @@ export const MapContainer = props => {
           />
         </div>
       )}
-      <div style={{overflowY: 'auto'}}>
+      <div>
         {state.mode === 'viewOnly' && (
-          <div style={{overflowY: 'auto'}}>
-            <RouteList style={{overflowY: 'auto'}} />
+          <div
+            style={{
+              height: '47vh',
+              width: '100%',
+              alignItems: 'center',
+              overflowY: 'auto'
+            }}
+          >
+            <RouteList />
           </div>
         )}
         {state.mode === 'create' && (
-          <div style={{overflowY: 'auto'}}>
+          <div
+            style={{
+              height: '47vh',
+              width: '100%',
+              alignItems: 'center',
+              overflowY: 'auto'
+            }}
+          >
             <PlacePreview />
-            <RouteList style={{overflowY: 'auto'}} />
+            <RouteList />
           </div>
         )}
-        {state.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
+        {state.mode === 'find' && (
+          <div
+            style={{
+              height: '47vh',
+              width: '100%',
+              alignItems: 'center',
+              overflowY: 'auto'
+            }}
+          >
+            <JourneyList />
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
 export default withRouter(MapContainer)
+
+// style={{overflowY: 'auto'}}
