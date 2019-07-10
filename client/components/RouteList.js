@@ -33,11 +33,8 @@ import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Divider from '@material-ui/core/Divider'
+import Popover from '@material-ui/core/Popover'
 
 export const RouteList = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -74,6 +71,12 @@ const useStyles = makeStyles(theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular
+  },
+  typography: {
+    padding: theme.spacing(2)
+  },
+  margin: {
+    marginRight: '2px'
   }
 }))
 
@@ -90,16 +93,26 @@ const RouteLister = props => {
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
   const {location} = props
+  const [anchorEl, setAnchorEl] = React.useState(null)
   // if (location.pathname.match("/homepage")) {
   //   return null;
   // }
 
   function handleClick(index) {
     deletePlace(props.places, props.segments, index, props.dispatch)
+    setAnchorEl(event.currentTarget)
   }
 
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
+  }
+
+  // function handleClick(event) {
+  //   setAnchorEl(event.currentTarget);
+  // }
+
+  function handleClose() {
+    setAnchorEl(null)
   }
 
   function handleAdd() {
@@ -122,6 +135,10 @@ const RouteLister = props => {
       )
     }
   }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
+
   console.log('singlejourney props: ', props)
   // props.segments.length > 0 &&
   // console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
@@ -133,6 +150,28 @@ const RouteLister = props => {
           <Typography variant="h6" className={classes.title}>
             {/* Avatar with text and icon */}
           </Typography>
+
+          <div aria-describedby={id} variant="contained" onClick={handleClick}>
+            Open Popover
+          </div>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center'
+            }}
+          >
+            <Typography className={classes.typography}>
+              The content of the Popover.
+            </Typography>
+          </Popover>
           {props.mode === 'viewOnly' && (
             <Button
               variant="contained"

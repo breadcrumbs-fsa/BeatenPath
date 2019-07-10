@@ -200,7 +200,7 @@ export class MyMapComponent extends Component {
         <MapControl position={google.maps.ControlPosition.RIGHT_BOTTOM}>
           <button
             style={{
-              backgroundColor: '#80e5ff',
+              backgroundColor: '#8fa3bc',
               border: 'none',
               color: 'red',
               display: 'inline-block',
@@ -211,14 +211,14 @@ export class MyMapComponent extends Component {
             }}
             onClick={() => this.state.onMe()}
           >
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAyNCAyNCIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij4gICAgPHBhdGggZD0iTTIxLDNIM3YxOGg2bDMsM2wzLTNoNlYzeiBNMTIsNmMxLjcsMCwzLDEuMywzLDNzLTEuMywzLTMsM3MtMy0xLjMtMy0zUzEwLjMsNiwxMiw2eiBNMTgsMThINmMwLDAsMC0wLjU4NSwwLTEgYzAtMS41NzEsMi43MjItMyw2LTNzNiwxLjQyOSw2LDNDMTgsMTcuNDE1LDE4LDE4LDE4LDE4eiI+PC9wYXRoPjwvc3ZnPg==" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PHBhdGggZD0iTTE1MC41LDIxLjVoLTEyOXYxMjloNDNsMjEuNSwyMS41bDIxLjUsLTIxLjVoNDN6TTg2LDQzYzEyLjE4MzMzLDAgMjEuNSw5LjMxNjY3IDIxLjUsMjEuNWMwLDEyLjE4MzMzIC05LjMxNjY3LDIxLjUgLTIxLjUsMjEuNWMtMTIuMTgzMzMsMCAtMjEuNSwtOS4zMTY2NyAtMjEuNSwtMjEuNWMwLC0xMi4xODMzMyA5LjMxNjY3LC0yMS41IDIxLjUsLTIxLjV6TTEyOSwxMjloLTg2YzAsMCAwLC00LjE5MjUgMCwtNy4xNjY2N2MwLC0xMS4yNTg4MyAxOS41MDc2NywtMjEuNSA0MywtMjEuNWMyMy40OTIzMywwIDQzLDEwLjI0MTE3IDQzLDIxLjVjMCwyLjk3NDE3IDAsNy4xNjY2NyAwLDcuMTY2Njd6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=" />
           </button>
         </MapControl>
 
         <MapControl position={google.maps.ControlPosition.LEFT_BOTTOM}>
           <button
             style={{
-              backgroundColor: '#80e5ff',
+              backgroundColor: '#8fa3bc',
               border: 'none',
               color: 'red',
               display: 'inline-block',
@@ -229,7 +229,7 @@ export class MyMapComponent extends Component {
             }}
             onClick={() => this.state.onClear()}
           >
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAzMiAzMiIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48ZyBpZD0ic3VyZmFjZTEiPjxwYXRoIHN0eWxlPSIgIiBkPSJNIDE2IDQgQyAxMC44ODY3MTkgNCA2LjYxNzE4OCA3LjE2MDE1NiA0Ljg3NSAxMS42MjUgTCA2LjcxODc1IDEyLjM3NSBDIDguMTc1NzgxIDguNjQwNjI1IDExLjcxMDkzOCA2IDE2IDYgQyAxOS4yNDIxODggNiAyMi4xMzI4MTMgNy41ODk4NDQgMjMuOTM3NSAxMCBMIDIwIDEwIEwgMjAgMTIgTCAyNyAxMiBMIDI3IDUgTCAyNSA1IEwgMjUgOC4wOTM3NSBDIDIyLjgwODU5NCA1LjU4MjAzMSAxOS41NzAzMTMgNCAxNiA0IFogTSAyNS4yODEyNSAxOS42MjUgQyAyMy44MjQyMTkgMjMuMzU5Mzc1IDIwLjI4OTA2MyAyNiAxNiAyNiBDIDEyLjcyMjY1NiAyNiA5Ljg0Mzc1IDI0LjM4NjcxOSA4LjAzMTI1IDIyIEwgMTIgMjIgTCAxMiAyMCBMIDUgMjAgTCA1IDI3IEwgNyAyNyBMIDcgMjMuOTA2MjUgQyA5LjE4NzUgMjYuMzg2NzE5IDEyLjM5NDUzMSAyOCAxNiAyOCBDIDIxLjExMzI4MSAyOCAyNS4zODI4MTMgMjQuODM5ODQ0IDI3LjEyNSAyMC4zNzUgWiAiPjwvcGF0aD48L2c+PC9zdmc+" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgaWQ9Im9yaWdpbmFsLWljb24iIGZpbGw9IiNmZmZmZmYiPjxnIGlkPSJzdXJmYWNlMSI+PHBhdGggZD0iTTg2LDIxLjVjLTI3LjQ4Mzg5LDAgLTUwLjQzMjYxLDE2Ljk4NTg0IC01OS43OTY4Nyw0MC45ODQzOGw5LjkxMDE2LDQuMDMxMjVjNy44MzE1NCwtMjAuMDcyMjcgMjYuODMzMDEsLTM0LjI2NTYyIDQ5Ljg4NjcyLC0zNC4yNjU2MmMxNy40MjY3NiwwIDMyLjk2Mzg3LDguNTQ1NDEgNDIuNjY0MDYsMjEuNWgtMjEuMTY0MDZ2MTAuNzVoMzcuNjI1di0zNy42MjVoLTEwLjc1djE2LjYyODkxYy0xMS43Nzg4MSwtMTMuNTAwNDkgLTI5LjE4NDU3LC0yMi4wMDM5MSAtNDguMzc1LC0yMi4wMDM5MXpNMTM1Ljg4NjcyLDEwNS40ODQzOGMtNy44MzE1NCwyMC4wNzIyNyAtMjYuODMzMDEsMzQuMjY1NjMgLTQ5Ljg4NjcyLDM0LjI2NTYzYy0xNy42MTU3MiwwIC0zMy4wODk4NCwtOC42NzEzOSAtNDIuODMyMDMsLTIxLjVoMjEuMzMyMDN2LTEwLjc1aC0zNy42MjV2MzcuNjI1aDEwLjc1di0xNi42Mjg5MWMxMS43NTc4MSwxMy4zMzI1MiAyOC45OTU2LDIyLjAwMzkxIDQ4LjM3NSwyMi4wMDM5MWMyNy40ODM4OSwwIDUwLjQzMjYyLC0xNi45ODU4NCA1OS43OTY4OCwtNDAuOTg0Mzd6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+" />
           </button>
         </MapControl>
         <MapControl position={google.maps.ControlPosition.left_TOP} />
