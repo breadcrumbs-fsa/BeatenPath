@@ -50,6 +50,24 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2)
+  },
+  floatLeft: {
+    display: 'inline',
+    float: 'left'
+  },
+  floatRight: {
+    display: 'inline',
+    float: 'right'
+  },
+  placeText: {
+    height: '48px',
+    display: 'inline',
+    float: 'left',
+    font: '30px sans-serif'
+  },
+
+  clearBoth: {
+    clear: 'both'
   }
 }))
 
@@ -83,11 +101,13 @@ export const JourneyListView = props => {
 
             {props.journeys.length > 0 &&
               props.journeys.map(journey => (
-                <List key={journey.id}>
+                <List key={journey.id} className={classes.clearBoth}>
                   <Typography variant="h6" className={classes.title}>
                     {journey.name}
                   </Typography>
+                  {/* distance number */}
                   <ListItemText
+                    className={classes.placeText}
                     primary={(
                       journey.segments.reduce(
                         (accum, currentSeg) => accum + currentSeg.distance,
@@ -99,49 +119,56 @@ export const JourneyListView = props => {
                   {/* <ListItemText
                   primary={props.places[0].price_level}
                 /> */}
-                  <ListItemIcon>
-                    <IconButton
-                      onClick={async () => {
-                        props.dispatch({type: 'CLEAR_PLACES'})
-                        props.dispatch({type: 'DELETE_PREVIEW'})
-                        props.dispatch({type: 'CLEAR_SEGMENTS'})
-                        await singleJourneyPlaces(
-                          journey.segments,
-                          props.placesService,
-                          props.dispatch,
-                          props.state
-                        )
-                      }}
-                      aria-label="map"
-                    >
-                      <MapIcon />
-                    </IconButton>
-                  </ListItemIcon>
-                  {/* </ListItem> */}
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      onClick={() => {
-                        props.dispatch({type: 'CLEAR_PLACES'})
-                        props.dispatch({type: 'DELETE_PREVIEW'})
-                        props.dispatch({type: 'CLEAR_SEGMENTS'})
-                        singleJourneyPlaces(
-                          journey.segments,
-                          props.placesService,
-                          props.dispatch,
-                          props.state
-                        )
-                        props.dispatch({
-                          type: 'SET_SINGLE_JOURNEY',
-                          journey: journey
-                        })
-                        props.dispatch({type: 'CHANGE_MODE', mode: 'viewOnly'})
-                      }}
-                      edge="end"
-                      aria-label="arrow_forward"
-                    >
-                      <ArrowForwardIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
+                  <div className={classes.floatRight}>
+                    {/* Map button */}
+                    <ListItemIcon className={classes.floatLeft}>
+                      <IconButton
+                        onClick={async () => {
+                          props.dispatch({type: 'CLEAR_PLACES'})
+                          props.dispatch({type: 'DELETE_PREVIEW'})
+                          props.dispatch({type: 'CLEAR_SEGMENTS'})
+                          await singleJourneyPlaces(
+                            journey.segments,
+                            props.placesService,
+                            props.dispatch,
+                            props.state
+                          )
+                        }}
+                        aria-label="map"
+                      >
+                        <MapIcon />
+                      </IconButton>
+                    </ListItemIcon>
+                    {/* </ListItem> */}
+                    {/* Arrow button */}
+                    <div className={classes.floatLeft}>
+                      <IconButton
+                        onClick={() => {
+                          props.dispatch({type: 'CLEAR_PLACES'})
+                          props.dispatch({type: 'DELETE_PREVIEW'})
+                          props.dispatch({type: 'CLEAR_SEGMENTS'})
+                          singleJourneyPlaces(
+                            journey.segments,
+                            props.placesService,
+                            props.dispatch,
+                            props.state
+                          )
+                          props.dispatch({
+                            type: 'SET_SINGLE_JOURNEY',
+                            journey: journey
+                          })
+                          props.dispatch({
+                            type: 'CHANGE_MODE',
+                            mode: 'viewOnly'
+                          })
+                        }}
+                        edge="end"
+                        aria-label="arrow_forward"
+                      >
+                        <ArrowForwardIcon />
+                      </IconButton>
+                    </div>
+                  </div>
                   {/* </ListItem> */}
                   {/* <Divider /> */}
                 </List>
