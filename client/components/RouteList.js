@@ -201,6 +201,10 @@ const RouteLister = props => {
                         journey: {}
                       })
                       props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
+                      props.dispatch({
+                        type: 'SET_FIT_BOUNDS',
+                        fitBounds: 'notFit'
+                      })
                     }}
                     edge="end"
                     aria-label="arrow_back"

@@ -50,7 +50,7 @@ export const ButtonAppBar = () => {
 
 export function ButtonAppBarView(props) {
   const classes = useStyles()
-  console.log('mode: ', props.mode)
+  // console.log('mode: ', props.mode)
   return (
     <div className={classes.root}>
       <AppBar position="static" classes={{root: classes.root}}>

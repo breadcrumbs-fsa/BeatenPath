@@ -120,11 +120,11 @@ export const JourneyListView = props => {
                   {/* <Divider /> */}
                   <ListItemSecondaryAction>
                     <IconButton
-                      onClick={() => {
+                      onClick={async () => {
                         props.dispatch({type: 'CLEAR_PLACES'})
                         props.dispatch({type: 'DELETE_PREVIEW'})
                         props.dispatch({type: 'CLEAR_SEGMENTS'})
-                        singleJourneyPlaces(
+                        await singleJourneyPlaces(
                           journey.segments,
                           props.placesService,
                           props.dispatch,

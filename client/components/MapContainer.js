@@ -39,9 +39,11 @@ export const MapContainer = props => {
             segments={state.segments}
             searchInput={state.searchInput}
             journeys={state.journeys}
+            journey={state.journey}
             placesService={state.placesService}
             mode={state.mode}
             bounds={state.bounds}
+            fitBounds={state.fitBounds}
           />
         </div>
       )}
