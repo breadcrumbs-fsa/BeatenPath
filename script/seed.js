@@ -19,14 +19,11 @@ async function seed() {
     journeyStart: 'ChIJlUbZ4qMsDogR3tCinMzzKUg'
   })
 
-  // let journeyTwo = await Journey.create({
-  //   // id: 4,
-  //   journeyEnd: 'ChIJeRTPP8fSD4gRl4sybR1EJmY',
-  //   updatedAt: '2019-07-03 14:29:29.317-05',
-  //   name: 'Bar Crawl',
-  //   journeyStart: 'ChIJk6WVC5XSD4gRxhZ8j-A-loE',
-  //   createdAt: '2019-07-03 14:29:29.317-05'
-  // })
+  await Journey.create({
+    journeyEnd: 'ChIJ1_gIYhQpDogRws11Ca6a00Y',
+    name: 'hyde park',
+    journeyStart: 'ChIJTeoOzD8pDogRU0ONY7Wxil8'
+  })
 
   let segOne = await Segment.create({
     journeyId: 1,
@@ -89,6 +86,35 @@ async function seed() {
     transportation: 'WALKING',
     placeId: null,
     segmentStart: 'ChIJtRSxt28rDogRpo4hEqqjIGk'
+  })
+
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJuRpqmhUpDogR4ff5cnIrILk',
+    distance: 350,
+    order: 0,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJTeoOzD8pDogRU0ONY7Wxil8'
+  })
+
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJCSwjBhUpDogRVIxJazSIqAo',
+    distance: 332,
+    order: 1,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJuRpqmhUpDogR4ff5cnIrILk'
+  })
+
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJ1_gIYhQpDogRws11Ca6a00Y',
+    distance: 342,
+    order: 2,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJCSwjBhUpDogRVIxJazSIqAo',
+    updatedAt: '2019-07-09 18:48:28.082-05',
+    createdAt: '2019-07-09 18:48:28.082-05'
   })
 
   console.log(`seeded successfully`)

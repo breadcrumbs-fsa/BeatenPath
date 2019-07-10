@@ -10,7 +10,7 @@ export const addCenter = center => ({
 export const centerReducer = (center, action) => {
   switch (action.type) {
     case ADD_CENTER:
-      console.log('CENTER:', center, 'ACTION:', action.center)
+      // console.log('CENTER:', center, 'ACTION:', action.center)
       return action.center
     case CLEAR_CENTER:
       return action.center
