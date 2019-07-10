@@ -53,12 +53,12 @@ export const MapContainer = props => {
       )}
       <div style={{overflowY: 'auto'}}>
         {state.mode === 'viewOnly' && (
-          <div>
+          <div style={{overflowY: 'auto'}}>
             <RouteList style={{overflowY: 'auto'}} />
           </div>
         )}
         {state.mode === 'create' && (
-          <div>
+          <div style={{overflowY: 'auto'}}>
             <PlacePreview />
             <RouteList style={{overflowY: 'auto'}} />
           </div>

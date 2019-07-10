@@ -194,7 +194,7 @@ export class MyMapComponent extends Component {
         onIdle={this.state.onIdle}
         onClick={event => this.state.onClickHandler(event, this.props)}
       >
-        <MapControl position={google.maps.ControlPosition.RIGHT_BOTTOM}>
+        <MapControl position={google.maps.ControlPosition.LEFT_BOTTOM}>
           <button
             style={{
               backgroundColor: '#80e5ff',
@@ -212,7 +212,7 @@ export class MyMapComponent extends Component {
           </button>
         </MapControl>
 
-        <MapControl position={google.maps.ControlPosition.LEFT_BOTTOM}>
+        <MapControl position={google.maps.ControlPosition.RIGHT_BOTTOM}>
           <button
             style={{
               backgroundColor: '#80e5ff',
@@ -229,7 +229,7 @@ export class MyMapComponent extends Component {
             <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAzMiAzMiIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48ZyBpZD0ic3VyZmFjZTEiPjxwYXRoIHN0eWxlPSIgIiBkPSJNIDE2IDQgQyAxMC44ODY3MTkgNCA2LjYxNzE4OCA3LjE2MDE1NiA0Ljg3NSAxMS42MjUgTCA2LjcxODc1IDEyLjM3NSBDIDguMTc1NzgxIDguNjQwNjI1IDExLjcxMDkzOCA2IDE2IDYgQyAxOS4yNDIxODggNiAyMi4xMzI4MTMgNy41ODk4NDQgMjMuOTM3NSAxMCBMIDIwIDEwIEwgMjAgMTIgTCAyNyAxMiBMIDI3IDUgTCAyNSA1IEwgMjUgOC4wOTM3NSBDIDIyLjgwODU5NCA1LjU4MjAzMSAxOS41NzAzMTMgNCAxNiA0IFogTSAyNS4yODEyNSAxOS42MjUgQyAyMy44MjQyMTkgMjMuMzU5Mzc1IDIwLjI4OTA2MyAyNiAxNiAyNiBDIDEyLjcyMjY1NiAyNiA5Ljg0Mzc1IDI0LjM4NjcxOSA4LjAzMTI1IDIyIEwgMTIgMjIgTCAxMiAyMCBMIDUgMjAgTCA1IDI3IEwgNyAyNyBMIDcgMjMuOTA2MjUgQyA5LjE4NzUgMjYuMzg2NzE5IDEyLjM5NDUzMSAyOCAxNiAyOCBDIDIxLjExMzI4MSAyOCAyNS4zODI4MTMgMjQuODM5ODQ0IDI3LjEyNSAyMC4zNzUgWiAiPjwvcGF0aD48L2c+PC9zdmc+" />
           </button>
         </MapControl>
-        <MapControl position={google.maps.ControlPosition.TOP_LEFT}>
+        <MapControl position={google.maps.ControlPosition.LEFT_TOP}>
           <MapFilter />
         </MapControl>
         <SearchBox
