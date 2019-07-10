@@ -28,6 +28,7 @@ import {deletePlace} from '../utils/deletePlace'
 import {saveJourney} from '../utils/saveJourney'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
 import {multiJourneys} from '../utils/multiJourneys'
 import {
   PLACE_PREVIEW_TO_FIRST,
@@ -172,41 +173,53 @@ const RouteLister = props => {
               The content of the Popover.
             </Typography>
           </Popover>
-          {props.mode === 'viewOnly' && (
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
+
+          {/* {props.mode === 'viewOnly' && (
+            <IconButton
+              // variant="contained"
+              // color="primary"
+              // className={classes.button}
               onClick={function() {
                 props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
               }}
             >
-              Customize
-            </Button>
-          )}
+              <Icon>edit_icon</Icon>
+            </IconButton>
+          )} */}
 
           <div className={classes.demo}>
             <List dense={dense}>
               {props.journey.name && (
                 <ListItem>
+                  <ArrowBackIcon />
+                  <IconButton
+                    onClick={() => {
+                      props.dispatch({type: 'CLEAR_PLACES'})
+                      props.dispatch({type: 'CLEAR_SEGMENTS'})
+                      props.dispatch({
+                        type: 'SET_SINGLE_JOURNEY',
+                        journey: {}
+                      })
+                      props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
+                    }}
+                    edge="end"
+                    aria-label="arrow_back"
+                  />
                   <ListItemText primary={props.journey.name} />
-                  <ListItemSecondaryAction>
+
+                  {props.mode === 'viewOnly' && (
                     <IconButton
-                      onClick={() => {
-                        props.dispatch({type: 'CLEAR_PLACES'})
-                        props.dispatch({type: 'CLEAR_SEGMENTS'})
-                        props.dispatch({
-                          type: 'SET_SINGLE_JOURNEY',
-                          journey: {}
-                        })
-                        props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
+                      // variant="contained"
+                      // color="primary"
+                      // className={classes.button}
+                      onClick={function() {
+                        props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
                       }}
-                      edge="end"
-                      aria-label="arrow_back"
                     >
-                      <ArrowBackIcon />
+                      <Icon>edit_icon</Icon>
                     </IconButton>
-                  </ListItemSecondaryAction>
+                  )}
+                  <ListItemSecondaryAction />
                 </ListItem>
               )}
               <Divider />
