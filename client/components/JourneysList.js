@@ -18,7 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import {makeStyles} from '@material-ui/core/styles'
 
 import Typography from '@material-ui/core/Typography'
-// import Divider from '@material-ui/core/Divider'
+import Divider from '@material-ui/core/Divider'
 
 import {addCenter} from '../hooks-store/search/centerReducer'
 import {addBounds} from '../hooks-store/search/boundsReducer'
@@ -96,7 +96,7 @@ export const JourneyListView = props => {
     <div className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <div className={classes.demo}>
+          <div className={classes.root}>
             {/* <List dense={dense}></List> */}
 
             {props.journeys.length > 0 &&
@@ -115,6 +115,17 @@ export const JourneyListView = props => {
                       ) / 1609.344
                     ).toFixed(1)}
                   />
+                  <ListItemText
+                    style={{
+                      height: '48px',
+                      display: 'inline',
+                      float: 'left',
+                      marginLeft: '4px',
+                      font: '30px sans-serif'
+                    }}
+                  >
+                    miles
+                  </ListItemText>
 
                   {/* <ListItemText
                   primary={props.places[0].price_level}
@@ -136,7 +147,7 @@ export const JourneyListView = props => {
                         }}
                         aria-label="map"
                       >
-                        <MapIcon />
+                        <MapIcon style={{color: '#339966'}} />
                       </IconButton>
                     </ListItemIcon>
                     {/* </ListItem> */}
@@ -170,7 +181,6 @@ export const JourneyListView = props => {
                     </div>
                   </div>
                   {/* </ListItem> */}
-                  {/* <Divider /> */}
                 </List>
               ))}
           </div>
