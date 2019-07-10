@@ -76,7 +76,7 @@ export function ButtonAppBarView(props) {
               </Button>
             )}
 
-            {(props.mode === 'create' || props.mode === 'viewOnly') && (
+            {props.mode === 'create' && (
               <Button
                 variant="contained"
                 size="small"
