@@ -22,6 +22,9 @@ const Segment = db.define('segments', {
   transportation: {
     type: Sequelize.ENUM('WALKING', 'DRIVING', 'BIKING', 'TRANSIT'),
     allowNull: false
+  },
+  distance: {
+    type: Sequelize.INTEGER
   }
 })
 
