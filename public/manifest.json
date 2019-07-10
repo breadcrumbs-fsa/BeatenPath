@@ -3,7 +3,7 @@
   "name": "BeatenPath",
   "icons": [
     {
-      "src": "./mapicon.png",
+      "src": "./favicon.ico",
       "sizes": "512x512",
       "type": "image/png"
     }
