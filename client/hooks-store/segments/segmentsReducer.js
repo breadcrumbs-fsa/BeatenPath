@@ -1,8 +1,10 @@
+import {CLEAR_PLACES} from '../places/placesReducer'
+
 /* eslint-disable complexity */
 export const ADD_SEGMENT_1 = 'ADD_SEGMENT_1'
 export const DELETE_PLACE = 'DELETE_PLACE'
 export const DELETE_FIRST_OR_LAST = 'DELETE_FIRST_OR_LAST'
-export const CLEAR_PLACES = 'CLEAR_PLACES'
+export const CLEAR_SEGMENTS = 'CLEAR_SEGMENTS'
 
 export const addSegment1 = segment => ({
   type: ADD_SEGMENT_1,
@@ -29,8 +31,8 @@ export const deleteFirstOrLast = index => ({
   index
 })
 
-export const clearPlaces = () => ({
-  type: CLEAR_PLACES
+export const clearSegments = () => ({
+  type: CLEAR_SEGMENTS
 })
 
 const segmentReducer = (segmentState, action) => {
@@ -53,6 +55,9 @@ const segmentReducer = (segmentState, action) => {
         }
       }
       return newArr
+    case CLEAR_SEGMENTS:
+      console.log('hitting segs')
+      return []
     case DELETE_FIRST_OR_LAST:
       if (segmentState.length > 0) {
         if (action.index === 0) {
@@ -61,9 +66,7 @@ const segmentReducer = (segmentState, action) => {
           return segmentState.slice(0, segmentState.length - 2)
         }
       }
-
-    case CLEAR_PLACES:
-      return []
+      break
 
     default:
       return segmentState

@@ -1,26 +1,26 @@
 import React, {useContext, useEffect} from 'react'
-import Map from './Map'
-import '../../secrets'
-import {StoreContext} from '../app'
+import Map from '../client/components/Map'
+import '../secrets'
+import {StoreContext} from '../client/app'
 import {GoogleMap, withGoogleMap, withScriptjs} from 'react-google-maps'
 const mapkey = process.env.GOOGLE_MAPJS_API
-import {directions} from '../utils/directions'
-import {saveJourney} from '../utils/saveJourney'
-import {multiJourneys} from '../utils/multiJourneys'
+import {directions} from '../client/utils/directions'
+import {saveJourney} from '../client/utils/saveJourney'
+import {multiJourneys} from '../client/utils/multiJourneys'
 import {
   DELETE_FIRST_OR_LAST,
   DELETE_SEGMENT
-} from '../hooks-store/segments/segmentsReducer'
+} from '../client/hooks-store/segments/segmentsReducer'
 import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
-} from '../hooks-store/places/placesReducer'
+} from '../client/hooks-store/places/placesReducer'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import TextField from '@material-ui/core/TextField'
-import {fetchSingleJourney} from '../utils/fetchSingleJourney'
-import {singleJourneyPlaces} from '../utils/singleJourneyPlaces'
+import {fetchSingleJourney} from '../client/utils/fetchSingleJourney'
+import {singleJourneyPlaces} from '../client/utils/singleJourneyPlaces'
 import axios from 'axios'
 
 export const CommandBar = () => {

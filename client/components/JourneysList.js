@@ -20,17 +20,21 @@ import Typography from '@material-ui/core/Typography'
 // import Divider from '@material-ui/core/Divider'
 
 import {addCenter} from '../hooks-store/search/centerReducer'
+import {addBounds} from '../hooks-store/search/boundsReducer'
 
 export const JourneyList = () => {
   const [state, dispatch] = useContext(StoreContext)
 
   return (
     <JourneyListView
+      state={state}
       journeys={state.journeys}
       dispatch={dispatch}
       placesService={state.placesService}
       center={state.center}
       segments={state.segments}
+      places={state.places}
+      bounds={state.bounds}
     />
   )
 }
@@ -68,9 +72,6 @@ export const JourneyListView = props => {
     }
     fetchMultiJourneys(props.dispatch)
   }, [])
-  props.segments.length > 0 && console.log('segments: ', props.segments)
-  props.segments.length > 0 &&
-    console.log('overviewpath ', props.segments[0].routes[0].overview_path[0])
 
   return (
     <div className={classes.root}>
@@ -86,6 +87,14 @@ export const JourneyListView = props => {
                     {journey.name}
                   </Typography>
                   <ListItemText primary="Single-line item" />
+                  <ListItemText
+                    primary={(
+                      journey.segments.reduce(
+                        (accum, currentSeg) => accum + currentSeg.distance,
+                        0
+                      ) / 1609.344
+                    ).toFixed(1)}
+                  />
 
                   {/* <ListItemText
                   primary={props.places[0].price_level}
@@ -93,17 +102,15 @@ export const JourneyListView = props => {
 
                   <IconButton
                     onClick={async () => {
+                      props.dispatch({type: 'CLEAR_PLACES'})
+                      props.dispatch({type: 'DELETE_PREVIEW'})
+                      props.dispatch({type: 'CLEAR_SEGMENTS'})
                       await singleJourneyPlaces(
                         journey.segments,
                         props.placesService,
-                        props.dispatch
+                        props.dispatch,
+                        props.state
                       )
-                      ;(await props.segments.length) > 0 &&
-                        props.dispatch(
-                          addCenter(
-                            props.segments[0].routes[0].overview_path[0]
-                          )
-                        )
                     }}
                     aria-label="map"
                   >
@@ -114,10 +121,14 @@ export const JourneyListView = props => {
                   <ListItemSecondaryAction>
                     <IconButton
                       onClick={() => {
+                        props.dispatch({type: 'CLEAR_PLACES'})
+                        props.dispatch({type: 'DELETE_PREVIEW'})
+                        props.dispatch({type: 'CLEAR_SEGMENTS'})
                         singleJourneyPlaces(
                           journey.segments,
                           props.placesService,
-                          props.dispatch
+                          props.dispatch,
+                          props.state
                         )
                         props.dispatch({
                           type: 'SET_SINGLE_JOURNEY',

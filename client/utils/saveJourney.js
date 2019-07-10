@@ -21,7 +21,8 @@ export async function saveJourney(
         segmentEnd: segment.geocoded_waypoints[1].place_id,
         journeyId: newJourney.id,
         order: index,
-        transportation: segment.request.travelMode
+        transportation: segment.request.travelMode,
+        distance: segment.routes[0].legs[0].distance.value
       })
 
       console.log(newSegment)
@@ -30,6 +31,7 @@ export async function saveJourney(
     await dispatch({
       type: 'CLEAR_PLACES'
     })
+    await dispatch({type: 'CLEAR_SEGMENTS'})
   } catch (error) {
     console.log(error)
   }
