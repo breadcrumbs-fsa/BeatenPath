@@ -19,7 +19,7 @@ import MapControl from './MapControl'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
-import {mapStyle, mapFlags} from './MapFilter'
+import MapFilter from './MapFilter'
 import {addBounds} from '../hooks-store/search/boundsReducer'
 import {addCenter} from '../hooks-store/search/centerReducer'
 // import mapFilter from './MapFilter'
@@ -119,8 +119,6 @@ export class MyMapComponent extends Component {
         this.props.dispatch({type: 'CLEAR_SEGMENTS'})
         this.props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
       },
-      mapStyle: mapStyle,
-      mapFlags: mapFlags,
 
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
@@ -188,7 +186,7 @@ export class MyMapComponent extends Component {
           zoomControl: false,
           streetViewControl: false,
           gestureHandling: 'greedy',
-          styles: mapStyle
+          styles: this.props.mapStyle
         }}
         ref={this.state.onMapMounted}
         defaultZoom={14}
@@ -197,7 +195,7 @@ export class MyMapComponent extends Component {
         onIdle={this.state.onIdle}
         onClick={event => this.state.onClickHandler(event, this.props)}
       >
-        <MapControl position={google.maps.ControlPosition.RIGHT_BOTTOM}>
+        <MapControl position={google.maps.ControlPosition.LEFT_BOTTOM}>
           <button
             style={{
               backgroundColor: '#8fa3bc',
@@ -215,7 +213,7 @@ export class MyMapComponent extends Component {
           </button>
         </MapControl>
 
-        <MapControl position={google.maps.ControlPosition.LEFT_BOTTOM}>
+        <MapControl position={google.maps.ControlPosition.RIGHT_BOTTOM}>
           <button
             style={{
               backgroundColor: '#8fa3bc',
@@ -232,7 +230,9 @@ export class MyMapComponent extends Component {
             <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgaWQ9Im9yaWdpbmFsLWljb24iIGZpbGw9IiNmZmZmZmYiPjxnIGlkPSJzdXJmYWNlMSI+PHBhdGggZD0iTTg2LDIxLjVjLTI3LjQ4Mzg5LDAgLTUwLjQzMjYxLDE2Ljk4NTg0IC01OS43OTY4Nyw0MC45ODQzOGw5LjkxMDE2LDQuMDMxMjVjNy44MzE1NCwtMjAuMDcyMjcgMjYuODMzMDEsLTM0LjI2NTYyIDQ5Ljg4NjcyLC0zNC4yNjU2MmMxNy40MjY3NiwwIDMyLjk2Mzg3LDguNTQ1NDEgNDIuNjY0MDYsMjEuNWgtMjEuMTY0MDZ2MTAuNzVoMzcuNjI1di0zNy42MjVoLTEwLjc1djE2LjYyODkxYy0xMS43Nzg4MSwtMTMuNTAwNDkgLTI5LjE4NDU3LC0yMi4wMDM5MSAtNDguMzc1LC0yMi4wMDM5MXpNMTM1Ljg4NjcyLDEwNS40ODQzOGMtNy44MzE1NCwyMC4wNzIyNyAtMjYuODMzMDEsMzQuMjY1NjMgLTQ5Ljg4NjcyLDM0LjI2NTYzYy0xNy42MTU3MiwwIC0zMy4wODk4NCwtOC42NzEzOSAtNDIuODMyMDMsLTIxLjVoMjEuMzMyMDN2LTEwLjc1aC0zNy42MjV2MzcuNjI1aDEwLjc1di0xNi42Mjg5MWMxMS43NTc4MSwxMy4zMzI1MiAyOC45OTU2LDIyLjAwMzkxIDQ4LjM3NSwyMi4wMDM5MWMyNy40ODM4OSwwIDUwLjQzMjYyLC0xNi45ODU4NCA1OS43OTY4OCwtNDAuOTg0Mzd6Ij48L3BhdGg+PC9nPjwvZz48L2c+PC9zdmc+" />
           </button>
         </MapControl>
-        <MapControl position={google.maps.ControlPosition.left_TOP} />
+        <MapControl position={google.maps.ControlPosition.LEFT_TOP}>
+          <MapFilter />
+        </MapControl>
         <SearchBox
           ref={this.state.onSearchBoxMounted}
           bounds={this.props.bounds}

@@ -8,11 +8,15 @@ import {PlacePreview} from '../components/PlacePreview'
 import {RouteList} from '../components/RouteList'
 import {JourneyList} from '../components/JourneysList'
 import {HomePage} from '../components/HomePage'
+import {mapStyle, mapFlags} from '../utils/mapStyle'
 
 export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
 
+  console.log(state.mapFilter)
+  let style = mapStyle(state.mapFilter)
+  console.log(style)
   // if (location.pathname.match('/homepage')) {
   //   return null
   // }
@@ -42,17 +46,18 @@ export const MapContainer = props => {
             placesService={state.placesService}
             mode={state.mode}
             bounds={state.bounds}
+            mapStyle={style}
           />
         </div>
       )}
       <div style={{overflowY: 'auto'}}>
         {state.mode === 'viewOnly' && (
-          <div>
+          <div style={{overflowY: 'auto'}}>
             <RouteList style={{overflowY: 'auto'}} />
           </div>
         )}
         {state.mode === 'create' && (
-          <div>
+          <div style={{overflowY: 'auto'}}>
             <PlacePreview />
             <RouteList style={{overflowY: 'auto'}} />
           </div>
