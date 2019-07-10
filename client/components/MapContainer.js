@@ -50,52 +50,49 @@ export const MapContainer = props => {
             fitBounds={state.fitBounds}
             mapStyle={style}
           />
+
+          {state.mode === 'viewOnly' && (
+            <div
+              style={{
+                height: '47vh',
+                width: '100%',
+                alignItems: 'center',
+                overflowY: 'auto'
+              }}
+            >
+              <RouteList />
+            </div>
+          )}
+          {state.mode === 'create' && (
+            <div
+              style={{
+                height: '47vh',
+                width: '100%',
+                alignItems: 'center',
+                overflowY: 'auto'
+              }}
+            >
+              <PlacePreview />
+              <RouteList />
+            </div>
+          )}
+          {state.mode === 'find' && (
+            <div
+              style={{
+                height: '47vh',
+                width: '100%',
+                alignItems: 'center',
+                overflowY: 'auto'
+              }}
+            >
+              <JourneyList />
+            </div>
+          )}
         </div>
       )}
-      <div>
-        {state.mode === 'viewOnly' && (
-          <div
-            style={{
-              height: '47vh',
-              width: '100%',
-              alignItems: 'center',
-              overflowY: 'auto'
-            }}
-          >
-            <RouteList />
-          </div>
-        )}
-        {state.mode === 'create' && (
-          <div
-            style={{
-              height: '47vh',
-              width: '100%',
-              alignItems: 'center',
-              overflowY: 'auto'
-            }}
-          >
-            <PlacePreview />
-            <RouteList />
-          </div>
-        )}
-        {state.mode === 'find' && (
-          <div
-            style={{
-              height: '47vh',
-              width: '100%',
-              alignItems: 'center',
-              overflowY: 'auto'
-            }}
-          >
-            <JourneyList />
-            )}
-          </div>
-        )}
-      </div>
     </div>
   )
 }
-
 export default withRouter(MapContainer)
 
 // style={{overflowY: 'auto'}}

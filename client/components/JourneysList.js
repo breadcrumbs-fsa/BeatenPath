@@ -180,7 +180,6 @@ export const JourneyListView = props => {
                       </IconButton>
                     </div>
                   </div>
-                  {/* </ListItem> */}
                 </List>
               ))}
           </div>
