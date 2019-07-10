@@ -8,11 +8,15 @@ import {PlacePreview} from '../components/PlacePreview'
 import {RouteList} from '../components/RouteList'
 import {JourneyList} from '../components/JourneysList'
 import {HomePage} from '../components/HomePage'
+import {mapStyle, mapFlags} from '../utils/mapStyle'
 
 export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
 
+  console.log(state.mapFilter)
+  let style = mapStyle(state.mapFilter)
+  console.log(style)
   // if (location.pathname.match('/homepage')) {
   //   return null
   // }
@@ -44,25 +48,54 @@ export const MapContainer = props => {
             mode={state.mode}
             bounds={state.bounds}
             fitBounds={state.fitBounds}
+            mapStyle={style}
           />
         </div>
       )}
-      <div style={{overflowY: 'auto'}}>
+      <div>
         {state.mode === 'viewOnly' && (
-          <div>
-            <RouteList style={{overflowY: 'auto'}} />
+          <div
+            style={{
+              height: '47vh',
+              width: '100%',
+              alignItems: 'center',
+              overflowY: 'auto'
+            }}
+          >
+            <RouteList />
           </div>
         )}
         {state.mode === 'create' && (
-          <div>
+          <div
+            style={{
+              height: '47vh',
+              width: '100%',
+              alignItems: 'center',
+              overflowY: 'auto'
+            }}
+          >
             <PlacePreview />
-            <RouteList style={{overflowY: 'auto'}} />
+            <RouteList />
           </div>
         )}
-        {state.mode === 'find' && <JourneyList style={{overflowY: 'auto'}} />}
+        {state.mode === 'find' && (
+          <div
+            style={{
+              height: '47vh',
+              width: '100%',
+              alignItems: 'center',
+              overflowY: 'auto'
+            }}
+          >
+            <JourneyList />
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
 export default withRouter(MapContainer)
+
+// style={{overflowY: 'auto'}}

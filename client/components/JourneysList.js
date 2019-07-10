@@ -14,10 +14,11 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 import {makeStyles} from '@material-ui/core/styles'
 
 import Typography from '@material-ui/core/Typography'
-// import Divider from '@material-ui/core/Divider'
+import Divider from '@material-ui/core/Divider'
 
 import {addCenter} from '../hooks-store/search/centerReducer'
 import {addBounds} from '../hooks-store/search/boundsReducer'
@@ -49,6 +50,24 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2)
+  },
+  floatLeft: {
+    display: 'inline',
+    float: 'left'
+  },
+  floatRight: {
+    display: 'inline',
+    float: 'right'
+  },
+  placeText: {
+    height: '48px',
+    display: 'inline',
+    float: 'left',
+    font: '30px sans-serif'
+  },
+
+  clearBoth: {
+    clear: 'both'
   }
 }))
 
@@ -77,17 +96,18 @@ export const JourneyListView = props => {
     <div className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <div className={classes.demo}>
+          <div className={classes.root}>
             {/* <List dense={dense}></List> */}
 
             {props.journeys.length > 0 &&
               props.journeys.map(journey => (
-                <List key={journey.id}>
+                <List key={journey.id} className={classes.clearBoth}>
                   <Typography variant="h6" className={classes.title}>
                     {journey.name}
                   </Typography>
-                  <ListItemText primary="Single-line item" />
+                  {/* distance number */}
                   <ListItemText
+                    className={classes.placeText}
                     primary={(
                       journey.segments.reduce(
                         (accum, currentSeg) => accum + currentSeg.distance,
@@ -95,53 +115,71 @@ export const JourneyListView = props => {
                       ) / 1609.344
                     ).toFixed(1)}
                   />
+                  <ListItemText
+                    style={{
+                      height: '48px',
+                      display: 'inline',
+                      float: 'left',
+                      marginLeft: '4px',
+                      font: '30px sans-serif'
+                    }}
+                  >
+                    miles
+                  </ListItemText>
 
                   {/* <ListItemText
                   primary={props.places[0].price_level}
                 /> */}
-
-                  <IconButton
-                    onClick={async () => {
-                      props.dispatch({type: 'CLEAR_PLACES'})
-                      props.dispatch({type: 'DELETE_PREVIEW'})
-                      props.dispatch({type: 'CLEAR_SEGMENTS'})
-                      await singleJourneyPlaces(
-                        journey.segments,
-                        props.placesService,
-                        props.dispatch,
-                        props.state
-                      )
-                    }}
-                    aria-label="map"
-                  >
-                    <MapIcon />
-                  </IconButton>
-                  {/* </ListItem> */}
-                  {/* <Divider /> */}
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      onClick={async () => {
-                        props.dispatch({type: 'CLEAR_PLACES'})
-                        props.dispatch({type: 'DELETE_PREVIEW'})
-                        props.dispatch({type: 'CLEAR_SEGMENTS'})
-                        await singleJourneyPlaces(
-                          journey.segments,
-                          props.placesService,
-                          props.dispatch,
-                          props.state
-                        )
-                        props.dispatch({
-                          type: 'SET_SINGLE_JOURNEY',
-                          journey: journey
-                        })
-                        props.dispatch({type: 'CHANGE_MODE', mode: 'viewOnly'})
-                      }}
-                      edge="end"
-                      aria-label="arrow_forward"
-                    >
-                      <ArrowForwardIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
+                  <div className={classes.floatRight}>
+                    {/* Map button */}
+                    <ListItemIcon className={classes.floatLeft}>
+                      <IconButton
+                        onClick={async () => {
+                          props.dispatch({type: 'CLEAR_PLACES'})
+                          props.dispatch({type: 'DELETE_PREVIEW'})
+                          props.dispatch({type: 'CLEAR_SEGMENTS'})
+                          await singleJourneyPlaces(
+                            journey.segments,
+                            props.placesService,
+                            props.dispatch,
+                            props.state
+                          )
+                        }}
+                        aria-label="map"
+                      >
+                        <MapIcon style={{color: '#339966'}} />
+                      </IconButton>
+                    </ListItemIcon>
+                    {/* </ListItem> */}
+                    {/* Arrow button */}
+                    <div className={classes.floatLeft}>
+                      <IconButton
+                        onClick={async () => {
+                          props.dispatch({type: 'CLEAR_PLACES'})
+                          props.dispatch({type: 'DELETE_PREVIEW'})
+                          props.dispatch({type: 'CLEAR_SEGMENTS'})
+                          await singleJourneyPlaces(
+                            journey.segments,
+                            props.placesService,
+                            props.dispatch,
+                            props.state
+                          )
+                          props.dispatch({
+                            type: 'SET_SINGLE_JOURNEY',
+                            journey: journey
+                          })
+                          props.dispatch({
+                            type: 'CHANGE_MODE',
+                            mode: 'viewOnly'
+                          })
+                        }}
+                        edge="end"
+                        aria-label="arrow_forward"
+                      >
+                        <ArrowForwardIcon />
+                      </IconButton>
+                    </div>
+                  </div>
                   {/* </ListItem> */}
                 </List>
               ))}

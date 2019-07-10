@@ -2,7 +2,7 @@ export const mapFlags = {
   all: 'on'
 }
 
-export const mapStyle = [
+export const mapStyle = Flags => [
   {
     featureType: 'administrative.locality',
     elementType: 'labels.text.fill',
@@ -68,7 +68,7 @@ export const mapStyle = [
     elementType: 'all',
     stylers: [
       {
-        visibility: Flags.on
+        visibility: Flags.all
       }
     ]
   },

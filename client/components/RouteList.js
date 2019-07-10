@@ -59,7 +59,14 @@ export const RouteList = () => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // flexGrow: 1
+    flexGrow: 1,
+
+    marginTop: '4px',
+    marginRight: '10px',
+    marginBottom: '4px',
+    maxWidth: '190px',
+    minWidth: '190px',
+    flexWrap: 'wrap'
     // maxWidth: 752,
   },
   demo: {
@@ -99,10 +106,10 @@ const RouteLister = props => {
   //   return null;
   // }
 
-  function handleClick(index) {
-    deletePlace(props.places, props.segments, index, props.dispatch)
-    setAnchorEl(event.currentTarget)
-  }
+  // function handleClick(event) {
+  // deletePlace(props.places, props.segments, index, props.dispatch)
+  // setAnchorEl(event.currentTarget)
+  // }
 
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
@@ -143,6 +150,7 @@ const RouteLister = props => {
   console.log('singlejourney props: ', props)
   // props.segments.length > 0 &&
   // console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
+  console.log('places ', props.places)
   return (
     <div>
       <FormGroup row />
@@ -152,10 +160,10 @@ const RouteLister = props => {
             {/* Avatar with text and icon */}
           </Typography>
 
-          <div aria-describedby={id} variant="contained" onClick={handleClick}>
+          {/* <div aria-describedby={id} variant="contained" onClick={handleClick}>
             Open Popover
-          </div>
-          <Popover
+          </div> */}
+          {/* <Popover
             id={id}
             open={open}
             anchorEl={anchorEl}
@@ -170,20 +178,20 @@ const RouteLister = props => {
             }}
           >
             <Typography className={classes.typography}>
-              The content of the Popover.
+              {props.places}
             </Typography>
-          </Popover>
+          </Popover> */}
 
           {/* {props.mode === 'viewOnly' && (
             <IconButton
-              // variant="contained"
-              // color="primary"
-              // className={classes.button}
-              onClick={function() {
-                props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
-              }}
+            // variant="contained"
+            // color="primary"
+            // className={classes.button}
+            onClick={function() {
+              props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
+            }}
             >
-              <Icon>edit_icon</Icon>
+            <Icon>edit_icon</Icon>
             </IconButton>
           )} */}
 
@@ -226,6 +234,7 @@ const RouteLister = props => {
                   <ListItemSecondaryAction />
                 </ListItem>
               )}
+
               <Divider />
               {props.places &&
                 props.places
@@ -247,6 +256,7 @@ const RouteLister = props => {
                         <LocationOnIcon />
                       </ListItemIcon>
                       <ListItemText
+                        className={classes.root}
                         primary={
                           place.name ? place.name : place.formatted_address
                         }
@@ -262,7 +272,14 @@ const RouteLister = props => {
                       {props.mode === 'create' && (
                         <ListItemSecondaryAction>
                           <IconButton
-                            onClick={() => handleClick(index)}
+                            onClick={() =>
+                              deletePlace(
+                                props.places,
+                                props.segments,
+                                index,
+                                props.dispatch
+                              )
+                            }
                             edge="end"
                             aria-label="Delete"
                           >
