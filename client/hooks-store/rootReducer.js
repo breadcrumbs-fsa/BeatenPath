@@ -10,6 +10,7 @@ import placesServiceReducer from './search/placesService'
 import centerReducer from './search/centerReducer'
 import {modeReducer} from './mode/modeReducer'
 import {boundsReducer} from './search/boundsReducer'
+import {setFitBoundsReducer} from './search/setFitBounds'
 import {mapFilterReducer} from './search/mapFilterReducer'
 
 export const initialState = {
@@ -21,8 +22,9 @@ export const initialState = {
   searchInput: {},
   journey: {},
   placesService: {},
-  center: {lat: 41.851, lng: -87.6513},
+  center: {lat: 41.8796, lng: -87.6237},
   bounds: null,
+  fitBounds: 'notFit',
   mode: 'home',
   mapFilter: {
     all: 'on'
@@ -39,7 +41,8 @@ export const rootReducer = combineReducers({
   journey: singleJourneyReducer,
   placesService: placesServiceReducer,
   center: centerReducer,
-  mode: modeReducer,
   bounds: boundsReducer,
+  fitBounds: setFitBoundsReducer,
+  mode: modeReducer,
   mapFilter: mapFilterReducer
 })
