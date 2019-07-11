@@ -32,12 +32,45 @@ export class MyMapComponent extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.state.getLocation()
+
+    if (
+      this.props.fitBounds === 'notFit' &&
+      this.props.segments.length > 0 &&
+      this.props.segments.length === prevProps.segments.length
+    ) {
+      this.state.onShowSavedJourney(
+        this.props.segments.reduce(
+          (journeyBounds, currentSeg) => {
+            if (
+              Math.abs(currentSeg.routes[0].bounds.ga.l) <
+              Math.abs(journeyBounds.east)
+            ) {
+              journeyBounds.east = currentSeg.routes[0].bounds.ga.l
+            }
+            if (currentSeg.routes[0].bounds.na.l > journeyBounds.north) {
+              journeyBounds.north = currentSeg.routes[0].bounds.na.l
+            }
+            if (currentSeg.routes[0].bounds.na.j < journeyBounds.south) {
+              journeyBounds.south = currentSeg.routes[0].bounds.na.j
+            }
+            if (currentSeg.routes[0].bounds.ga.j < journeyBounds.west) {
+              journeyBounds.west = currentSeg.routes[0].bounds.ga.j
+            }
+            return journeyBounds
+          },
+          {east: Infinity, north: 0, south: Infinity, west: 0}
+        )
+      )
+      this.props.dispatch({type: 'SET_FIT_BOUNDS', fitBounds: 'boundsAreFit'})
+    }
+
+    // google.maps.Map.prototype.panToBounds(this.props.journey.bounds)
   }
 
   componentDidMount() {
-    console.log(this.props.center)
+    // console.log(this.props.center)
 
     const refs = {}
 
@@ -51,8 +84,13 @@ export class MyMapComponent extends Component {
           type: 'ADD_PLACES_SERVICE',
           placesService: placesService
         })
+        console.log('map mounted segs: ', this.props.segments)
       },
 
+      onShowSavedJourney: journeyBounds => {
+        refs.map.fitBounds(journeyBounds)
+      },
+      // east: ga, l; north: na, l; south: na, j; west: ga, j
       getLocation: () => {
         if (navigator.geolocation) {
           return navigator.geolocation.getCurrentPosition(position => {
@@ -177,7 +215,33 @@ export class MyMapComponent extends Component {
     // fetchSingleJourney(2, this.props.dispatch)
   }
   render() {
-    // console.log('rendering')
+    console.log('fitBounds: ', this.props.fitBounds)
+    // console.log('map segs', this.props.segments)
+    // this.props.segments.length > 0 &&
+    //   this.state.onShowSavedJourney(
+    //     this.props.segments.reduce(
+    //       (journeyBounds, currentSeg) => {
+    //         if (
+    //           Math.abs(currentSeg.routes[0].bounds.ga.l) <
+    //           Math.abs(journeyBounds.east)
+    //         ) {
+    //           journeyBounds.east = currentSeg.routes[0].bounds.ga.l
+    //         }
+    //         if (currentSeg.routes[0].bounds.na.l > journeyBounds.north) {
+    //           journeyBounds.north = currentSeg.routes[0].bounds.na.l
+    //         }
+    //         if (currentSeg.routes[0].bounds.na.j < journeyBounds.south) {
+    //           journeyBounds.south = currentSeg.routes[0].bounds.na.j
+    //         }
+    //         if (currentSeg.routes[0].bounds.ga.j < journeyBounds.west) {
+    //           journeyBounds.west = currentSeg.routes[0].bounds.ga.j
+    //         }
+    //         return journeyBounds
+    //       },
+    //       {east: Infinity, north: 0, south: Infinity, west: 0}
+    //     )
+    //   )
+
     return (
       <GoogleMap
         options={{
@@ -189,8 +253,8 @@ export class MyMapComponent extends Component {
           styles: this.props.mapStyle
         }}
         ref={this.state.onMapMounted}
-        defaultZoom={14}
-        defaultCenter={{lat: 41.85258, lng: -87.65138}}
+        defaultZoom={12.5}
+        defaultCenter={{lat: 42.8796, lng: -87.6237}}
         center={this.props.center}
         onIdle={this.state.onIdle}
         onClick={event => this.state.onClickHandler(event, this.props)}

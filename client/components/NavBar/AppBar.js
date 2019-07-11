@@ -50,7 +50,7 @@ export const ButtonAppBar = () => {
 
 export function ButtonAppBarView(props) {
   const classes = useStyles()
-  console.log('mode: ', props.mode)
+  // console.log('mode: ', props.mode)
   return (
     <div className={classes.root}>
       <AppBar position="static" classes={{root: classes.root}}>
@@ -69,6 +69,7 @@ export function ButtonAppBarView(props) {
                 onClick={function() {
                   props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
                   props.dispatch({type: 'CLEAR_PLACES'})
+                  props.dispatch({type: 'CLEAR_SEGMENTS'})
                   props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
                 }}
               >
@@ -83,6 +84,9 @@ export function ButtonAppBarView(props) {
                 className={classes.margin}
                 onClick={function() {
                   props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
+                  props.dispatch({type: 'CLEAR_PLACES'})
+                  props.dispatch({type: 'CLEAR_SEGMENTS'})
+                  props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
                 }}
               >
                 Find

@@ -14,9 +14,9 @@ export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
 
-  console.log(state.mapFilter)
+  // console.log(state.mapFilter)
   let style = mapStyle(state.mapFilter)
-  console.log(style)
+  // console.log(style)
   // if (location.pathname.match('/homepage')) {
   //   return null
   // }
@@ -43,57 +43,56 @@ export const MapContainer = props => {
             segments={state.segments}
             searchInput={state.searchInput}
             journeys={state.journeys}
+            journey={state.journey}
             placesService={state.placesService}
             mode={state.mode}
             bounds={state.bounds}
+            fitBounds={state.fitBounds}
             mapStyle={style}
           />
+
+          {state.mode === 'viewOnly' && (
+            <div
+              style={{
+                height: '47vh',
+                width: '100%',
+                alignItems: 'center',
+                overflowY: 'auto'
+              }}
+            >
+              <RouteList />
+            </div>
+          )}
+          {state.mode === 'create' && (
+            <div
+              style={{
+                height: '47vh',
+                width: '100%',
+                alignItems: 'center',
+                overflowY: 'auto'
+              }}
+            >
+              <PlacePreview />
+              <RouteList />
+            </div>
+          )}
+          {state.mode === 'find' && (
+            <div
+              style={{
+                height: '47vh',
+                width: '100%',
+                alignItems: 'center',
+                overflowY: 'auto'
+              }}
+            >
+              <JourneyList />
+            </div>
+          )}
         </div>
       )}
-      <div>
-        {state.mode === 'viewOnly' && (
-          <div
-            style={{
-              height: '47vh',
-              width: '100%',
-              alignItems: 'center',
-              overflowY: 'auto'
-            }}
-          >
-            <RouteList />
-          </div>
-        )}
-        {state.mode === 'create' && (
-          <div
-            style={{
-              height: '47vh',
-              width: '100%',
-              alignItems: 'center',
-              overflowY: 'auto'
-            }}
-          >
-            <PlacePreview />
-            <RouteList />
-          </div>
-        )}
-        {state.mode === 'find' && (
-          <div
-            style={{
-              height: '47vh',
-              width: '100%',
-              alignItems: 'center',
-              overflowY: 'auto'
-            }}
-          >
-            <JourneyList />
-            )}
-          </div>
-        )}
-      </div>
     </div>
   )
 }
-
 export default withRouter(MapContainer)
 
 // style={{overflowY: 'auto'}}
