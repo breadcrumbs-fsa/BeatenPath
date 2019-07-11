@@ -253,8 +253,8 @@ export class MyMapComponent extends Component {
           styles: this.props.mapStyle
         }}
         ref={this.state.onMapMounted}
-        defaultZoom={14}
-        defaultCenter={{lat: 41.85258, lng: -87.65138}}
+        defaultZoom={12.5}
+        defaultCenter={{lat: 42.8796, lng: -87.6237}}
         center={this.props.center}
         onIdle={this.state.onIdle}
         onClick={event => this.state.onClickHandler(event, this.props)}

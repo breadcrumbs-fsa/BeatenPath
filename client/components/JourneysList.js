@@ -135,6 +135,10 @@ export const JourneyListView = props => {
                     <ListItemIcon className={classes.floatLeft}>
                       <IconButton
                         onClick={async () => {
+                          props.dispatch({
+                            type: 'SET_FIT_BOUNDS',
+                            fitBounds: 'notFit'
+                          })
                           props.dispatch({type: 'CLEAR_PLACES'})
                           props.dispatch({type: 'DELETE_PREVIEW'})
                           props.dispatch({type: 'CLEAR_SEGMENTS'})
@@ -155,6 +159,10 @@ export const JourneyListView = props => {
                     <div className={classes.floatLeft}>
                       <IconButton
                         onClick={async () => {
+                          props.dispatch({
+                            type: 'SET_FIT_BOUNDS',
+                            fitBounds: 'notFit'
+                          })
                           props.dispatch({type: 'CLEAR_PLACES'})
                           props.dispatch({type: 'DELETE_PREVIEW'})
                           props.dispatch({type: 'CLEAR_SEGMENTS'})

@@ -22,7 +22,7 @@ export const initialState = {
   searchInput: {},
   journey: {},
   placesService: {},
-  center: {lat: 41.851, lng: -87.6513},
+  center: {lat: 41.8796, lng: -87.6237},
   bounds: null,
   fitBounds: 'notFit',
   mode: 'home',
