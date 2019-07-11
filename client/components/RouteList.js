@@ -241,55 +241,74 @@ const RouteLister = props => {
                 props.places
                   .slice()
                   .reverse()
-                  .map((place, index) => (
-                    <ListItem
-                      key={index}
-                      style={{
-                        divider: true
-                        // outline: `2px solid lightslategray`
-                      }}
-                    >
-                      <ListItemIcon
+                  .map((place, index) => {
+                    return (
+                      <ListItem
+                        key={index}
                         style={{
-                          color: colorPicker(props.places.length - 1 - index)
+                          divider: true
+                          // outline: `2px solid lightslategray`
                         }}
                       >
-                        <LocationOnIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        className={classes.root}
-                        primary={
-                          place.name ? place.name : place.formatted_address
-                        }
-                        secondary={secondary ? 'Secondary text' : null}
-                      />
+                        <ListItemIcon
+                          style={{
+                            color: colorPicker(props.places.length - 1 - index)
+                          }}
+                        >
+                          <LocationOnIcon />
+                        </ListItemIcon>
+                        <ListItemText
+                          // variant="h6"
+                          className={classes.root}
+                          primary={
+                            place.name ? place.name : place.formatted_address
+                          }
+                          secondary={secondary ? 'Secondary text' : null}
+                        />
+                        <ListItemText>{place.price_level}</ListItemText>
+                        {/* <img
+                          width="auto"
+                          height="100 rem"
+                          src={place.photos[0].getUrl()}
+                        /> */}
 
-                      <ListItemText
-                        primary={place.types[0].replace('_', ' ')}
-                        // primary={props.places[0].rating}
-                        // primary={props.places[0].price_level}
-                      />
+                        {/* Point of interest */}
+                        <ListItemText
+                          primary={
+                            place.types[0][0].toUpperCase() +
+                            place.types[0]
+                              .split('_')
+                              .join(' ')
+                              .slice(1)
+                          }
+                        />
+                        <ListItemText primary={place.rating} />
 
-                      {props.mode === 'create' && (
-                        <ListItemSecondaryAction>
-                          <IconButton
-                            onClick={() =>
-                              deletePlace(
-                                props.places,
-                                props.segments,
-                                index,
-                                props.dispatch
-                              )
-                            }
-                            edge="end"
-                            aria-label="Delete"
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      )}
-                    </ListItem>
-                  ))}
+                        {/* <ListItemText
+                        primary={place.price_level}
+                      /> */}
+
+                        {props.mode === 'create' && (
+                          <ListItemSecondaryAction>
+                            <IconButton
+                              onClick={() =>
+                                deletePlace(
+                                  props.places,
+                                  props.segments,
+                                  index,
+                                  props.dispatch
+                                )
+                              }
+                              edge="end"
+                              aria-label="Delete"
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        )}
+                      </ListItem>
+                    )
+                  })}
             </List>
           </div>
         </Grid>
