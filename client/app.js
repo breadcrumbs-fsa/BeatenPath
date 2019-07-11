@@ -21,27 +21,30 @@ const App = () => {
   const store = useReducer(rootReducer, initialState)
   return (
     <StoreContext.Provider value={store}>
-      <div>
+      <div
+        style={{
+          height: '100vh',
+          width: '100%'
+        }}
+      >
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            height: '100vh',
-            width: '100%'
+            height: '4.5vh',
+            width: '100%',
+            alignItems: 'center'
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              height: '4.5vh',
-              width: '100%',
-              alignItems: 'center'
-            }}
-          >
-            <AppBar />
-          </div>
-          {/* <HomePage /> */}
-
+          <AppBar />
+        </div>
+        {/* <HomePage /> */}
+        <div
+          style={{
+            height: '95.5vh',
+            width: '100%',
+            alignItems: 'center'
+          }}
+        >
           <MapContainer />
           {/* <PlacePreview />
           <div style={{overflowY: 'auto'}}>
