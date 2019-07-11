@@ -199,7 +199,6 @@ const RouteLister = props => {
             <List dense={dense}>
               {props.journey.name && (
                 <ListItem>
-                  <ArrowBackIcon />
                   <IconButton
                     onClick={() => {
                       props.dispatch({type: 'CLEAR_PLACES'})
@@ -214,9 +213,11 @@ const RouteLister = props => {
                         fitBounds: 'notFit'
                       })
                     }}
-                    edge="end"
+                    // edge="end"
                     aria-label="arrow_back"
-                  />
+                  >
+                    <ArrowBackIcon />
+                  </IconButton>
                   <ListItemText primary={props.journey.name} />
 
                   {props.mode === 'viewOnly' && (

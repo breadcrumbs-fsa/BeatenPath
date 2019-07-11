@@ -14,9 +14,9 @@ export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
 
-  console.log(state.mapFilter)
+  // console.log(state.mapFilter)
   let style = mapStyle(state.mapFilter)
-  console.log(style)
+  // console.log(style)
   // if (location.pathname.match('/homepage')) {
   //   return null
   // }
