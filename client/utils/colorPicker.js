@@ -3,13 +3,13 @@ export const colorPicker = index => {
     case -1:
       return '#E74C3C' //red
     case 0:
-      return '#75aa8e' // light turquoise
+      return '#75aa8e' // greyish-green
     case 1:
       return '#f9c266' // light gold
     case 2:
-      return '#e68762' // pink
+      return '#e68762' // peach-pink
     case 3:
-      return '#6b7086' // light teal blue
+      return '#6b7086' // light purple-grey
     case 4:
       return '#f9d45a' //light yellow
     case 5:
