@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0px !important;
 }
 
 a {
@@ -12,10 +13,10 @@ label {
 
 nav a {
   display: inline-block;
-  margin: 1em;
+  /*margin: 1em;*/
 }
 
 form div {
-  margin: 1em;
+  /*margin: 1em;*/
   display: inline-block;
 }
