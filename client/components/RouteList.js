@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, {useContext} from 'react'
 import {withRouter} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
@@ -238,8 +239,9 @@ const RouteLister = props => {
                             <Grid className={classes.root}>
                               <img
                                 width="auto"
-                                height="50 rem"
-                                src={`/markernums${index + 1}.png`}
+                                height="30 rem"
+                                src={`/markernums${props.places.length -
+                                  index}.png`}
                               />
 
                               <Typography>
@@ -251,6 +253,12 @@ const RouteLister = props => {
                           </ExpansionPanelSummary>
                           <ExpansionPanelDetails>
                             <Grid className={classes.root}>
+                              {place.opening_hours &&
+                                (place.opening_hours.open_now ? (
+                                  <div color="green">Open</div>
+                                ) : (
+                                  <div color="red">Closed</div>
+                                ))}
                               {place.types && (
                                 <Typography>
                                   {place.types[0][0].toUpperCase() +

@@ -37,7 +37,7 @@ const RouteViewer = props => {
             options={{
               suppressMarkers: true,
               polylineOptions: {
-                strokeColor: colorPicker(props.segments.length - index)
+                strokeColor: colorPicker(index)
               },
               preserveViewport: true
             }}
