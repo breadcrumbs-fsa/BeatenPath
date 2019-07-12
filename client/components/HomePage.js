@@ -51,9 +51,9 @@ const useStyles = makeStyles(theme => ({
   input: {
     display: 'none'
   },
-  root: {
-    flexGrow: 1
-  },
+  // root: {
+  //   flexGrow: 1
+  // },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -88,7 +88,7 @@ export const HomePageView = props => {
       }}
     >
       <Box
-        height="100vh"
+        height="93.5vh"
         display="flex"
         alignItems="center"
         justifyContent="center"

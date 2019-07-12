@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     color: '#303f50'
   },
   margin2: {
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
     backgroundColor: '#f19367',
     color: '#303f50'
   }
