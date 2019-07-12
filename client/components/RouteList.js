@@ -236,15 +236,12 @@ const RouteLister = props => {
                             id="panel1bh-header"
                           >
                             <Grid className={classes.root}>
-                              <ListItemIcon
-                                style={{
-                                  color: colorPicker(
-                                    props.places.length - 1 - index
-                                  )
-                                }}
-                              >
-                                <LocationOnIcon />
-                              </ListItemIcon>
+                              <img
+                                width="auto"
+                                height="50 rem"
+                                src={`/markernums${index + 1}.png`}
+                              />
+
                               <Typography>
                                 {place.name
                                   ? place.name
@@ -254,31 +251,45 @@ const RouteLister = props => {
                           </ExpansionPanelSummary>
                           <ExpansionPanelDetails>
                             <Grid className={classes.root}>
-                              <Typography>
-                                {place.types[0][0].toUpperCase() +
-                                  place.types[0]
-                                    .split('_')
-                                    .join(' ')
-                                    .slice(1)}
-                              </Typography>
-                              <Typography>
-                                Rating: {place.rating}{' '}
-                                {'⭐️'.repeat(Math.round(place.rating))}{' '}
-                              </Typography>
+                              {place.types && (
+                                <Typography>
+                                  {place.types[0][0].toUpperCase() +
+                                    place.types[0]
+                                      .split('_')
+                                      .join(' ')
+                                      .slice(1)}
+                                </Typography>
+                              )}
+                              {place.rating && (
+                                <Typography>
+                                  Rating: {place.rating}{' '}
+                                  {'⭐️'.repeat(Math.round(place.rating))}{' '}
+                                </Typography>
+                              )}
                               {place.price_level && (
                                 <Typography>
                                   Price: {'$'.repeat(place.price_level)}
                                 </Typography>
                               )}
                               <Grid />
-                              {place.photos.map(photo => (
-                                <img
-                                  key={photo.getUrl()}
-                                  width="auto"
-                                  height="100 rem"
-                                  src={photo.getUrl()}
-                                />
-                              ))}
+                              {place.photos && (
+                                <Grid>
+                                  {place.photos.map((photo, index) => {
+                                    const imageURL = photo.getUrl()
+                                    if (imageURL) {
+                                      return (
+                                        <img
+                                          key={index}
+                                          width="auto"
+                                          height="100 rem"
+                                          src={imageURL}
+                                        />
+                                      )
+                                    }
+                                  })}
+                                  )}
+                                </Grid>
+                              )}
                             </Grid>
                           </ExpansionPanelDetails>
                         </ExpansionPanel>
