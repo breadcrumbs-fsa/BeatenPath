@@ -21,9 +21,9 @@ export const colorPicker = index => {
     case 8:
       return '#928476' // light taupe
     case 9:
-      return '#856cb5' // light purple
-    case 10:
       return '#c74742' // rust
+    case 10:
+      return '#856cb5' // light purple
     case 11:
       return '#ac7566' //brown
   }
