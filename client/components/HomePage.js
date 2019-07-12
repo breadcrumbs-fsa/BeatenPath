@@ -81,14 +81,18 @@ export const HomePageView = props => {
     <div
       style={{
         backgroundImage: `url('/perfect-bg.jpg')`,
-        height: '100vh',
+        height: 'auto',
+        maxHeight: '100%',
+        width: 'auto',
+        maxWidth: '100%',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
+        backgroundRepeat: 'no-repeat'
+
+        // backgroundSize: 'cover'
       }}
     >
       <Box
-        height="93.5vh"
+        height="91.5vh"
         display="flex"
         alignItems="center"
         justifyContent="center"
