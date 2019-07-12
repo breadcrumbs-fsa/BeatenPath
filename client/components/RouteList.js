@@ -36,6 +36,10 @@ import {
 } from '../hooks-store/places/placesReducer'
 import Divider from '@material-ui/core/Divider'
 import Popover from '@material-ui/core/Popover'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 export const RouteList = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -66,8 +70,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '4px',
     maxWidth: '190px',
     minWidth: '190px',
-    flexWrap: 'wrap'
-    // maxWidth: 752,
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   },
   demo: {
     backgroundColor: theme.palette.background.paper
@@ -101,15 +105,18 @@ const RouteLister = props => {
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
   const {location} = props
+  const [popoverClick, setPopoverClick] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null)
-  // if (location.pathname.match("/homepage")) {
-  //   return null;
-  // }
+  const [expanded, setExpanded] = React.useState(false)
 
-  // function handleClick(event) {
-  // deletePlace(props.places, props.segments, index, props.dispatch)
-  // setAnchorEl(event.currentTarget)
-  // }
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false)
+  }
+
+  function handleClick(event) {
+    deletePlace(props.places, props.segments, index, props.dispatch)
+    setAnchorEl(event.currentTarget)
+  }
 
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
@@ -121,6 +128,7 @@ const RouteLister = props => {
 
   function handleClose() {
     setAnchorEl(null)
+    setPopoverClick(false)
   }
 
   function handleAdd() {
@@ -144,9 +152,6 @@ const RouteLister = props => {
     }
   }
 
-  const open = Boolean(anchorEl)
-  const id = open ? 'simple-popover' : undefined
-
   console.log('singlejourney props: ', props)
   // props.segments.length > 0 &&
   // console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
@@ -156,44 +161,7 @@ const RouteLister = props => {
       <FormGroup row />
       <Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" className={classes.title}>
-            {/* Avatar with text and icon */}
-          </Typography>
-
-          {/* <div aria-describedby={id} variant="contained" onClick={handleClick}>
-            Open Popover
-          </div> */}
-          {/* <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center'
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center'
-            }}
-          >
-            <Typography className={classes.typography}>
-              {props.places}
-            </Typography>
-          </Popover> */}
-
-          {/* {props.mode === 'viewOnly' && (
-            <IconButton
-            // variant="contained"
-            // color="primary"
-            // className={classes.button}
-            onClick={function() {
-              props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
-            }}
-            >
-            <Icon>edit_icon</Icon>
-            </IconButton>
-          )} */}
+          <Typography variant="h6" className={classes.title} />
 
           <div className={classes.demo}>
             <List dense={dense}>
@@ -250,43 +218,81 @@ const RouteLister = props => {
                           // outline: `2px solid lightslategray`
                         }}
                       >
-                        <ListItemIcon
+                        {/* <ListItemIcon
                           style={{
                             color: colorPicker(props.places.length - 1 - index)
                           }}
                         >
                           <LocationOnIcon />
-                        </ListItemIcon>
-                        <ListItemText
-                          // variant="h6"
-                          className={classes.root}
-                          primary={
-                            place.name ? place.name : place.formatted_address
-                          }
-                          secondary={secondary ? 'Secondary text' : null}
-                        />
-                        <ListItemText>{place.price_level}</ListItemText>
-                        {/* <img
-                          width="auto"
-                          height="100 rem"
-                          src={place.photos[0].getUrl()}
-                        /> */}
+                        </ListItemIcon> */}
 
-                        {/* Point of interest */}
-                        <ListItemText
-                          primary={
-                            place.types[0][0].toUpperCase() +
-                            place.types[0]
-                              .split('_')
-                              .join(' ')
-                              .slice(1)
-                          }
-                        />
-                        <ListItemText primary={place.rating} />
+                        <ExpansionPanel
+                          expanded={expanded === index}
+                          onChange={handleChange(index)}
+                        >
+                          <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1bh-content"
+                            id="panel1bh-header"
+                          >
+                            <Grid className={classes.root}>
+                              <img
+                                width="auto"
+                                height="50 rem"
+                                src={`/markernums${index + 1}.png`}
+                              />
 
-                        {/* <ListItemText
-                        primary={place.price_level}
-                      /> */}
+                              <Typography>
+                                {place.name
+                                  ? place.name
+                                  : place.formatted_address}
+                              </Typography>
+                            </Grid>
+                          </ExpansionPanelSummary>
+                          <ExpansionPanelDetails>
+                            <Grid className={classes.root}>
+                              {place.types && (
+                                <Typography>
+                                  {place.types[0][0].toUpperCase() +
+                                    place.types[0]
+                                      .split('_')
+                                      .join(' ')
+                                      .slice(1)}
+                                </Typography>
+                              )}
+                              {place.rating && (
+                                <Typography>
+                                  Rating: {place.rating}{' '}
+                                  {'⭐️'.repeat(Math.round(place.rating))}{' '}
+                                </Typography>
+                              )}
+                              {place.price_level && (
+                                <Typography>
+                                  Price: {'$'.repeat(place.price_level)}
+                                </Typography>
+                              )}
+                              <Grid />
+                              {place.photos && (
+                                <Grid>
+                                  {place.photos.map((photo, index) => {
+                                    const imageURL = photo.getUrl()
+                                    if (imageURL) {
+                                      return (
+                                        <img
+                                          key={index}
+                                          width="auto"
+                                          height="100 rem"
+                                          src={imageURL}
+                                        />
+                                      )
+                                    }
+                                  })}
+                                  )}
+                                </Grid>
+                              )}
+                            </Grid>
+                          </ExpansionPanelDetails>
+                        </ExpansionPanel>
 
                         {props.mode === 'create' && (
                           <ListItemSecondaryAction>
