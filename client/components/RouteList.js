@@ -70,8 +70,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '4px',
     maxWidth: '190px',
     minWidth: '190px',
-    flexWrap: 'wrap'
-    // maxWidth: 752,
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   },
   demo: {
     backgroundColor: theme.palette.background.paper
@@ -161,44 +161,7 @@ const RouteLister = props => {
       <FormGroup row />
       <Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" className={classes.title}>
-            {/* Avatar with text and icon */}
-          </Typography>
-
-          {/* <div aria-describedby={id} variant="contained" onClick={handleClick}>
-            Open Popover
-          </div> */}
-          {/* <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center'
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center'
-            }}
-          >
-            <Typography className={classes.typography}>
-              {props.places}
-            </Typography>
-          </Popover> */}
-
-          {/* {props.mode === 'viewOnly' && (
-            <IconButton
-            // variant="contained"
-            // color="primary"
-            // className={classes.button}
-            onClick={function() {
-              props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
-            }}
-            >
-            <Icon>edit_icon</Icon>
-            </IconButton>
-          )} */}
+          <Typography variant="h6" className={classes.title} />
 
           <div className={classes.demo}>
             <List dense={dense}>
@@ -255,13 +218,13 @@ const RouteLister = props => {
                           // outline: `2px solid lightslategray`
                         }}
                       >
-                        <ListItemIcon
+                        {/* <ListItemIcon
                           style={{
                             color: colorPicker(props.places.length - 1 - index)
                           }}
                         >
                           <LocationOnIcon />
-                        </ListItemIcon>
+                        </ListItemIcon> */}
 
                         <ExpansionPanel
                           expanded={expanded === index}
@@ -272,14 +235,25 @@ const RouteLister = props => {
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
                           >
-                            <Typography>
-                              {place.name
-                                ? place.name
-                                : place.formatted_address}
-                            </Typography>
+                            <Grid className={classes.root}>
+                              <ListItemIcon
+                                style={{
+                                  color: colorPicker(
+                                    props.places.length - 1 - index
+                                  )
+                                }}
+                              >
+                                <LocationOnIcon />
+                              </ListItemIcon>
+                              <Typography>
+                                {place.name
+                                  ? place.name
+                                  : place.formatted_address}
+                              </Typography>
+                            </Grid>
                           </ExpansionPanelSummary>
                           <ExpansionPanelDetails>
-                            <Grid>
+                            <Grid className={classes.root}>
                               <Typography>
                                 {place.types[0][0].toUpperCase() +
                                   place.types[0]
@@ -287,52 +261,28 @@ const RouteLister = props => {
                                     .join(' ')
                                     .slice(1)}
                               </Typography>
-                              <Typography>Rating: {place.rating}</Typography>
                               <Typography>
-                                Price: {place.price_level}*'$'
+                                Rating: {place.rating}{' '}
+                                {'⭐️'.repeat(Math.round(place.rating))}{' '}
                               </Typography>
-                              <img
-                                width="auto"
-                                height="100 rem"
-                                src={place.photos[0].getUrl()}
-                              />
+                              {place.price_level && (
+                                <Typography>
+                                  Price: {'$'.repeat(place.price_level)}
+                                </Typography>
+                              )}
+                              <Grid />
+                              {place.photos.map(photo => (
+                                <img
+                                  key={photo.getUrl()}
+                                  width="auto"
+                                  height="100 rem"
+                                  src={photo.getUrl()}
+                                />
+                              ))}
                             </Grid>
                           </ExpansionPanelDetails>
                         </ExpansionPanel>
-                        {/* <Popover
-                          open={popoverClick}
-                          anchorEl={anchorEl}
-                          onClose={handleClose}
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center'
-                          }}
-                          transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center'
-                          }}
-                        >
-                          <Grid> */}
-                        {/* <ListItemText>{place.price_level}</ListItemText>
-                            <ListItemText
-                              primary={
-                                place.types[0][0].toUpperCase() +
-                                place.types[0]
-                                  .split('_')
-                                  .join(' ')
-                                  .slice(1)
-                              }
-                            /> */}
-                        {/* <ListItemText>
-                              {place.rating} {index}
-                            </ListItemText> */}
 
-                        {/* </Grid>
-                        </Popover> */}
-                        {/* Point of interest */}
-                        {/* <ListItemText
-                        primary={place.price_level}
-                      /> */}
                         {props.mode === 'create' && (
                           <ListItemSecondaryAction>
                             <IconButton
