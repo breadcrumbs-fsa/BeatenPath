@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, {useContext} from 'react'
 import {withRouter} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
@@ -89,6 +90,9 @@ const useStyles = makeStyles(theme => ({
   },
   margin: {
     marginRight: '2px'
+  },
+  openClass: {
+    color: '#388e3c'
   }
 }))
 
@@ -105,8 +109,6 @@ const RouteLister = props => {
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
   const {location} = props
-  const [popoverClick, setPopoverClick] = React.useState(false)
-  const [anchorEl, setAnchorEl] = React.useState(null)
   const [expanded, setExpanded] = React.useState(false)
 
   const handleChange = panel => (event, isExpanded) => {
@@ -151,6 +153,9 @@ const RouteLister = props => {
       )
     }
   }
+
+  const textSecondary = '#388e3c'
+  const error = '#d32f2f'
 
   console.log('singlejourney props: ', props)
   // props.segments.length > 0 &&
@@ -238,8 +243,9 @@ const RouteLister = props => {
                             <Grid className={classes.root}>
                               <img
                                 width="auto"
-                                height="50 rem"
-                                src={`/markernums${index + 1}.png`}
+                                height="30 rem"
+                                src={`/markernums${props.places.length -
+                                  index}.png`}
                               />
 
                               <Typography>
@@ -251,6 +257,17 @@ const RouteLister = props => {
                           </ExpansionPanelSummary>
                           <ExpansionPanelDetails>
                             <Grid className={classes.root}>
+                              {place.opening_hours &&
+                                (place.opening_hours.open_now ? (
+                                  <Typography
+                                    color="textSecondary"
+                                    className={classes.openClass}
+                                  >
+                                    Open Now
+                                  </Typography>
+                                ) : (
+                                  <Typography color="error">Closed</Typography>
+                                ))}
                               {place.types && (
                                 <Typography>
                                   {place.types[0][0].toUpperCase() +
@@ -287,7 +304,6 @@ const RouteLister = props => {
                                       )
                                     }
                                   })}
-                                  )}
                                 </Grid>
                               )}
                             </Grid>
