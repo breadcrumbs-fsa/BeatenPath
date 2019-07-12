@@ -36,6 +36,10 @@ import {
 } from '../hooks-store/places/placesReducer'
 import Divider from '@material-ui/core/Divider'
 import Popover from '@material-ui/core/Popover'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 export const RouteList = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -101,15 +105,18 @@ const RouteLister = props => {
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
   const {location} = props
+  const [popoverClick, setPopoverClick] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null)
-  // if (location.pathname.match("/homepage")) {
-  //   return null;
-  // }
+  const [expanded, setExpanded] = React.useState(false)
 
-  // function handleClick(event) {
-  // deletePlace(props.places, props.segments, index, props.dispatch)
-  // setAnchorEl(event.currentTarget)
-  // }
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false)
+  }
+
+  function handleClick(event) {
+    deletePlace(props.places, props.segments, index, props.dispatch)
+    setAnchorEl(event.currentTarget)
+  }
 
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
@@ -121,6 +128,7 @@ const RouteLister = props => {
 
   function handleClose() {
     setAnchorEl(null)
+    setPopoverClick(false)
   }
 
   function handleAdd() {
@@ -143,9 +151,6 @@ const RouteLister = props => {
       )
     }
   }
-
-  const open = Boolean(anchorEl)
-  const id = open ? 'simple-popover' : undefined
 
   console.log('singlejourney props: ', props)
   // props.segments.length > 0 &&
@@ -257,37 +262,77 @@ const RouteLister = props => {
                         >
                           <LocationOnIcon />
                         </ListItemIcon>
-                        <ListItemText
-                          // variant="h6"
-                          className={classes.root}
-                          primary={
-                            place.name ? place.name : place.formatted_address
-                          }
-                          secondary={secondary ? 'Secondary text' : null}
-                        />
-                        <ListItemText>{place.price_level}</ListItemText>
-                        {/* <img
-                          width="auto"
-                          height="100 rem"
-                          src={place.photos[0].getUrl()}
-                        /> */}
 
+                        <ExpansionPanel
+                          expanded={expanded === index}
+                          onChange={handleChange(index)}
+                        >
+                          <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1bh-content"
+                            id="panel1bh-header"
+                          >
+                            <Typography>
+                              {place.name
+                                ? place.name
+                                : place.formatted_address}
+                            </Typography>
+                          </ExpansionPanelSummary>
+                          <ExpansionPanelDetails>
+                            <Grid>
+                              <Typography>
+                                {place.types[0][0].toUpperCase() +
+                                  place.types[0]
+                                    .split('_')
+                                    .join(' ')
+                                    .slice(1)}
+                              </Typography>
+                              <Typography>Rating: {place.rating}</Typography>
+                              <Typography>
+                                Price: {place.price_level}*'$'
+                              </Typography>
+                              <img
+                                width="auto"
+                                height="100 rem"
+                                src={place.photos[0].getUrl()}
+                              />
+                            </Grid>
+                          </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        {/* <Popover
+                          open={popoverClick}
+                          anchorEl={anchorEl}
+                          onClose={handleClose}
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center'
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center'
+                          }}
+                        >
+                          <Grid> */}
+                        {/* <ListItemText>{place.price_level}</ListItemText>
+                            <ListItemText
+                              primary={
+                                place.types[0][0].toUpperCase() +
+                                place.types[0]
+                                  .split('_')
+                                  .join(' ')
+                                  .slice(1)
+                              }
+                            /> */}
+                        {/* <ListItemText>
+                              {place.rating} {index}
+                            </ListItemText> */}
+
+                        {/* </Grid>
+                        </Popover> */}
                         {/* Point of interest */}
-                        <ListItemText
-                          primary={
-                            place.types[0][0].toUpperCase() +
-                            place.types[0]
-                              .split('_')
-                              .join(' ')
-                              .slice(1)
-                          }
-                        />
-                        <ListItemText primary={place.rating} />
-
                         {/* <ListItemText
                         primary={place.price_level}
                       /> */}
-
                         {props.mode === 'create' && (
                           <ListItemSecondaryAction>
                             <IconButton
