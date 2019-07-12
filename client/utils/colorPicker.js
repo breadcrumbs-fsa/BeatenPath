@@ -1,7 +1,7 @@
 export const colorPicker = index => {
   switch (index) {
     case -1:
-      return '#f9a752' //light orange
+      return '#E74C3C' //red
     case 0:
       return '#75aa8e' // light turquoise
     case 1:
@@ -21,9 +21,9 @@ export const colorPicker = index => {
     case 8:
       return '#928476' // light taupe
     case 9:
-      return '#856cb5' // light purple
-    case 10:
       return '#c74742' // rust
+    case 10:
+      return '#856cb5' // light purple
     case 11:
       return '#ac7566' //brown
   }
