@@ -90,6 +90,9 @@ const useStyles = makeStyles(theme => ({
   },
   margin: {
     marginRight: '2px'
+  },
+  openClass: {
+    color: '#388e3c'
   }
 }))
 
@@ -106,8 +109,6 @@ const RouteLister = props => {
   const [dense] = React.useState(false)
   const [secondary] = React.useState(false)
   const {location} = props
-  const [popoverClick, setPopoverClick] = React.useState(false)
-  const [anchorEl, setAnchorEl] = React.useState(null)
   const [expanded, setExpanded] = React.useState(false)
 
   const handleChange = panel => (event, isExpanded) => {
@@ -152,6 +153,9 @@ const RouteLister = props => {
       )
     }
   }
+
+  const textSecondary = '#388e3c'
+  const error = '#d32f2f'
 
   console.log('singlejourney props: ', props)
   // props.segments.length > 0 &&
@@ -255,9 +259,14 @@ const RouteLister = props => {
                             <Grid className={classes.root}>
                               {place.opening_hours &&
                                 (place.opening_hours.open_now ? (
-                                  <div color="green">Open</div>
+                                  <Typography
+                                    color="textSecondary"
+                                    className={classes.openClass}
+                                  >
+                                    Open Now
+                                  </Typography>
                                 ) : (
-                                  <div color="red">Closed</div>
+                                  <Typography color="error">Closed</Typography>
                                 ))}
                               {place.types && (
                                 <Typography>
