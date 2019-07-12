@@ -304,7 +304,6 @@ const RouteLister = props => {
                                       )
                                     }
                                   })}
-                                  )}
                                 </Grid>
                               )}
                             </Grid>
