@@ -229,21 +229,38 @@ const RouteLister = props => {
                         <Grid />
                         {props.placePreview[0].photos && (
                           <Grid>
-                            {props.placePreview[0].photos.map(
-                              (photo, index) => {
-                                const imageURL = photo.getUrl()
-                                if (imageURL) {
-                                  return (
-                                    <img
-                                      key={index}
-                                      width="auto"
-                                      height="100 rem"
-                                      src={imageURL}
-                                    />
-                                  )
+                            <div
+                              style={{
+                                overflowX: 'auto',
+                                width: '210px',
+                                display: 'flex'
+                              }}
+                            >
+                              {' '}
+                              {props.placePreview[0].photos.map(
+                                (photo, index) => {
+                                  const imageURL = photo.getUrl()
+                                  if (imageURL) {
+                                    return (
+                                      <Grid
+                                        container
+                                        direction="row"
+                                        justify="flex-start"
+                                        alignItems="baseline"
+                                        style={{paddingRight: '.3rem'}}
+                                      >
+                                        <img
+                                          key={index}
+                                          width="auto"
+                                          height="100 rem"
+                                          src={imageURL}
+                                        />
+                                      </Grid>
+                                    )
+                                  }
                                 }
-                              }
-                            )}
+                              )}
+                            </div>
                           </Grid>
                         )}
                       </Grid>
