@@ -59,7 +59,8 @@ export const PlacePreview = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     leftMargin: '15px',
-    bottomPadding: '15px'
+    bottomPadding: '15px',
+    marginBottom: '25px'
     // topMargin: '-30px'
     // flexGrow: 1
     // maxWidth: 752,
@@ -289,6 +290,7 @@ const RouteLister = props => {
               {/* <FormControlLabel classes={label.left}>  */}
               <form
                 className={classes.container}
+                style={{marginBottom: '4px'}}
                 noValidate
                 autoComplete="off"
                 onSubmit={event => {

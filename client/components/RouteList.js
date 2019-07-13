@@ -72,11 +72,13 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '190px',
     minWidth: '190px',
     flexWrap: 'wrap',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    margin: '0px',
+    padding: '0px'
   },
   demo: {
-    backgroundColor: theme.palette.background.paper,
-    marginTop: '-35px'
+    backgroundColor: theme.palette.background.paper
+    // marginTop: '-35px'
   },
   title: {
     // margin: theme.spacing(0, 0, 0)
@@ -94,6 +96,13 @@ const useStyles = makeStyles(theme => ({
   },
   openClass: {
     color: '#388e3c'
+  },
+  noPadNoMarg: {
+    padding: '0px',
+    margin: '0px'
+  },
+  topspace: {
+    marginTop: '-35px'
   }
 }))
 
@@ -172,7 +181,7 @@ const RouteLister = props => {
           <div className={classes.demo}>
             <List dense={dense}>
               {props.journey.name && (
-                <ListItem>
+                <ListItem className={classes.topspace}>
                   <IconButton
                     onClick={() => {
                       props.dispatch({type: 'CLEAR_PLACES'})
@@ -219,9 +228,10 @@ const RouteLister = props => {
                     return (
                       <ListItem
                         key={index}
+                        className={classes.noPadNoMarg}
                         style={{
-                          divider: true
-                          // outline: `2px solid lightslategray`
+                          divider: true,
+                          margin: '0px'
                         }}
                       >
                         {/* <ListItemIcon
@@ -240,13 +250,20 @@ const RouteLister = props => {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
+                            className={classes.noPadNoMarg}
                           >
-                            <Grid className={classes.root}>
+                            <Grid
+                              container
+                              direction="row"
+                              justify="flex-start"
+                              alignItems="center"
+                            >
                               <img
                                 width="auto"
                                 height="30 rem"
                                 src={`/markernums${props.places.length -
                                   index}.png`}
+                                style={{paddingRight: '1rem'}}
                               />
 
                               <Typography>
