@@ -53,7 +53,11 @@ export function ButtonAppBarView(props) {
   // console.log('mode: ', props.mode)
   return (
     <div className={classes.root}>
-      <AppBar position="static" classes={{root: classes.root}}>
+      <AppBar
+        position="static"
+        classes={{root: classes.root}}
+        style={{height: '42px'}}
+      >
         <Toolbar variant="dense">
           {/*<NavMenu />*/}
 
@@ -72,6 +76,7 @@ export function ButtonAppBarView(props) {
                   props.dispatch({type: 'CLEAR_SEGMENTS'})
                   props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
                 }}
+                style={{height: '4.5vh'}}
               >
                 Create
               </Button>
@@ -88,6 +93,7 @@ export function ButtonAppBarView(props) {
                   props.dispatch({type: 'CLEAR_SEGMENTS'})
                   props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
                 }}
+                style={{height: '4.5vh'}}
               >
                 Find
               </Button>

@@ -65,12 +65,12 @@ export const RouteList = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-
-    marginTop: '4px',
-    marginRight: '10px',
-    marginBottom: '4px',
-    maxWidth: '190px',
-    minWidth: '190px',
+    //
+    // marginTop: '4px',
+    // marginRight: '10px',
+    // marginBottom: '4px',
+    maxWidth: '210px',
+    minWidth: '210px',
     flexWrap: 'wrap',
     flexDirection: 'row'
   },
@@ -171,7 +171,7 @@ const RouteLister = props => {
           <div className={classes.demo}>
             <List dense={dense}>
               {props.journey.name && (
-                <ListItem>
+                <ListItem style={{height: '5vh'}}>
                   <IconButton
                     onClick={() => {
                       props.dispatch({type: 'CLEAR_PLACES'})
@@ -239,11 +239,17 @@ const RouteLister = props => {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
+                            // style={{height: '5vh'}}
                           >
-                            <Grid className={classes.root}>
+                            <Grid
+                              container
+                              direction="row"
+                              justify="space-between"
+                              alignItems="center"
+                            >
                               <img
                                 width="auto"
-                                height="30 rem"
+                                height="20 rem"
                                 src={`/markernums${props.places.length -
                                   index}.png`}
                               />
@@ -291,19 +297,37 @@ const RouteLister = props => {
                               <Grid />
                               {place.photos && (
                                 <Grid>
-                                  {place.photos.map((photo, index) => {
-                                    const imageURL = photo.getUrl()
-                                    if (imageURL) {
-                                      return (
-                                        <img
-                                          key={index}
-                                          width="auto"
-                                          height="100 rem"
-                                          src={imageURL}
-                                        />
-                                      )
-                                    }
-                                  })}
+                                  <div
+                                    style={{
+                                      overflowX: 'auto',
+                                      width: '210px',
+                                      display: 'flex'
+                                    }}
+                                  >
+                                    {place.photos.map((photo, index) => {
+                                      const imageURL = photo.getUrl()
+                                      if (imageURL) {
+                                        return (
+                                          <Grid
+                                            container
+                                            direction="row"
+                                            justify="flex-start"
+                                            alignItems="baseline"
+                                            style={{paddingRight: '.3rem'}}
+                                          >
+                                            <img
+                                              key={index}
+                                              // width="auto"
+                                              height="100 rem"
+                                              src={imageURL}
+                                              margin="10 px"
+                                              style={{margin: '10 rem'}}
+                                            />
+                                          </Grid>
+                                        )
+                                      }
+                                    })}
+                                  </div>
                                 </Grid>
                               )}
                             </Grid>

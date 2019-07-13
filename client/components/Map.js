@@ -310,7 +310,7 @@ export class MyMapComponent extends Component {
             style={{
               boxSizing: `border-box`,
               border: `1px solid transparent`,
-              width: `240px`,
+              width: `65%`,
               height: `32px`,
               marginTop: `27px`,
               padding: `0 12px`,
