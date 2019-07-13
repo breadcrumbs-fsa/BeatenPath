@@ -30,7 +30,7 @@ const App = () => {
         <div
           style={{
             display: 'flex',
-            height: '4.5vh',
+            height: '5.5vh',
             width: '100%',
             alignItems: 'center'
           }}
@@ -40,7 +40,7 @@ const App = () => {
         {/* <HomePage /> */}
         <div
           style={{
-            height: '95.5vh',
+            height: '94.5vh',
             width: '100%',
             alignItems: 'center'
           }}

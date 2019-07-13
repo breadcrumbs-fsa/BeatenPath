@@ -54,7 +54,7 @@ export const MapContainer = props => {
           {state.mode === 'viewOnly' && (
             <div
               style={{
-                height: '47vh',
+                height: '28vh',
                 width: '100%',
                 alignItems: 'center',
                 overflowY: 'auto'
@@ -66,7 +66,7 @@ export const MapContainer = props => {
           {state.mode === 'create' && (
             <div
               style={{
-                height: '47vh',
+                height: '28vh',
                 width: '100%',
                 alignItems: 'center',
                 overflowY: 'auto'
@@ -79,7 +79,7 @@ export const MapContainer = props => {
           {state.mode === 'find' && (
             <div
               style={{
-                height: '47vh',
+                height: '28vh',
                 width: '100%',
                 alignItems: 'center',
                 overflowY: 'auto'
