@@ -97,8 +97,9 @@ const useStyles = makeStyles(theme => ({
     color: '#388e3c'
   },
   noPadNoMarg: {
-    padding: '0px',
-    margin: '0px'
+    padding: '0px 0px 0px 5px',
+    margin: '0px',
+    width: '360px'
   }
 }))
 
@@ -247,6 +248,7 @@ const RouteLister = props => {
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
                             className={classes.noPadNoMarg}
+                            style={{width: '210 px'}}
                           >
                             <Grid
                               container
@@ -353,7 +355,6 @@ const RouteLister = props => {
                                   props.dispatch
                                 )
                               }
-                              edge="end"
                               aria-label="Delete"
                             >
                               <DeleteIcon />
