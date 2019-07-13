@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 270,
+    width: 240,
     topMargin: 0,
     leftMargin: '15px'
   },
@@ -290,7 +290,7 @@ const RouteLister = props => {
               {/* <FormControlLabel classes={label.left}>  */}
               <form
                 className={classes.container}
-                style={{marginBottom: '4px'}}
+                style={{marginBottom: '-4px'}}
                 noValidate
                 autoComplete="off"
                 onSubmit={event => {

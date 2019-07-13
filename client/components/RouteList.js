@@ -66,18 +66,19 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
 
-    marginTop: '4px',
-    marginRight: '10px',
-    marginBottom: '4px',
-    maxWidth: '190px',
-    minWidth: '190px',
+    // marginTop: '4px',
+    // marginRight: '10px',
+    // marginBottom: '4px',
+    maxWidth: '180px',
+    minWidth: '180px',
     flexWrap: 'wrap',
     flexDirection: 'row',
     margin: '0px',
     padding: '0px'
   },
   demo: {
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper,
+    // marginLeft: '15px'
     // marginTop: '-35px'
   },
   title: {
@@ -98,11 +99,13 @@ const useStyles = makeStyles(theme => ({
     color: '#388e3c'
   },
   noPadNoMarg: {
-    padding: '0px',
-    margin: '0px'
+    padding: '0px 0px 0px 5px',
+    margin: '0px',
+    width: '360px'
   },
   topspace: {
-    marginTop: '-35px'
+    marginTop: '-35px',
+    marginLeft: '15px'
   }
 }))
 
@@ -178,7 +181,7 @@ const RouteLister = props => {
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title} />
 
-          <div className={classes.demo}>
+          <div>
             <List dense={dense}>
               {props.journey.name && (
                 <ListItem className={classes.topspace}>
@@ -251,6 +254,7 @@ const RouteLister = props => {
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
                             className={classes.noPadNoMarg}
+                            style={{width: '210 px'}}
                           >
                             <Grid
                               container
@@ -339,7 +343,6 @@ const RouteLister = props => {
                                   props.dispatch
                                 )
                               }
-                              edge="end"
                               aria-label="Delete"
                             >
                               <DeleteIcon />

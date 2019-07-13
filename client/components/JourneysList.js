@@ -43,13 +43,16 @@ export const JourneyList = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    maxWidth: 752
+    // maxWidth: 752
+    marginLeft: '10px',
+    marginRight: '10px'
   },
   demo: {
     backgroundColor: theme.palette.background.paper
   },
   title: {
-    margin: theme.spacing(4, 0, 2)
+    fontSize: '18px'
+    // margin: theme.spacing(4, 0, 2)
   },
   floatLeft: {
     display: 'inline',
@@ -67,7 +70,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   clearBoth: {
-    clear: 'both'
+    clear: 'both',
+    padding: '-2px'
   }
 }))
 
@@ -102,6 +106,7 @@ export const JourneyListView = props => {
             {props.journeys.length > 0 &&
               props.journeys.map(journey => (
                 <List key={journey.id} className={classes.clearBoth}>
+                  <h1 />
                   <Typography className={classes.title}>
                     {journey.name}
                   </Typography>
@@ -188,6 +193,7 @@ export const JourneyListView = props => {
                       </IconButton>
                     </div>
                   </div>
+                  <Divider style={{width: '100%'}} />
                 </List>
               ))}
           </div>
