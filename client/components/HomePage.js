@@ -80,7 +80,7 @@ export const HomePageView = props => {
   return (
     <div
       style={{
-        backgroundImage: `url('/perfect-bg.jpg')`,
+        backgroundImage: `url('/2perfectmap.jpg')`,
         height: '94.5vh',
         maxHeight: '100%',
         width: '100%',
