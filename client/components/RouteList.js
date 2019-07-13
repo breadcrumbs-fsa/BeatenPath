@@ -72,7 +72,9 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '210px',
     minWidth: '210px',
     flexWrap: 'wrap',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    margin: '0px',
+    padding: '0px'
   },
   demo: {
     backgroundColor: theme.palette.background.paper
@@ -93,6 +95,10 @@ const useStyles = makeStyles(theme => ({
   },
   openClass: {
     color: '#388e3c'
+  },
+  noPadNoMarg: {
+    padding: '0px',
+    margin: '0px'
   }
 }))
 
@@ -218,9 +224,10 @@ const RouteLister = props => {
                     return (
                       <ListItem
                         key={index}
+                        className={classes.noPadNoMarg}
                         style={{
-                          divider: true
-                          // outline: `2px solid lightslategray`
+                          divider: true,
+                          margin: '0px'
                         }}
                       >
                         {/* <ListItemIcon
@@ -239,12 +246,12 @@ const RouteLister = props => {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
-                            // style={{height: '5vh'}}
+                            className={classes.noPadNoMarg}
                           >
                             <Grid
                               container
                               direction="row"
-                              justify="space-between"
+                              justify="flex-start"
                               alignItems="center"
                             >
                               <img
@@ -252,6 +259,7 @@ const RouteLister = props => {
                                 height="20 rem"
                                 src={`/markernums${props.places.length -
                                   index}.png`}
+                                style={{paddingRight: '1rem'}}
                               />
 
                               <Typography>
