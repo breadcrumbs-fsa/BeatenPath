@@ -355,7 +355,6 @@ const RouteLister = props => {
                                   props.dispatch
                                 )
                               }
-                              edge="end"
                               aria-label="Delete"
                             >
                               <DeleteIcon />
