@@ -38,6 +38,11 @@ import {
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+
 export const PlacePreview = () => {
   const [state, dispatch] = useContext(StoreContext)
 
@@ -92,6 +97,7 @@ const useStyles = makeStyles(theme => ({
 //   )
 // }
 
+// eslint-disable-next-line complexity
 const RouteLister = props => {
   const classes = useStyles()
   const [dense] = React.useState(false)
@@ -100,6 +106,7 @@ const RouteLister = props => {
     title: ''
   })
   const [saved, setSaved] = React.useState(false)
+  const [expanded, setExpanded] = React.useState(false)
   const handleChange = name => event => {
     console.log('event on handlechange', event)
     setValues({...values, [name]: event.target.value})
@@ -134,9 +141,15 @@ const RouteLister = props => {
     }
   }
 
+  const handleExpand = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false)
+  }
+
+  const textSecondary = '#388e3c'
+  const error = '#d32f2f'
   return (
-    <div className={classes.root}>
-      {/* <FormGroup row /> */}
+    <div>
+      <FormGroup row />
       <Grid>
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title}>
@@ -150,20 +163,90 @@ const RouteLister = props => {
                 //   outline: `2px solid lightslategray `
                 // }}
                 >
-                  <ListItemIcon style={{color: colorPicker(-1)}}>
-                    <LocationOnIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
-                      props.placePreview[0].name
-                        ? props.placePreview[0].name
-                        : props.placePreview[0].formatted_address
-                    }
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                  <ListItemText
-                    primary={props.placePreview[0].types[0].replace('_', ' ')}
-                  />
+                  <ExpansionPanel onChange={handleExpand()}>
+                    <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1bh-content"
+                      id="panel1bh-header"
+                    >
+                      <Grid
+                        container
+                        direction="row"
+                        justify="space-around"
+                        alignItems="center"
+                      >
+                        <img
+                          width="auto"
+                          height="30 rem"
+                          src="/marker-startnum.png"
+                        />
+
+                        <Typography>
+                          {props.placePreview[0].name
+                            ? props.placePreview[0].name
+                            : props.placePreview[0].formatted_address}
+                        </Typography>
+                      </Grid>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Grid className={classes.root}>
+                        {props.placePreview[0].opening_hours &&
+                          (props.placePreview[0].opening_hours.open_now ? (
+                            <Typography
+                              color="textSecondary"
+                              className={classes.openClass}
+                            >
+                              Open Now
+                            </Typography>
+                          ) : (
+                            <Typography color="error">Closed</Typography>
+                          ))}
+                        {props.placePreview[0].types && (
+                          <Typography>
+                            {props.placePreview[0].types[0][0].toUpperCase() +
+                              props.placePreview[0].types[0]
+                                .split('_')
+                                .join(' ')
+                                .slice(1)}
+                          </Typography>
+                        )}
+                        {props.placePreview[0].rating && (
+                          <Typography>
+                            Rating: {props.placePreview[0].rating}{' '}
+                            {'⭐️'.repeat(
+                              Math.round(props.placePreview[0].rating)
+                            )}{' '}
+                          </Typography>
+                        )}
+                        {props.placePreview[0].price_level && (
+                          <Typography>
+                            Price:{' '}
+                            {'$'.repeat(props.placePreview[0].price_level)}
+                          </Typography>
+                        )}
+                        <Grid />
+                        {props.placePreview[0].photos && (
+                          <Grid>
+                            {props.placePreview[0].photos.map(
+                              (photo, index) => {
+                                const imageURL = photo.getUrl()
+                                if (imageURL) {
+                                  return (
+                                    <img
+                                      key={index}
+                                      width="auto"
+                                      height="100 rem"
+                                      src={imageURL}
+                                    />
+                                  )
+                                }
+                              }
+                            )}
+                          </Grid>
+                        )}
+                      </Grid>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
 
                   <ListItemSecondaryAction>
                     <IconButton

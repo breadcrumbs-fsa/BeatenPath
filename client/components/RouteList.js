@@ -241,7 +241,12 @@ const RouteLister = props => {
                             id="panel1bh-header"
                             // style={{height: '5vh'}}
                           >
-                            <Grid className={classes.root}>
+                            <Grid
+                              container
+                              direction="row"
+                              justify="space-between"
+                              alignItems="center"
+                            >
                               <img
                                 width="auto"
                                 height="20 rem"
