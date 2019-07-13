@@ -58,15 +58,10 @@ export const PlacePreview = () => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-
-    marginTop: '4px',
-    marginRight: '10px',
-    marginBottom: '4px',
-    maxWidth: '190px',
-    minWidth: '190px',
-    flexWrap: 'wrap',
-    flexDirection: 'row'
+    leftMargin: '15px'
+    // topMargin: '-30px'
+    // flexGrow: 1
+    // maxWidth: 752,
   },
   demo: {
     backgroundColor: theme.palette.background.paper
@@ -74,16 +69,20 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
-    topMargin: 0
+    width: 270,
+    topMargin: 0,
+    leftMargin: '15px'
   },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    marginBottom: '-60px',
+    marginLeft: '20px',
+    marginTop: '-20px'
   },
-  openClass: {
-    color: '#388e3c'
+  left: {
+    marginLeft: '15px'
   }
   // title: {
   //   margin: theme.spacing(0, 0, 0)
@@ -173,7 +172,7 @@ const RouteLister = props => {
                       <Grid
                         container
                         direction="row"
-                        justify="space-between"
+                        justify="space-around"
                         alignItems="center"
                       >
                         <img
@@ -286,6 +285,7 @@ const RouteLister = props => {
                   />
                 </ListItem>
               )}
+              {/* <FormControlLabel classes={label.left}>  */}
               <form
                 className={classes.container}
                 noValidate

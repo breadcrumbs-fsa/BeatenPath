@@ -65,12 +65,12 @@ export const RouteList = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-
-    marginTop: '4px',
-    marginRight: '10px',
-    marginBottom: '4px',
-    maxWidth: '190px',
-    minWidth: '190px',
+    //
+    // marginTop: '4px',
+    // marginRight: '10px',
+    // marginBottom: '4px',
+    // maxWidth: '190px',
+    // minWidth: '190px',
     flexWrap: 'wrap',
     flexDirection: 'row'
   },
@@ -171,7 +171,7 @@ const RouteLister = props => {
           <div className={classes.demo}>
             <List dense={dense}>
               {props.journey.name && (
-                <ListItem>
+                <ListItem style={{height: '5vh'}}>
                   <IconButton
                     onClick={() => {
                       props.dispatch({type: 'CLEAR_PLACES'})
@@ -239,6 +239,7 @@ const RouteLister = props => {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
+                            // style={{height: '5vh'}}
                           >
                             <Grid
                               container
@@ -248,7 +249,7 @@ const RouteLister = props => {
                             >
                               <img
                                 width="auto"
-                                height="30 rem"
+                                height="20 rem"
                                 src={`/markernums${props.places.length -
                                   index}.png`}
                               />
