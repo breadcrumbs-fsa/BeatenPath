@@ -33,7 +33,7 @@ export const MapContainer = props => {
             isMarkerShown
             googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapjs}&js?v=3.exp&libraries=geometry,drawing,places`}
             loadingElement={<div style={{height: `100%`}} />}
-            containerElement={<div style={{height: `350px`}} />}
+            containerElement={<div style={{height: `55vh`}} />}
             mapElement={<div style={{height: `100%`}} />}
             dispatch={dispatch}
             center={state.center}
@@ -54,7 +54,7 @@ export const MapContainer = props => {
           {state.mode === 'viewOnly' && (
             <div
               style={{
-                height: '28vh',
+                height: '39.5vh',
                 width: '100%',
                 alignItems: 'center',
                 overflowY: 'auto'
@@ -66,7 +66,7 @@ export const MapContainer = props => {
           {state.mode === 'create' && (
             <div
               style={{
-                height: '28vh',
+                height: '39.5vh',
                 width: '100%',
                 alignItems: 'center',
                 overflowY: 'auto'
@@ -79,7 +79,7 @@ export const MapContainer = props => {
           {state.mode === 'find' && (
             <div
               style={{
-                height: '28vh',
+                height: '39.5vh',
                 width: '100%',
                 alignItems: 'center',
                 overflowY: 'auto'
