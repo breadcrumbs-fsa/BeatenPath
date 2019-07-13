@@ -58,7 +58,8 @@ export const PlacePreview = () => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    leftMargin: '15px'
+    leftMargin: '15px',
+    bottomPadding: '15px'
     // topMargin: '-30px'
     // flexGrow: 1
     // maxWidth: 752,

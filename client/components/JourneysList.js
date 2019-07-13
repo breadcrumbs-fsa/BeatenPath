@@ -102,7 +102,7 @@ export const JourneyListView = props => {
             {props.journeys.length > 0 &&
               props.journeys.map(journey => (
                 <List key={journey.id} className={classes.clearBoth}>
-                  <Typography variant="h6" className={classes.title}>
+                  <Typography className={classes.title}>
                     {journey.name}
                   </Typography>
                   {/* distance number */}
