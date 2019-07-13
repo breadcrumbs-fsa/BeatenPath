@@ -54,6 +54,7 @@ export const PlacePreview = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     leftMargin: '15px'
+    // topMargin: '-30px'
     // flexGrow: 1
     // maxWidth: 752,
   },
@@ -72,7 +73,8 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     alignItems: 'baseline',
     marginBottom: '-60px',
-    marginLeft: '20px'
+    marginLeft: '20px',
+    marginTop: '-20px'
   },
   left: {
     marginLeft: '15px'
@@ -134,7 +136,7 @@ const RouteLister = props => {
 
   return (
     <div className={classes.root}>
-      <FormGroup row />
+      {/* <FormGroup row /> */}
       <Grid>
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title}>
