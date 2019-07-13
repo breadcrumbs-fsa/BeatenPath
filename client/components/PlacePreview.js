@@ -53,6 +53,8 @@ export const PlacePreview = () => {
 
 const useStyles = makeStyles(theme => ({
   root: {
+    leftMargin: '15px'
+    // topMargin: '-30px'
     // flexGrow: 1
     // maxWidth: 752,
   },
@@ -62,13 +64,20 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
-    topMargin: 0
+    width: 270,
+    topMargin: 0,
+    leftMargin: '15px'
   },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    marginBottom: '-60px',
+    marginLeft: '20px',
+    marginTop: '-20px'
+  },
+  left: {
+    marginLeft: '15px'
   }
   // title: {
   //   margin: theme.spacing(0, 0, 0)
@@ -127,7 +136,7 @@ const RouteLister = props => {
 
   return (
     <div className={classes.root}>
-      <FormGroup row />
+      {/* <FormGroup row /> */}
       <Grid>
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title}>
@@ -193,6 +202,7 @@ const RouteLister = props => {
                   />
                 </ListItem>
               )}
+              {/* <FormControlLabel classes={label.left}>  */}
               <form
                 className={classes.container}
                 noValidate
