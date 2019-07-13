@@ -240,7 +240,12 @@ const RouteLister = props => {
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
                           >
-                            <Grid className={classes.root}>
+                            <Grid
+                              container
+                              direction="row"
+                              justify="space-between"
+                              alignItems="center"
+                            >
                               <img
                                 width="auto"
                                 height="30 rem"

@@ -149,7 +149,7 @@ const RouteLister = props => {
   const textSecondary = '#388e3c'
   const error = '#d32f2f'
   return (
-    <div className={classes.root}>
+    <div>
       <FormGroup row />
       <Grid>
         <Grid item xs={12}>
@@ -170,7 +170,12 @@ const RouteLister = props => {
                       aria-controls="panel1bh-content"
                       id="panel1bh-header"
                     >
-                      <Grid className={classes.root}>
+                      <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                      >
                         <img
                           width="auto"
                           height="30 rem"
