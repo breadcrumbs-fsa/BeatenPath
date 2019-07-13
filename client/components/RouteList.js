@@ -313,19 +313,37 @@ const RouteLister = props => {
                               <Grid />
                               {place.photos && (
                                 <Grid>
-                                  {place.photos.map((photo, index) => {
-                                    const imageURL = photo.getUrl()
-                                    if (imageURL) {
-                                      return (
-                                        <img
-                                          key={index}
-                                          width="auto"
-                                          height="100 rem"
-                                          src={imageURL}
-                                        />
-                                      )
-                                    }
-                                  })}
+                                  <div
+                                    style={{
+                                      overflowX: 'auto',
+                                      width: '210px',
+                                      display: 'flex'
+                                    }}
+                                  >
+                                    {place.photos.map((photo, index) => {
+                                      const imageURL = photo.getUrl()
+                                      if (imageURL) {
+                                        return (
+                                          <Grid
+                                            container
+                                            direction="row"
+                                            justify="flex-start"
+                                            alignItems="baseline"
+                                            style={{paddingRight: '.3rem'}}
+                                          >
+                                            <img
+                                              key={index}
+                                              // width="auto"
+                                              height="100 rem"
+                                              src={imageURL}
+                                              margin="10 px"
+                                              style={{margin: '10 rem'}}
+                                            />
+                                          </Grid>
+                                        )
+                                      }
+                                    })}
+                                  </div>
                                 </Grid>
                               )}
                             </Grid>
