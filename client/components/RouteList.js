@@ -173,7 +173,8 @@ const RouteLister = props => {
   console.log('singlejourney props: ', props)
   // props.segments.length > 0 &&
   // console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
-  console.log('places ', props.places)
+  console.log('price level', props.places.price_level)
+
   return (
     <div>
       <FormGroup row />
@@ -228,6 +229,11 @@ const RouteLister = props => {
                   .slice()
                   .reverse()
                   .map((place, index) => {
+                    console.log(
+                      'PRICE: ',
+                      place.price_level,
+                      place.price_level == 0
+                    )
                     return (
                       <ListItem
                         key={index}
@@ -305,11 +311,14 @@ const RouteLister = props => {
                                   {'⭐️'.repeat(Math.round(place.rating))}{' '}
                                 </Typography>
                               )}
-                              {place.price_level && (
-                                <Typography>
-                                  Price: {'$'.repeat(place.price_level)}
-                                </Typography>
-                              )}
+                              {typeof place.price_level === 'number' &&
+                                (place.price_level != 0 ? (
+                                  <Typography>
+                                    Price: {'$'.repeat(place.price_level)}
+                                  </Typography>
+                                ) : (
+                                  <Typography>Price: Free!</Typography>
+                                ))}
                               <Grid />
                               {place.photos && (
                                 <Grid>
