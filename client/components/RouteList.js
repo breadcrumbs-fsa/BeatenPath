@@ -65,19 +65,21 @@ export const RouteList = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    //
+
     // marginTop: '4px',
     // marginRight: '10px',
     // marginBottom: '4px',
-    maxWidth: '210px',
-    minWidth: '210px',
+    maxWidth: '180px',
+    minWidth: '180px',
     flexWrap: 'wrap',
     flexDirection: 'row',
     margin: '0px',
     padding: '0px'
   },
   demo: {
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper,
+    // marginLeft: '15px'
+    // marginTop: '-35px'
   },
   title: {
     // margin: theme.spacing(0, 0, 0)
@@ -100,6 +102,10 @@ const useStyles = makeStyles(theme => ({
     padding: '0px 0px 0px 5px',
     margin: '0px',
     width: '360px'
+  },
+  topspace: {
+    marginTop: '-35px',
+    marginLeft: '15px'
   }
 }))
 
@@ -175,10 +181,10 @@ const RouteLister = props => {
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title} />
 
-          <div className={classes.demo}>
+          <div>
             <List dense={dense}>
               {props.journey.name && (
-                <ListItem style={{height: '5vh'}}>
+                <ListItem className={classes.topspace}>
                   <IconButton
                     onClick={() => {
                       props.dispatch({type: 'CLEAR_PLACES'})
@@ -258,7 +264,7 @@ const RouteLister = props => {
                             >
                               <img
                                 width="auto"
-                                height="20 rem"
+                                height="30 rem"
                                 src={`/markernums${props.places.length -
                                   index}.png`}
                                 style={{paddingRight: '1rem'}}
