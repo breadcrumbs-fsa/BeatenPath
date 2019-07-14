@@ -325,7 +325,7 @@ const RouteLister = props => {
                                   <div
                                     style={{
                                       overflowX: 'auto',
-                                      width: '210px',
+                                      width: '360px',
                                       display: 'flex'
                                     }}
                                   >
