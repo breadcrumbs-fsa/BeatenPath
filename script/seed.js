@@ -12,7 +12,7 @@ async function seed() {
   await Journey.create({
     journeyEnd: 'ChIJf6m9-bEsDogRcgm9nf2Dtho',
     updatedAt: '2019-07-12 14:57:10.063-05',
-    name: 'Chicago Classics in the Loop',
+    name: 'Chicago Loop Classics 🏙',
     journeyStart: 'ChIJV0AwM30rDogR2sd-X0cgErU',
     createdAt: '2019-07-12 14:57:10.063-05'
   })
@@ -20,9 +20,15 @@ async function seed() {
   await Journey.create({
     journeyEnd: 'ChIJOxc99b4sDogReRG3-qoMN5Q',
     updatedAt: '2019-07-12 15:19:46.44-05',
-    name: 'Sunday Funday',
+    name: 'Sunday Funday 🍾',
     journeyStart: 'ChIJC_YdYqwsDogR3xYeKE6rLfA',
     createdAt: '2019-07-12 15:19:46.44-05'
+  })
+
+  await Journey.create({
+    journeyEnd: 'ChIJR1SjLbIsDogR2hKQQejxOtc',
+    name: 'Chicago Loop Hidden Gems 💎',
+    journeyStart: 'ChIJ3x_LPKotDogRlVVkZiSwgbI'
   })
 
   await Segment.create({
@@ -133,6 +139,57 @@ async function seed() {
     segmentStart: 'ChIJu_tp4r4sDogRfYy4Xs5tDwE',
     updatedAt: '2019-07-12 15:19:46.563-05',
     createdAt: '2019-07-12 15:19:46.563-05'
+  })
+
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJV9pYbJssDogRafJH1kYVdSw',
+    distance: 784,
+    order: 0,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJ3x_LPKotDogRlVVkZiSwgbI',
+    updatedAt: '2019-07-13 17:25:01.353-05',
+    createdAt: '2019-07-13 17:25:01.353-05'
+  })
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJHzRIuaUsDogRP_AJdMSgzjI',
+    distance: 458,
+    order: 2,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJh4u67aMsDogRnMzJlXRqfGI',
+    updatedAt: '2019-07-13 17:25:01.363-05',
+    createdAt: '2019-07-13 17:25:01.363-05'
+  })
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJh4u67aMsDogRnMzJlXRqfGI',
+    distance: 1388,
+    order: 1,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJV9pYbJssDogRafJH1kYVdSw',
+    updatedAt: '2019-07-13 17:25:01.362-05',
+    createdAt: '2019-07-13 17:25:01.362-05'
+  })
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJH5l_WYcsDogRw8ymcCe737E',
+    distance: 291,
+    order: 3,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJHzRIuaUsDogRP_AJdMSgzjI',
+    updatedAt: '2019-07-13 17:25:01.374-05',
+    createdAt: '2019-07-13 17:25:01.374-05'
+  })
+  await Segment.create({
+    journeyId: 3,
+    segmentEnd: 'ChIJR1SjLbIsDogR2hKQQejxOtc',
+    distance: 1063,
+    order: 4,
+    transportation: 'WALKING',
+    segmentStart: 'ChIJH5l_WYcsDogRw8ymcCe737E',
+    updatedAt: '2019-07-13 17:25:01.376-05',
+    createdAt: '2019-07-13 17:25:01.376-05'
   })
 
   console.log(`seeded successfully`)

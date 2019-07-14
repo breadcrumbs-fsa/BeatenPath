@@ -172,7 +172,7 @@ const RouteLister = props => {
                       <Grid
                         container
                         direction="row"
-                        justify="space-around"
+                        justify="flex-start"
                         alignItems="center"
                       >
                         <img
