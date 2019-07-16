@@ -140,7 +140,7 @@ export const JourneyListView = props => {
                           props.dispatch({type: 'CLEAR_PLACES'})
                           props.dispatch({type: 'DELETE_PREVIEW'})
                           props.dispatch({type: 'CLEAR_SEGMENTS'})
-                          await singleJourneyPlaces(
+                          singleJourneyPlaces(
                             journey.segments,
                             props.placesService,
                             props.dispatch,
@@ -164,7 +164,7 @@ export const JourneyListView = props => {
                           props.dispatch({type: 'CLEAR_PLACES'})
                           props.dispatch({type: 'DELETE_PREVIEW'})
                           props.dispatch({type: 'CLEAR_SEGMENTS'})
-                          await singleJourneyPlaces(
+                          singleJourneyPlaces(
                             journey.segments,
                             props.placesService,
                             props.dispatch,

@@ -5,6 +5,12 @@ export const ADD_SEGMENT_1 = 'ADD_SEGMENT_1'
 export const DELETE_PLACE = 'DELETE_PLACE'
 export const DELETE_FIRST_OR_LAST = 'DELETE_FIRST_OR_LAST'
 export const CLEAR_SEGMENTS = 'CLEAR_SEGMENTS'
+export const ADD_SEGMENTS_ARRAY = 'ADD_SEGMENTS_ARRAY'
+
+export const addSegmentsArray = segments => ({
+  type: ADD_SEGMENTS_ARRAY,
+  segments
+})
 
 export const addSegment1 = segment => ({
   type: ADD_SEGMENT_1,
@@ -39,6 +45,8 @@ const segmentReducer = (segmentState, action) => {
   switch (action.type) {
     case ADD_SEGMENT_1:
       return [...segmentState, action.segment]
+    case ADD_SEGMENTS_ARRAY:
+      return action.segments
 
     case DELETE_PLACE:
       console.log(segmentState, action.index)
