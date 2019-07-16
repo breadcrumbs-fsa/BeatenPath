@@ -44,9 +44,10 @@ const placesReducer = (placesState, action) => {
       return [action.place]
     case DELETE_FIRST_OR_LAST:
       if (action.index === 0) {
+        console.log(action.index)
         return placesState.slice(0, placesState.length - 1)
       } else {
-        return placesState.slice(-1)
+        return placesState.slice(1)
       }
     case DELETE_PLACE: {
       return placesState.filter((item, index) => index !== action.index)

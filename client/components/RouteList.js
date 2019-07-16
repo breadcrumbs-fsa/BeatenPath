@@ -143,202 +143,207 @@ const RouteLister = props => {
   }
 
   return (
-    <div>
-      <FormGroup row />
-      <Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" className={classes.title} />
+    console.log(props.segments),
+    (
+      <div>
+        <FormGroup row />
+        <Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6" className={classes.title} />
 
-          <div>
-            <List dense={dense}>
-              {props.journey.name && (
-                <ListItem className={classes.topspace}>
-                  <IconButton
-                    onClick={() => {
-                      props.dispatch({type: 'CLEAR_PLACES'})
-                      props.dispatch({type: 'CLEAR_SEGMENTS'})
-                      props.dispatch({
-                        type: 'SET_SINGLE_JOURNEY',
-                        journey: {}
-                      })
-                      props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
-                      props.dispatch({
-                        type: 'SET_FIT_BOUNDS',
-                        fitBounds: 'notFit'
-                      })
-                    }}
-                    // edge="end"
-                    aria-label="arrow_back"
-                  >
-                    <ArrowBackIcon />
-                  </IconButton>
-                  <ListItemText primary={props.journey.name} />
-
-                  {props.mode === 'viewOnly' && (
+            <div>
+              <List dense={dense}>
+                {props.journey.name && (
+                  <ListItem className={classes.topspace}>
                     <IconButton
-                      // variant="contained"
-                      // color="primary"
-                      // className={classes.button}
-                      onClick={function() {
-                        props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
+                      onClick={() => {
+                        props.dispatch({type: 'CLEAR_PLACES'})
+                        props.dispatch({type: 'CLEAR_SEGMENTS'})
+                        props.dispatch({
+                          type: 'SET_SINGLE_JOURNEY',
+                          journey: {}
+                        })
+                        props.dispatch({type: 'CHANGE_MODE', mode: 'find'})
+                        props.dispatch({
+                          type: 'SET_FIT_BOUNDS',
+                          fitBounds: 'notFit'
+                        })
                       }}
+                      // edge="end"
+                      aria-label="arrow_back"
                     >
-                      <Icon>edit_icon</Icon>
+                      <ArrowBackIcon />
                     </IconButton>
-                  )}
-                  <ListItemSecondaryAction />
-                </ListItem>
-              )}
+                    <ListItemText primary={props.journey.name} />
 
-              <Divider />
-              {props.places &&
-                props.places
-                  .slice()
-                  .reverse()
-                  .map((place, index) => {
-                    return (
-                      <ListItem
-                        key={index}
-                        className={classes.noPadNoMarg}
-                        style={{
-                          divider: true,
-                          margin: '0px'
+                    {props.mode === 'viewOnly' && (
+                      <IconButton
+                        // variant="contained"
+                        // color="primary"
+                        // className={classes.button}
+                        onClick={function() {
+                          props.dispatch({type: 'CHANGE_MODE', mode: 'create'})
                         }}
                       >
-                        <ExpansionPanel
-                          expanded={expanded === index}
-                          onChange={handleChange(index)}
+                        <Icon>edit_icon</Icon>
+                      </IconButton>
+                    )}
+                    <ListItemSecondaryAction />
+                  </ListItem>
+                )}
+
+                <Divider />
+                {props.places &&
+                  props.places
+                    .slice()
+                    .reverse()
+                    .map((place, index) => {
+                      return (
+                        <ListItem
+                          key={index}
+                          className={classes.noPadNoMarg}
+                          style={{
+                            divider: true,
+                            margin: '0px'
+                          }}
                         >
-                          <ExpansionPanelSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1bh-content"
-                            id="panel1bh-header"
-                            className={classes.noPadNoMarg}
-                            style={{width: '210 px'}}
+                          <ExpansionPanel
+                            expanded={expanded === index}
+                            onChange={handleChange(index)}
                           >
-                            <Grid
-                              container
-                              direction="row"
-                              justify="flex-start"
-                              alignItems="center"
+                            <ExpansionPanelSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1bh-content"
+                              id="panel1bh-header"
+                              className={classes.noPadNoMarg}
+                              style={{width: '210 px'}}
                             >
-                              <img
-                                width="auto"
-                                height="30 rem"
-                                src={`/markernums${props.places.length -
-                                  index}.png`}
-                                style={{paddingRight: '1rem'}}
-                              />
+                              <Grid
+                                container
+                                direction="row"
+                                justify="flex-start"
+                                alignItems="center"
+                              >
+                                <img
+                                  width="auto"
+                                  height="30 rem"
+                                  src={`/markernums${props.places.length -
+                                    index}.png`}
+                                  style={{paddingRight: '1rem'}}
+                                />
 
-                              <Typography>
-                                {place.name
-                                  ? place.name
-                                  : place.formatted_address}
-                              </Typography>
-                            </Grid>
-                          </ExpansionPanelSummary>
-                          <ExpansionPanelDetails>
-                            <Grid className={classes.root}>
-                              {place.opening_hours &&
-                                (place.opening_hours.open_now ? (
-                                  <Typography
-                                    color="textSecondary"
-                                    className={classes.openClass}
-                                  >
-                                    Open Now
-                                  </Typography>
-                                ) : (
-                                  <Typography color="error">Closed</Typography>
-                                ))}
-                              {place.types && (
                                 <Typography>
-                                  {place.types[0][0].toUpperCase() +
-                                    place.types[0]
-                                      .split('_')
-                                      .join(' ')
-                                      .slice(1)}
+                                  {place.name
+                                    ? place.name
+                                    : place.formatted_address}
                                 </Typography>
-                              )}
-                              {place.rating && (
-                                <Typography>
-                                  Rating: {place.rating}{' '}
-                                  {'⭐️'.repeat(Math.round(place.rating))}{' '}
-                                </Typography>
-                              )}
-                              {typeof place.price_level === 'number' &&
-                                (place.price_level !== 0 ? (
+                              </Grid>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                              <Grid className={classes.root}>
+                                {place.opening_hours &&
+                                  (place.opening_hours.open_now ? (
+                                    <Typography
+                                      color="textSecondary"
+                                      className={classes.openClass}
+                                    >
+                                      Open Now
+                                    </Typography>
+                                  ) : (
+                                    <Typography color="error">
+                                      Closed
+                                    </Typography>
+                                  ))}
+                                {place.types && (
                                   <Typography>
-                                    Price: {'$'.repeat(place.price_level)}
+                                    {place.types[0][0].toUpperCase() +
+                                      place.types[0]
+                                        .split('_')
+                                        .join(' ')
+                                        .slice(1)}
                                   </Typography>
-                                ) : (
-                                  <Typography>Price: Free!</Typography>
-                                ))}
-                              <Grid />
-                              {place.photos && (
-                                <Grid>
-                                  <div
-                                    style={{
-                                      overflowX: 'auto',
-                                      width: '210px',
-                                      display: 'flex'
-                                    }}
-                                  >
-                                    {place.photos.map((photo, index) => {
-                                      const imageURL = photo.getUrl()
-                                      if (imageURL) {
-                                        return (
-                                          <Grid
-                                            key={imageURL}
-                                            container
-                                            direction="row"
-                                            justify="flex-start"
-                                            alignItems="baseline"
-                                            style={{paddingRight: '.3rem'}}
-                                          >
-                                            <img
-                                              key={index}
-                                              // width="auto"
-                                              height="100 rem"
-                                              src={imageURL}
-                                              margin="10 px"
-                                              style={{margin: '10 rem'}}
-                                            />
-                                          </Grid>
-                                        )
-                                      }
-                                    })}
-                                  </div>
-                                </Grid>
-                              )}
-                            </Grid>
-                          </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                                )}
+                                {place.rating && (
+                                  <Typography>
+                                    Rating: {place.rating}{' '}
+                                    {'⭐️'.repeat(Math.round(place.rating))}{' '}
+                                  </Typography>
+                                )}
+                                {typeof place.price_level === 'number' &&
+                                  (place.price_level !== 0 ? (
+                                    <Typography>
+                                      Price: {'$'.repeat(place.price_level)}
+                                    </Typography>
+                                  ) : (
+                                    <Typography>Price: Free!</Typography>
+                                  ))}
+                                <Grid />
+                                {place.photos && (
+                                  <Grid>
+                                    <div
+                                      style={{
+                                        overflowX: 'auto',
+                                        width: '210px',
+                                        display: 'flex'
+                                      }}
+                                    >
+                                      {place.photos.map((photo, index) => {
+                                        const imageURL = photo.getUrl()
+                                        if (imageURL) {
+                                          return (
+                                            <Grid
+                                              key={imageURL}
+                                              container
+                                              direction="row"
+                                              justify="flex-start"
+                                              alignItems="baseline"
+                                              style={{paddingRight: '.3rem'}}
+                                            >
+                                              <img
+                                                key={index}
+                                                // width="auto"
+                                                height="100 rem"
+                                                src={imageURL}
+                                                margin="10 px"
+                                                style={{margin: '10 rem'}}
+                                              />
+                                            </Grid>
+                                          )
+                                        }
+                                      })}
+                                    </div>
+                                  </Grid>
+                                )}
+                              </Grid>
+                            </ExpansionPanelDetails>
+                          </ExpansionPanel>
 
-                        {props.mode === 'create' && (
-                          <ListItemSecondaryAction>
-                            <IconButton
-                              onClick={() =>
-                                deletePlace(
-                                  props.places,
-                                  props.segments,
-                                  index,
-                                  props.dispatch
-                                )
-                              }
-                              aria-label="Delete"
-                            >
-                              <DeleteIcon />
-                            </IconButton>
-                          </ListItemSecondaryAction>
-                        )}
-                      </ListItem>
-                    )
-                  })}
-            </List>
-          </div>
+                          {props.mode === 'create' && (
+                            <ListItemSecondaryAction>
+                              <IconButton
+                                onClick={() =>
+                                  deletePlace(
+                                    props.places,
+                                    props.segments,
+                                    index,
+                                    props.dispatch
+                                  )
+                                }
+                                aria-label="Delete"
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </ListItemSecondaryAction>
+                          )}
+                        </ListItem>
+                      )
+                    })}
+              </List>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    )
   )
 }
 
