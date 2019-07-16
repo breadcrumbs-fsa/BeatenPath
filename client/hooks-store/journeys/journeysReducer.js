@@ -12,7 +12,6 @@ export const journeysReducer = (journeysState, action) => {
     case GET_MULTIPLE_JOURNEYS:
       return action.journeys
     case CLEAR_JOURNEYS:
-      console.log('HELLOO')
       return []
     default:
       return journeysState

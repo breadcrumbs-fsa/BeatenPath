@@ -6,22 +6,15 @@ import Grid from '@material-ui/core/Grid'
 import MapIcon from '@material-ui/icons/Map'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import IconButton from '@material-ui/core/IconButton'
-import Button from '@material-ui/core/Button'
-import ButtonGroup from '@material-ui/core/ButtonGroup'
 import {singleJourneyPlaces} from '../utils/singleJourneyPlaces'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import {makeStyles} from '@material-ui/core/styles'
 
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
-
-import {addCenter} from '../hooks-store/search/centerReducer'
-import {addBounds} from '../hooks-store/search/boundsReducer'
 
 export const JourneyList = () => {
   const [state, dispatch] = useContext(StoreContext)

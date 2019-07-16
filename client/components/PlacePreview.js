@@ -1,42 +1,24 @@
 import React, {useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-import clsx from 'clsx'
-import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import FolderIcon from '@material-ui/icons/Folder'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
-import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
-import {Store} from '../app'
 import {StoreContext} from '../app'
-import {DirectionsRenderer} from 'react-google-maps'
-import {colorPicker} from '../utils/colorPicker'
 import {directions} from '../utils/directions'
 import {deletePlace} from '../utils/deletePlace'
 import {saveJourney} from '../utils/saveJourney'
-import ButtonGroup from '@material-ui/core/ButtonGroup'
-import Divider from '@material-ui/core/Divider'
 import Button from '@material-ui/core/Button'
-import {multiJourneys} from '../utils/multiJourneys'
 import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
-import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -83,6 +65,9 @@ const useStyles = makeStyles(theme => ({
     marginLeft: '20px',
     marginTop: '-20px'
   },
+  openClass: {
+    color: '#388e3c'
+  },
   left: {
     marginLeft: '15px'
   }
@@ -110,7 +95,6 @@ const RouteLister = props => {
   const [saved, setSaved] = React.useState(false)
   const [expanded, setExpanded] = React.useState(false)
   const handleChange = name => event => {
-    console.log('event on handlechange', event)
     setValues({...values, [name]: event.target.value})
   }
 
@@ -123,7 +107,6 @@ const RouteLister = props => {
 
   function handleAdd() {
     if (props.places.length === 0) {
-      console.log(props.places.length)
       props.dispatch({
         type: PLACE_PREVIEW_TO_FIRST,
         place: props.placePreview[0]
@@ -147,8 +130,6 @@ const RouteLister = props => {
     setExpanded(isExpanded ? panel : false)
   }
 
-  const textSecondary = '#388e3c'
-  const error = '#d32f2f'
   return (
     <div>
       <FormGroup row />
@@ -243,6 +224,7 @@ const RouteLister = props => {
                                   if (imageURL) {
                                     return (
                                       <Grid
+                                        key={imageURL}
                                         container
                                         direction="row"
                                         justify="flex-start"
@@ -250,7 +232,6 @@ const RouteLister = props => {
                                         style={{paddingRight: '.3rem'}}
                                       >
                                         <img
-                                          key={index}
                                           width="auto"
                                           height="100 rem"
                                           src={imageURL}

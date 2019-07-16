@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import _ from 'lodash'
 import React, {Component} from 'react'
 import {GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps'
@@ -5,24 +6,12 @@ import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox'
 import MarkerView from './MarkerView'
 import RouteView from './RouteView'
 import {directions} from '../utils/directions'
-import {multiJourneys} from '../utils/multiJourneys'
-import {
-  ADD_PLACE_PREVIEW,
-  PLACE_PREVIEW_TO_FIRST
-} from '../hooks-store/places/placePreviewReducer'
-import {ADD_REF} from '../hooks-store/search/searchReducer'
-import {ALL_SEGMENTS} from '../hooks-store/segments/segmentsReducer'
-import {fetchSingleJourney} from '../utils/fetchSingleJourney'
-import {colorPicker} from '../utils/colorPicker'
+import {ADD_PLACE_PREVIEW} from '../hooks-store/places/placePreviewReducer'
 import MapControl from './MapControl'
 
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import ButtonGroup from '@material-ui/core/ButtonGroup'
 import MapFilter from './MapFilter'
 import {addBounds} from '../hooks-store/search/boundsReducer'
 import {addCenter} from '../hooks-store/search/centerReducer'
-// import mapFilter from './MapFilter'
 
 export class MyMapComponent extends Component {
   constructor(props) {
@@ -65,13 +54,9 @@ export class MyMapComponent extends Component {
       )
       this.props.dispatch({type: 'SET_FIT_BOUNDS', fitBounds: 'boundsAreFit'})
     }
-
-    // google.maps.Map.prototype.panToBounds(this.props.journey.bounds)
   }
 
   componentDidMount() {
-    // console.log(this.props.center)
-
     const refs = {}
 
     this.setState({
@@ -84,17 +69,14 @@ export class MyMapComponent extends Component {
           type: 'ADD_PLACES_SERVICE',
           placesService: placesService
         })
-        console.log('map mounted segs: ', this.props.segments)
       },
 
       onShowSavedJourney: journeyBounds => {
         refs.map.fitBounds(journeyBounds)
       },
-      // east: ga, l; north: na, l; south: na, j; west: ga, j
       getLocation: () => {
         if (navigator.geolocation) {
           return navigator.geolocation.getCurrentPosition(position => {
-            console.log(position)
             this.setState({
               user: {
                 lat: position.coords.latitude,
@@ -164,7 +146,7 @@ export class MyMapComponent extends Component {
           await this.props.placesService.getDetails(
             {placeId: event.placeId},
             (results, status) => {
-              if (status == google.maps.places.PlacesServiceStatus.OK) {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
                 props.dispatch({type: ADD_PLACE_PREVIEW, place: [results]})
                 if (props.places.length > 0) {
                   directions(
@@ -208,40 +190,8 @@ export class MyMapComponent extends Component {
         }
       }
     })
-
-    //TODO: make useEffect hook for both of these in command bar
-    // multiJourneys(this.props.dispatch)
-
-    // fetchSingleJourney(2, this.props.dispatch)
   }
   render() {
-    console.log('fitBounds: ', this.props.fitBounds)
-    // console.log('map segs', this.props.segments)
-    // this.props.segments.length > 0 &&
-    //   this.state.onShowSavedJourney(
-    //     this.props.segments.reduce(
-    //       (journeyBounds, currentSeg) => {
-    //         if (
-    //           Math.abs(currentSeg.routes[0].bounds.ga.l) <
-    //           Math.abs(journeyBounds.east)
-    //         ) {
-    //           journeyBounds.east = currentSeg.routes[0].bounds.ga.l
-    //         }
-    //         if (currentSeg.routes[0].bounds.na.l > journeyBounds.north) {
-    //           journeyBounds.north = currentSeg.routes[0].bounds.na.l
-    //         }
-    //         if (currentSeg.routes[0].bounds.na.j < journeyBounds.south) {
-    //           journeyBounds.south = currentSeg.routes[0].bounds.na.j
-    //         }
-    //         if (currentSeg.routes[0].bounds.ga.j < journeyBounds.west) {
-    //           journeyBounds.west = currentSeg.routes[0].bounds.ga.j
-    //         }
-    //         return journeyBounds
-    //       },
-    //       {east: Infinity, north: 0, south: Infinity, west: 0}
-    //     )
-    //   )
-
     return (
       <GoogleMap
         options={{
@@ -261,6 +211,7 @@ export class MyMapComponent extends Component {
       >
         <MapControl position={google.maps.ControlPosition.LEFT_BOTTOM}>
           <button
+            type="button"
             style={{
               backgroundColor: '#8fa3bc',
               border: 'none',
@@ -279,6 +230,7 @@ export class MyMapComponent extends Component {
 
         <MapControl position={google.maps.ControlPosition.RIGHT_BOTTOM}>
           <button
+            type="button"
             style={{
               backgroundColor: '#8fa3bc',
               border: 'none',

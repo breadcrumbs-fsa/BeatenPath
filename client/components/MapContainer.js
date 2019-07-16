@@ -2,24 +2,18 @@ import React, {useContext} from 'react'
 import Map from './Map'
 import {StoreContext} from '../app'
 import {mapjs} from '../config'
-import {multiJourneys} from '../utils/multiJourneys'
 import {withRouter} from 'react-router-dom'
 import {PlacePreview} from '../components/PlacePreview'
 import {RouteList} from '../components/RouteList'
 import {JourneyList} from '../components/JourneysList'
 import {HomePage} from '../components/HomePage'
-import {mapStyle, mapFlags} from '../utils/mapStyle'
+import {mapStyle} from '../utils/mapStyle'
 
 export const MapContainer = props => {
   const [state, dispatch] = useContext(StoreContext)
   const {location} = props
 
-  // console.log(state.mapFilter)
   let style = mapStyle(state.mapFilter)
-  // console.log(style)
-  // if (location.pathname.match('/homepage')) {
-  //   return null
-  // }
 
   return (
     <div style={{width: '100%'}}>
@@ -94,5 +88,3 @@ export const MapContainer = props => {
   )
 }
 export default withRouter(MapContainer)
-
-// style={{overflowY: 'auto'}}

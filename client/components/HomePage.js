@@ -1,22 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import {multiJourneys} from '../utils/multiJourneys'
 import '../../secrets'
 import {StoreContext} from '../app'
-import {directions} from '../utils/directions'
-import {flexbox} from '@material-ui/system'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import {
-  PLACE_PREVIEW_TO_FIRST,
-  PLACE_PREVIEW_TO_NTH
-} from '../hooks-store/places/placesReducer'
-import {renderComponent} from 'recompose'
-const mapkey = process.env.GOOGLE_MAPJS_API
-
-// import {fetchSingleJourney} from '../utils/fetchSingleJourney'
 
 export const HomePage = () => {
   const [state, dispatch] = useContext(StoreContext)
@@ -62,18 +50,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const HomePageView = props => {
-  const [modeFlag, setMode] = useState('')
-
-  // function testClick() {
-  //   console.log(modeFlag)
-  //   setMode('test')
-  //   console.log(modeFlag)
-  // }
-
-  // function clickHandler() {
-  //   setMode()
-  // }
-
   const classes = useStyles()
   // const map = mapBackground
 

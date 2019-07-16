@@ -1,8 +1,6 @@
-import {DirectionsRenderer, GoogleMap, Marker} from 'react-google-maps'
-import {MarkerWithLabel} from 'react-google-maps/lib/components/addons/MarkerWithLabel'
-import React, {Component, createContext, useContext} from 'react'
+import {Marker} from 'react-google-maps'
+import React, {useContext} from 'react'
 import {StoreContext} from '../app'
-import {colorPicker} from '../utils/colorPicker'
 
 export const MarkerView = () => {
   const [state, dispatch] = useContext(StoreContext)
