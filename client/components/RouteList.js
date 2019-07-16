@@ -4,39 +4,24 @@ import {withRouter} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import FolderIcon from '@material-ui/icons/Folder'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
 import DeleteIcon from '@material-ui/icons/Delete'
-import AddIcon from '@material-ui/icons/Add'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import {Store} from '../app'
+// import {Store} from '../app'
 import {StoreContext} from '../app'
-import {DirectionsRenderer} from 'react-google-maps'
-import {colorPicker} from '../utils/colorPicker'
 import {directions} from '../utils/directions'
 import {deletePlace} from '../utils/deletePlace'
-import {saveJourney} from '../utils/saveJourney'
-import ButtonGroup from '@material-ui/core/ButtonGroup'
-import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
-import {multiJourneys} from '../utils/multiJourneys'
 import {
   PLACE_PREVIEW_TO_FIRST,
   PLACE_PREVIEW_TO_NTH
 } from '../hooks-store/places/placesReducer'
 import Divider from '@material-ui/core/Divider'
-import Popover from '@material-ui/core/Popover'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -120,7 +105,7 @@ const useStyles = makeStyles(theme => ({
 const RouteLister = props => {
   const classes = useStyles()
   const [dense] = React.useState(false)
-  const [secondary] = React.useState(false)
+  // const [secondary] = React.useState(false)
   const {location} = props
   const [expanded, setExpanded] = React.useState(false)
 
@@ -130,20 +115,10 @@ const RouteLister = props => {
 
   function handleClick(event) {
     deletePlace(props.places, props.segments, index, props.dispatch)
-    setAnchorEl(event.currentTarget)
   }
 
   function handleClickPreview() {
     props.dispatch({type: 'DELETE_PREVIEW'})
-  }
-
-  // function handleClick(event) {
-  //   setAnchorEl(event.currentTarget);
-  // }
-
-  function handleClose() {
-    setAnchorEl(null)
-    setPopoverClick(false)
   }
 
   function handleAdd() {
@@ -166,14 +141,6 @@ const RouteLister = props => {
       )
     }
   }
-
-  const textSecondary = '#388e3c'
-  const error = '#d32f2f'
-
-  console.log('singlejourney props: ', props)
-  // props.segments.length > 0 &&
-  // console.log('center: ', props.segments[0].routes[0].bounds.getCenter())
-  console.log('price level', props.places.price_level)
 
   return (
     <div>
@@ -229,11 +196,6 @@ const RouteLister = props => {
                   .slice()
                   .reverse()
                   .map((place, index) => {
-                    console.log(
-                      'PRICE: ',
-                      place.price_level,
-                      place.price_level == 0
-                    )
                     return (
                       <ListItem
                         key={index}
@@ -243,14 +205,6 @@ const RouteLister = props => {
                           margin: '0px'
                         }}
                       >
-                        {/* <ListItemIcon
-                          style={{
-                            color: colorPicker(props.places.length - 1 - index)
-                          }}
-                        >
-                          <LocationOnIcon />
-                        </ListItemIcon> */}
-
                         <ExpansionPanel
                           expanded={expanded === index}
                           onChange={handleChange(index)}
@@ -312,7 +266,7 @@ const RouteLister = props => {
                                 </Typography>
                               )}
                               {typeof place.price_level === 'number' &&
-                                (place.price_level != 0 ? (
+                                (place.price_level !== 0 ? (
                                   <Typography>
                                     Price: {'$'.repeat(place.price_level)}
                                   </Typography>
@@ -325,7 +279,7 @@ const RouteLister = props => {
                                   <div
                                     style={{
                                       overflowX: 'auto',
-                                      width: '360px',
+                                      width: '210px',
                                       display: 'flex'
                                     }}
                                   >
@@ -334,6 +288,7 @@ const RouteLister = props => {
                                       if (imageURL) {
                                         return (
                                           <Grid
+                                            key={imageURL}
                                             container
                                             direction="row"
                                             justify="flex-start"

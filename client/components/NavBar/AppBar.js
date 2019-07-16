@@ -1,15 +1,11 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import {StoreContext} from '../../app'
 import {makeStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import ProfileMenu from './LoginMenu'
 import Button from '@material-ui/core/Button'
 import ViewModuleIcon from '@material-ui/icons/ViewModule'
-import NavMenu from './NavMenu'
-import Switch from '@material-ui/core/Switch'
-import {defaultProps} from 'recompose'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,7 +46,6 @@ export const ButtonAppBar = () => {
 
 export function ButtonAppBarView(props) {
   const classes = useStyles()
-  // console.log('mode: ', props.mode)
   return (
     <div className={classes.root}>
       <AppBar
@@ -61,9 +56,18 @@ export function ButtonAppBarView(props) {
         <Toolbar variant="dense">
           {/*<NavMenu />*/}
 
-          <Typography variant="h6" className={classes.title}>
+          <div
+            variant="h6"
+            className={classes.title}
+            // onClick={function() {
+            //   props.dispatch({type: 'CHANGE_MODE', mode: 'home'})
+            //   props.dispatch({type: 'CLEAR_PLACES'})
+            //   props.dispatch({type: 'CLEAR_SEGMENTS'})
+            //   props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
+            // }}
+          >
             {<img src="/BeatenPath2.png" height="25px" />}
-          </Typography>
+          </div>
           <div style={{marginBottom: '1vh'}}>
             {(props.mode === 'find' || props.mode === 'viewOnly') && (
               <Button

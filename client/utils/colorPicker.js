@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 export const colorPicker = index => {
   switch (index) {
     case -1:

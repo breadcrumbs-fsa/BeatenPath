@@ -1,7 +1,5 @@
-import {DirectionsRenderer, GoogleMap, Marker} from 'react-google-maps'
-import React, {Component, createContext, useContext} from 'react'
+import React, {useContext} from 'react'
 import {StoreContext} from '../app'
-import Button from '@material-ui/core/Button'
 
 const MapFilter = props => {
   const [state, dispatch] = useContext(StoreContext)
@@ -11,6 +9,7 @@ const MapFilter = props => {
   return (
     <div>
       <button
+        type="button"
         style={{
           backgroundColor: '#8fa3bc',
           border: 'none',
