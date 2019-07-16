@@ -50,8 +50,8 @@ export const MapContainer = props => {
               style={{
                 height: '39.5vh',
                 width: '23.4rem',
-                alignItems: 'center',
-                overflowY: 'auto'
+                alignItems: 'center'
+                // overflowY: 'auto'
               }}
             >
               <RouteList />
@@ -62,8 +62,8 @@ export const MapContainer = props => {
               style={{
                 height: '39.5vh',
                 width: '23.4rem',
-                alignItems: 'center',
-                overflowY: 'auto'
+                alignItems: 'center'
+                // overflowY: 'auto'
               }}
             >
               <PlacePreview />
@@ -75,8 +75,8 @@ export const MapContainer = props => {
               style={{
                 height: '39.5vh',
                 width: '23.4rem',
-                alignItems: 'center',
-                overflowY: 'auto'
+                alignItems: 'center'
+                // overflowY: 'auto'
               }}
             >
               <JourneyList />
