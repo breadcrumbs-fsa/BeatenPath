@@ -32,6 +32,7 @@ export const PlacePreview = () => {
     <RouteLister
       segments={state.segments}
       placePreview={state.placePreview}
+      segmentPreview={state.segmentPreview}
       places={state.places}
       dispatch={dispatch}
     />
@@ -75,14 +76,6 @@ const useStyles = makeStyles(theme => ({
   //   margin: theme.spacing(0, 0, 0)
   // }
 }))
-
-// function generate(element) {
-//   return [0, 1, 2].map(value =>
-//     React.cloneElement(element, {
-//       key: value
-//     })
-//   )
-// }
 
 // eslint-disable-next-line complexity
 const RouteLister = props => {
@@ -129,7 +122,6 @@ const RouteLister = props => {
   const handleExpand = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false)
   }
-
   return (
     <div>
       <FormGroup row />
@@ -292,7 +284,6 @@ const RouteLister = props => {
                 noValidate
                 autoComplete="off"
                 onSubmit={event => {
-                  console.log(event)
                   event.preventDefault()
                 }}
               >
