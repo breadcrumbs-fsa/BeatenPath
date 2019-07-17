@@ -134,7 +134,7 @@ const RouteLister = props => {
     <div>
       <FormGroup row />
       <Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style="width: 100%">
           <Typography variant="h6" className={classes.title}>
             {/* Avatar with text and icon */}
           </Typography>

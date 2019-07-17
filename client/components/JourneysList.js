@@ -38,7 +38,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     // maxWidth: 752
     marginLeft: '10px',
-    marginRight: '10px'
+    marginRight: '10px',
+    flexBasis: '100%'
   },
   demo: {
     backgroundColor: theme.palette.background.paper
