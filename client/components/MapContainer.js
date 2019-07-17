@@ -49,7 +49,7 @@ export const MapContainer = props => {
             <div
               style={{
                 height: '39.5vh',
-                width: '23.4rem',
+                // width: '23.4rem',
                 alignItems: 'center',
                 overflowY: 'auto'
               }}
@@ -61,7 +61,7 @@ export const MapContainer = props => {
             <div
               style={{
                 height: '39.5vh',
-                width: '23.4rem',
+                // width: '23.4rem',
                 alignItems: 'center',
                 overflowY: 'auto'
               }}
@@ -74,7 +74,7 @@ export const MapContainer = props => {
             <div
               style={{
                 height: '39.5vh',
-                width: '23.4rem',
+                // width: '23.4rem',
                 alignItems: 'center',
                 overflowY: 'auto'
               }}

@@ -54,8 +54,7 @@ const useStyles = makeStyles(theme => ({
     // marginTop: '4px',
     // marginRight: '10px',
     // marginBottom: '4px',
-    maxWidth: '180px',
-    minWidth: '180px',
+    minWidth: '100%',
     flexWrap: 'wrap',
     flexDirection: 'row',
     margin: '0px',
@@ -86,11 +85,14 @@ const useStyles = makeStyles(theme => ({
   noPadNoMarg: {
     padding: '0px 0px 0px 5px',
     margin: '0px',
-    width: '360px'
+    width: '100%'
   },
   topspace: {
-    marginTop: '-35px',
-    marginLeft: '15px'
+    marginTop: '-35px'
+    // marginLeft: '15px'
+  },
+  gridWidth: {
+    width: '100%'
   }
 }))
 
@@ -148,7 +150,7 @@ const RouteLister = props => {
       <div>
         <FormGroup row />
         <Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={classes.gridWidth}>
             <Typography variant="h6" className={classes.title} />
 
             <div>
@@ -207,117 +209,119 @@ const RouteLister = props => {
                             margin: '0px'
                           }}
                         >
-                          <ExpansionPanel
-                            expanded={expanded === index}
-                            onChange={handleChange(index)}
-                          >
-                            <ExpansionPanelSummary
-                              expandIcon={<ExpandMoreIcon />}
-                              aria-controls="panel1bh-content"
-                              id="panel1bh-header"
-                              className={classes.noPadNoMarg}
-                              style={{width: '210 px'}}
+                          <div className={classes.gridWidth}>
+                            <ExpansionPanel
+                              expanded={expanded === index}
+                              onChange={handleChange(index)}
+                              className={classes.gridWidth}
                             >
-                              <Grid
-                                container
-                                direction="row"
-                                justify="flex-start"
-                                alignItems="center"
+                              <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header"
+                                // className={classes.noPadNoMarg}
+                                // style={{width: '210 px'}}
                               >
-                                <img
-                                  width="auto"
-                                  height="30 rem"
-                                  src={`/markernums${props.places.length -
-                                    index}.png`}
-                                  style={{paddingRight: '1rem'}}
-                                />
+                                <Grid
+                                  container
+                                  direction="row"
+                                  justify="flex-start"
+                                  alignItems="center"
+                                >
+                                  <img
+                                    width="auto"
+                                    height="30 rem"
+                                    src={`/markernums${props.places.length -
+                                      index}.png`}
+                                    style={{paddingRight: '1rem'}}
+                                  />
 
-                                <Typography>
-                                  {place.name
-                                    ? place.name
-                                    : place.formatted_address}
-                                </Typography>
-                              </Grid>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                              <Grid className={classes.root}>
-                                {place.opening_hours &&
-                                  (place.opening_hours.open_now ? (
-                                    <Typography
-                                      color="textSecondary"
-                                      className={classes.openClass}
-                                    >
-                                      Open Now
-                                    </Typography>
-                                  ) : (
-                                    <Typography color="error">
-                                      Closed
-                                    </Typography>
-                                  ))}
-                                {place.types && (
                                   <Typography>
-                                    {place.types[0][0].toUpperCase() +
-                                      place.types[0]
-                                        .split('_')
-                                        .join(' ')
-                                        .slice(1)}
+                                    {place.name
+                                      ? place.name
+                                      : place.formatted_address}
                                   </Typography>
-                                )}
-                                {place.rating && (
-                                  <Typography>
-                                    Rating: {place.rating}{' '}
-                                    {'⭐️'.repeat(Math.round(place.rating))}{' '}
-                                  </Typography>
-                                )}
-                                {typeof place.price_level === 'number' &&
-                                  (place.price_level !== 0 ? (
+                                </Grid>
+                              </ExpansionPanelSummary>
+                              <ExpansionPanelDetails className={classes.root}>
+                                <Grid className={classes.root}>
+                                  {place.opening_hours &&
+                                    (place.opening_hours.open_now ? (
+                                      <Typography
+                                        color="textSecondary"
+                                        className={classes.openClass}
+                                      >
+                                        Open Now
+                                      </Typography>
+                                    ) : (
+                                      <Typography color="error">
+                                        Closed
+                                      </Typography>
+                                    ))}
+                                  {place.types && (
                                     <Typography>
-                                      Price: {'$'.repeat(place.price_level)}
+                                      {place.types[0][0].toUpperCase() +
+                                        place.types[0]
+                                          .split('_')
+                                          .join(' ')
+                                          .slice(1)}
                                     </Typography>
-                                  ) : (
-                                    <Typography>Price: Free!</Typography>
-                                  ))}
-                                <Grid />
-                                {place.photos && (
-                                  <Grid>
-                                    <div
-                                      style={{
-                                        overflowX: 'auto',
-                                        width: '210px',
-                                        display: 'flex'
-                                      }}
-                                    >
-                                      {place.photos.map((photo, index) => {
-                                        const imageURL = photo.getUrl()
-                                        if (imageURL) {
-                                          return (
-                                            <Grid
-                                              key={imageURL}
-                                              container
-                                              direction="row"
-                                              justify="flex-start"
-                                              alignItems="baseline"
-                                              style={{paddingRight: '.3rem'}}
-                                            >
-                                              <img
-                                                key={index}
-                                                // width="auto"
-                                                height="100 rem"
-                                                src={imageURL}
-                                                margin="10 px"
-                                                style={{margin: '10 rem'}}
-                                              />
-                                            </Grid>
-                                          )
-                                        }
-                                      })}
-                                    </div>
-                                  </Grid>
-                                )}
-                              </Grid>
-                            </ExpansionPanelDetails>
-                          </ExpansionPanel>
-
+                                  )}
+                                  {place.rating && (
+                                    <Typography>
+                                      Rating: {place.rating}{' '}
+                                      {'⭐️'.repeat(Math.round(place.rating))}{' '}
+                                    </Typography>
+                                  )}
+                                  {typeof place.price_level === 'number' &&
+                                    (place.price_level !== 0 ? (
+                                      <Typography>
+                                        Price: {'$'.repeat(place.price_level)}
+                                      </Typography>
+                                    ) : (
+                                      <Typography>Price: Free!</Typography>
+                                    ))}
+                                  <Grid />
+                                  {place.photos && (
+                                    <Grid>
+                                      <div
+                                        style={{
+                                          overflowX: 'auto',
+                                          width: 'auto',
+                                          display: 'flex'
+                                        }}
+                                      >
+                                        {place.photos.map((photo, index) => {
+                                          const imageURL = photo.getUrl()
+                                          if (imageURL) {
+                                            return (
+                                              <Grid
+                                                key={imageURL}
+                                                container
+                                                direction="row"
+                                                justify="flex-start"
+                                                alignItems="baseline"
+                                                style={{paddingRight: '.3rem'}}
+                                              >
+                                                <img
+                                                  key={index}
+                                                  // width="auto"
+                                                  height="100 rem"
+                                                  src={imageURL}
+                                                  margin="10 px"
+                                                  style={{margin: '10 rem'}}
+                                                />
+                                              </Grid>
+                                            )
+                                          }
+                                        })}
+                                      </div>
+                                    </Grid>
+                                  )}
+                                </Grid>
+                              </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                          </div>
                           {props.mode === 'create' && (
                             <ListItemSecondaryAction>
                               <IconButton

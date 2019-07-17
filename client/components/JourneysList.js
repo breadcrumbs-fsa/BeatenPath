@@ -65,6 +65,9 @@ const useStyles = makeStyles(theme => ({
   clearBoth: {
     clear: 'both',
     padding: '-2px'
+  },
+  gridWidth: {
+    width: '100%'
   }
 }))
 
@@ -92,7 +95,7 @@ export const JourneyListView = props => {
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} className={classes.gridWidth}>
           <div className={classes.root}>
             {/* <List dense={dense}></List> */}
 
