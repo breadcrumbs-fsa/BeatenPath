@@ -141,9 +141,9 @@ const RouteLister = props => {
       )
     }
   }
-
+  console.log('places: ', props.places)
   return (
-    console.log(props.segments),
+    console.log('segments: ', props.segments),
     (
       <div>
         <FormGroup row />
