@@ -74,7 +74,7 @@ const segmentReducer = (segmentState, action) => {
           return segmentState.slice(0, -1)
         } else if (action.index === segmentState.length) {
           console.log('hitting last')
-          return segmentState.slice(0, segmentState.length - 2)
+          return segmentState.slice(1, segmentState.length)
         }
       }
       break
