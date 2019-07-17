@@ -79,6 +79,7 @@ export function ButtonAppBarView(props) {
                   props.dispatch({type: 'CLEAR_PLACES'})
                   props.dispatch({type: 'CLEAR_SEGMENTS'})
                   props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
+                  props.dispatch({type: 'DELETE_PREVIEW'})
                 }}
                 style={{height: '4.5vh'}}
               >
@@ -96,6 +97,7 @@ export function ButtonAppBarView(props) {
                   props.dispatch({type: 'CLEAR_PLACES'})
                   props.dispatch({type: 'CLEAR_SEGMENTS'})
                   props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
+                  props.dispatch({type: 'DELETE_PREVIEW'})
                 }}
                 style={{height: '4.5vh'}}
               >

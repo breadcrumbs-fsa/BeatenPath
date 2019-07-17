@@ -49,31 +49,22 @@ const segmentReducer = (segmentState, action) => {
       return action.segments
 
     case DELETE_PLACE:
-      console.log(segmentState, action.index)
       const newArr = []
       for (let i = 0; i < segmentState.length; i++) {
         if (i === action.index) {
-          console.log('NEW: ', segmentState[i])
-
           newArr.push(action.segment)
         } else if (i !== action.index - 1) {
-          console.log('OLD: ', segmentState[i])
-
           newArr.push(segmentState[i])
         }
       }
       return newArr
     case CLEAR_SEGMENTS:
-      console.log('hitting segs')
       return []
     case DELETE_FIRST_OR_LAST:
       if (segmentState.length > 0) {
-        console.log('SEGMENT STATE: ', segmentState)
         if (action.index === 0) {
-          console.log('hitting first')
           return segmentState.slice(0, -1)
         } else if (action.index === segmentState.length) {
-          console.log('hitting last')
           return segmentState.slice(1, segmentState.length)
         }
       }

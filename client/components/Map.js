@@ -138,10 +138,12 @@ export class MyMapComponent extends Component {
         this.props.dispatch({type: 'CLEAR_PLACES'})
         this.props.dispatch({type: 'CLEAR_SEGMENTS'})
         this.props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
+        this.props.dispatch({type: 'DELETE_PREVIEW'})
       },
 
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
+        console.log('place event: ', event)
         if (event.placeId) {
           await this.props.placesService.getDetails(
             {placeId: event.placeId},
@@ -151,7 +153,7 @@ export class MyMapComponent extends Component {
                 if (props.places.length > 0) {
                   directions(
                     props.places[props.places.length - 1].place_id,
-                    results.placeId,
+                    event.placeId,
                     props.dispatch,
                     'WALKING',
                     'PREVIEW_SEGMENT'
