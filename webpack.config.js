@@ -20,6 +20,7 @@ module.exports = {
         {
           // Match any same-origin request that contains 'api'.
           // Apply a network-first strategy.
+          urlPattern: '/',
           handler: 'NetworkFirst'
         }
       ]
