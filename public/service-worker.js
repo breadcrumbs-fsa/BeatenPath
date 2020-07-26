@@ -11,22 +11,24 @@
  * See https://goo.gl/2aRDsh
  */
 
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+
 importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
-)
+  "precache-manifest.e325e8a0bcc848facf4d57678ed8be1a.js"
+);
 
-importScripts('precache-manifest.6d0df4d8613f2933dc8f40304eba7a0d.js')
+workbox.core.skipWaiting();
 
-workbox.core.skipWaiting()
-
-workbox.core.clientsClaim()
+workbox.core.clientsClaim();
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
  * See https://goo.gl/S9QRab
  */
-self.__precacheManifest = [].concat(self.__precacheManifest || [])
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
+self.__precacheManifest = [].concat(self.__precacheManifest || []);
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.precaching.cleanupOutdatedCaches()
+workbox.precaching.cleanupOutdatedCaches();
+
+workbox.routing.registerRoute("/", new workbox.strategies.NetworkFirst(), 'GET');
