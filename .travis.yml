@@ -1,28 +1,29 @@
 language: node_js
 node_js:
-- node
+  - node # uses most recent stable node version
 services:
-- postgresql
+  - postgresql # starts up postgres
 addons:
-  postgresql: '9.6'
-dist: trusty
-sudo: false
+  postgresql: '9.6' # highest available postgres version on Travis
+dist: trusty # uses trusty environment
+sudo: false # when on trusty, uses Docker containers for speed
 notifications:
   email:
-    on_success: change
-    on_failure: always
+    on_success: change # default: change (only when going from broken to fixed)
+    on_failure: always # default: always (which is annoying, as it should be)
 install:
-- npm install --dev
+  - npm ci # faster, goes only from package-lock
 before_script:
-- psql -c 'create database "beatenpath";' -U postgres
+  - psql -c 'create database "beatenpath";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-- npm test
-- npm run build-client
+  - npm test             # test the code
+  - npm run build-client # make the bundle
+
 before_deploy:
-- rm -rf node_modules
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
 deploy:
-  skip_cleanup: true
+  skip_cleanup: true # prevents travis from deleting the build
   provider: heroku
-  app: beaten-path
+  app: beaten-path # see README
   api_key:
-    secure: GaTuTUFN9pSfDayGf0ObcH5Dax/NclWLCHDW9qVB6F/idQWIvjU+gU33qmfrH6oF+w6EpGbbiqEuEP5ZWc56KjPz+7x3fqTs8H+9XTvRuD0nSL73cBiFKCBnbhtt6TfMYLfKhu785Vhy6yGDCPI9cTTjxkT7Ajz4B2I9R8P7vNxph2thAzOjXzrIf2DRC12kfUj6RiaeCFyw+/epYj6IuFOMtd+9uGAwKAL+TLZ4grGx6Mir5zG+nNb5+JozNk4j1tW6rZUFWhlRgAjm/nPuXfz2baT4CCxR1JBDLnzKxTgL2M1As0FfsERZuUDo1Mb95MVcfFgOhlA8wHm6g8KlBfTlKmnDM5gzebZM7Ow4xatxwU36AX1xobMFmjbfjJbuC4Rsm6moQnvGBg3ZovsNtfISJVnlWD3C6Neh6I6Qh80KefW8Dl8ckkAGpMd/FlReA/8R2znaXJZ1c2ZwMy+RfTVe9tvV39Bg5mL1mMkH75ltwdCGkxHABKHMj9jSvlHs4Otd1Sq0P3qtCoYOd6tSIKUir4h4zxsB+V5GT69qe9NSXT+IQfSBbEVympDkFAEJ8hbe2kR0CzyvIp7P+eK+T61gb7lIWS4KC/SYk8ScyhyB18DU2WJv9vf9GM+BWYFa/IWFC2fLyxIurFm5vf17RX9gCN0bb0BODNgJdRmO068=
+    secure: 'eNSrnme8QthNwvAR44zbIM7BGp16WBSi7Qy479c9VkAS1kPMMPy7ANLchk16OuE2WVki1gIrFGKDrYK0I4M5impolNhi1mM7cVuSzASMBlvFuVlU+pNyeL2MkHcGbfvadj7GFaYR+dhsE8KqI9two7OaR0mxptagPSkgK2c9baY9sOPDGN0cVWLWs2bWs2lwq475E/8N1xwfGmiMAl+ZXinQ/RuUYmSaTvaqSf0JAI6poo5YH9GSMrfaDCFqz7N6GAyCOKrEvCIRdQtQP2NBNgPWqA7WqixbPt2w2uTu4AHzCudEjXf2u+hQD6IPHGhIrGGn7gUtcKwysKT8lC3fpCICKqe6pQyfZViIWJOJUC6hDXW+CZz632P4klQ/kP0VmDnmuiZpMAeWTiMV0wkxPs5SC3Jumrq9ucVKjkl9GIvCw10PSEhFIwH185WPw62TGtry+QtRDcH5NKwpK0vQWjyYew+tQxHyGoRpfdbuqW0MZd1iERgW5zNNSMl4Wqdcuik+0SxkA6lPRChCSLYGHKZvISmsVOYhKIjBzXPURwFAR29whwFOf28yv9VBWPPcaeFTe9C2N0pzgcrh2aEiHsxTnzXTqghuQkrJEjWWjpLuEXqj/JheZdW+4Kz2S3qE3HuLN7snM+ZVAkff7uCakIaIBIs2beCP2QCtHH2/A1w=' # see README
