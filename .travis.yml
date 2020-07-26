@@ -1,29 +1,28 @@
 language: node_js
 node_js:
-  - node # uses most recent stable node version
+- node
 services:
-  - postgresql # starts up postgres
+- postgresql
 addons:
-  postgresql: '9.6' # highest available postgres version on Travis
-dist: trusty # uses trusty environment
-sudo: false # when on trusty, uses Docker containers for speed
+  postgresql: '9.6'
+dist: trusty
+sudo: false
 notifications:
   email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    on_success: change
+    on_failure: always
 install:
-  - npm ci # faster, goes only from package-lock
+- npm ci
 before_script:
-  - psql -c 'create database "beatenpath";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+- psql -c 'create database "beatenpath";' -U postgres
 script:
-  - npm test             # test the code
-  - npm run build-client # make the bundle
-
+- npm test
+- npm run build-client
 before_deploy:
-  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+- rm -rf node_modules
 deploy:
-  skip_cleanup: true # prevents travis from deleting the build
+  skip_cleanup: true
   provider: heroku
-  app: beaten-path # see README
+  app: beaten-path
   api_key:
-    secure: 'eNSrnme8QthNwvAR44zbIM7BGp16WBSi7Qy479c9VkAS1kPMMPy7ANLchk16OuE2WVki1gIrFGKDrYK0I4M5impolNhi1mM7cVuSzASMBlvFuVlU+pNyeL2MkHcGbfvadj7GFaYR+dhsE8KqI9two7OaR0mxptagPSkgK2c9baY9sOPDGN0cVWLWs2bWs2lwq475E/8N1xwfGmiMAl+ZXinQ/RuUYmSaTvaqSf0JAI6poo5YH9GSMrfaDCFqz7N6GAyCOKrEvCIRdQtQP2NBNgPWqA7WqixbPt2w2uTu4AHzCudEjXf2u+hQD6IPHGhIrGGn7gUtcKwysKT8lC3fpCICKqe6pQyfZViIWJOJUC6hDXW+CZz632P4klQ/kP0VmDnmuiZpMAeWTiMV0wkxPs5SC3Jumrq9ucVKjkl9GIvCw10PSEhFIwH185WPw62TGtry+QtRDcH5NKwpK0vQWjyYew+tQxHyGoRpfdbuqW0MZd1iERgW5zNNSMl4Wqdcuik+0SxkA6lPRChCSLYGHKZvISmsVOYhKIjBzXPURwFAR29whwFOf28yv9VBWPPcaeFTe9C2N0pzgcrh2aEiHsxTnzXTqghuQkrJEjWWjpLuEXqj/JheZdW+4Kz2S3qE3HuLN7snM+ZVAkff7uCakIaIBIs2beCP2QCtHH2/A1w=' # see README
+    secure: POsuUnyo+f25kBuaw81jeH1KDaxWzAeM81tGA4rL87R9EJFgrVm45UPQuXcTeUXrs7S62eZRnfMAR3xJtDAcQYReyLARi6i5mQimVC1u9v8DhkLAswTuQm/rbIIlfaD3PugYJ+1yycJEjV9ShSKzm6rgPDP+S+lNI+R6SJfSNYCWvRztvlu2cqG/nqyAiVZrx7Z5uQ2iDOL7IHAOtJQQW3x9Wtg21pk1tUoq1s0+7HCnK1yNIfolxn5NK+9yPvHDETljOQtn3bP2MBIvvzX1yr9aOX7iax0qSbbOyWQvoSu+tDsvbIEwPvrVcQY96VGlDBfmqywAWZWc/YGbnDlZ9Pd/sTlVXqA5U7p4RIS2lsOnmGxmcXOGcHWReSPz9auv+Y1+0dNURfLoFd1+QSP0QxXY9Ed2RVa8nScaRgC2o42RclDET1akC4U4i8g1lRw8UPfcqmDX91kq2Aoka8TKTjk30ZC7cNMnvDEmxVqu8v+uLGs4fKtKxeHoMowTEPOIVgozHr9bgr9aO2qvshvb4n+V3S8mCQUd89szi1WMXzqRFHBxP3lbDKCKIXVbDzpgCMlTrzpZg9kPgTXlISnO5Jnon8nr8xLHyEN8r9hwBG/dC90PpIhIMsbdF/oERFjRzrFD6q+mUipHuDDGg7DlmSuDW7Q16+rblhi1kqZ1xVw=
