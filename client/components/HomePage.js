@@ -60,7 +60,9 @@ export const HomePageView = props => {
 
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '124% 100vh'
+        backgroundSize: 'auto 96.5vh',
+        backgroundColor: '#F4F3EE',
+        filte
       }}
     >
       <Box
@@ -70,12 +72,7 @@ export const HomePageView = props => {
         justifyContent="center"
       >
         {/* // find all journeys  */}
-        <Grid
-          container
-          direction="column"
-          // justify="flex-start"
-          alignItems="center"
-        >
+        <Grid container direction="column" alignItems="center">
           <Button
             variant="contained"
             size="large"
