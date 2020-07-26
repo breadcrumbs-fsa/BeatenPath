@@ -56,13 +56,12 @@ export const HomePageView = props => {
   return (
     <div
       style={{
-        backgroundImage: `url('/2perfectmap.jpg')`,
+        backgroundImage: `url('/2perfectmap.png')`,
 
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'auto 96.5vh',
-        backgroundColor: '#F4F3EE',
-        filte
+        backgroundColor: '#F4F3EE'
       }}
     >
       <Box
