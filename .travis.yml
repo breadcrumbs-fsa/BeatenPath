@@ -12,7 +12,7 @@ notifications:
     on_success: change
     on_failure: always
 install:
-- npm ci
+- npm install --dev
 before_script:
 - psql -c 'create database "beatenpath";' -U postgres
 script:
