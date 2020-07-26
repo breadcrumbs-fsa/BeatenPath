@@ -66,7 +66,7 @@ export function ButtonAppBarView(props) {
             //   props.dispatch({type: 'SET_SINGLE_JOURNEY', journey: {}})
             // }}
           >
-            {<img src="/BeatenPath2.png" height="25px" />}
+            <img src="/BeatenPath2.png" height="25px" />
           </div>
           <div style={{marginBottom: '1vh'}}>
             {(props.mode === 'find' || props.mode === 'viewOnly') && (

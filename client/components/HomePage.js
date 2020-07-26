@@ -56,30 +56,21 @@ export const HomePageView = props => {
   return (
     <div
       style={{
-        backgroundImage: `url('/2perfectmap.jpg')`,
-        height: '94.5vh',
-        maxHeight: '100%',
-        width: '100%',
-        maxWidth: '100%',
+        backgroundImage: `url('/2perfectmap.png')`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        // objectFit: 'cover'
-        backgroundSize: 'cover'
+        backgroundSize: 'auto 96.5vh',
+        backgroundColor: '#F4F3EE'
       }}
     >
       <Box
-        height="91.5vh"
+        height="96.5vh"
         display="flex"
         alignItems="center"
         justifyContent="center"
       >
         {/* // find all journeys  */}
-        <Grid
-          container
-          direction="column"
-          // justify="flex-start"
-          alignItems="center"
-        >
+        <Grid container direction="column" alignItems="center">
           <Button
             variant="contained"
             size="large"

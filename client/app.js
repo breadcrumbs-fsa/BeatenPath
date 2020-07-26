@@ -30,26 +30,21 @@ const App = () => {
         <div
           style={{
             display: 'flex',
-            height: '5.5vh',
+            height: '3.5vh',
             width: '100%',
             alignItems: 'center'
           }}
         >
           <AppBar />
         </div>
-        {/* <HomePage /> */}
         <div
           style={{
-            height: '94.5vh',
+            height: '96.5vh',
             width: '100%',
             alignItems: 'center'
           }}
         >
           <MapContainer />
-          {/* <PlacePreview />
-          <div style={{overflowY: 'auto'}}>
-            {/* <RouteList style={{overflowY: 'auto'}} /> */}
-          {/* <JourneyList style={{overflowY: 'auto'}} /> */}
         </div>
       </div>
     </StoreContext.Provider>
@@ -57,6 +52,3 @@ const App = () => {
 }
 
 export default App
-
-// <BottomInfo />
-// <RouteList />
