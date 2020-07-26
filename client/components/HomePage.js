@@ -57,7 +57,6 @@ export const HomePageView = props => {
     <div
       style={{
         backgroundImage: `url('/2perfectmap.png')`,
-
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'auto 96.5vh',
