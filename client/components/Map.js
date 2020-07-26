@@ -32,20 +32,22 @@ export class MyMapComponent extends Component {
       this.state.onShowSavedJourney(
         this.props.segments.reduce(
           (journeyBounds, currentSeg) => {
+            const currentBounds = currentSeg.routes[0].bounds
+
             if (
-              Math.abs(currentSeg.routes[0].bounds.ga.l) <
+              Math.abs(currentBounds.getNorthEast().lng()) <
               Math.abs(journeyBounds.east)
             ) {
-              journeyBounds.east = currentSeg.routes[0].bounds.ga.l
+              journeyBounds.east = currentBounds.getNorthEast().lng()
             }
-            if (currentSeg.routes[0].bounds.na.l > journeyBounds.north) {
-              journeyBounds.north = currentSeg.routes[0].bounds.na.l
+            if (currentBounds.getNorthEast().lat() > journeyBounds.north) {
+              journeyBounds.north = currentBounds.getNorthEast().lat()
             }
-            if (currentSeg.routes[0].bounds.na.j < journeyBounds.south) {
-              journeyBounds.south = currentSeg.routes[0].bounds.na.j
+            if (currentBounds.getSouthWest().lat() < journeyBounds.south) {
+              journeyBounds.south = currentBounds.getSouthWest().lat()
             }
-            if (currentSeg.routes[0].bounds.ga.j < journeyBounds.west) {
-              journeyBounds.west = currentSeg.routes[0].bounds.ga.j
+            if (currentBounds.getSouthWest().lng() < journeyBounds.west) {
+              journeyBounds.west = currentBounds.getSouthWest().lng()
             }
             return journeyBounds
           },
@@ -94,9 +96,6 @@ export class MyMapComponent extends Component {
       },
 
       onIdle: () => {
-        // this.setState({
-        //   bounds: refs.map.getBounds()
-        // })
         this.props.dispatch(addBounds(refs.map.getBounds()))
         this.props.dispatch(addCenter(refs.map.getCenter()))
       },
@@ -143,7 +142,6 @@ export class MyMapComponent extends Component {
 
       //for store access have to pass in props below in arrow function
       onClickHandler: async (event, props) => {
-        console.log('place event: ', event)
         if (event.placeId) {
           await this.props.placesService.getDetails(
             {placeId: event.placeId},
