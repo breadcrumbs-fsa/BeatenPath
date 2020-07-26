@@ -23,7 +23,6 @@ export class MyMapComponent extends Component {
 
   componentDidUpdate(prevProps) {
     this.state.getLocation()
-    console.log('PROPS', this.props)
 
     if (
       this.props.fitBounds === 'notFit' &&
@@ -34,19 +33,19 @@ export class MyMapComponent extends Component {
         this.props.segments.reduce(
           (journeyBounds, currentSeg) => {
             if (
-              Math.abs(currentSeg.routes[0].bounds.Va.i) <
+              Math.abs(currentSeg.routes[0].bounds.ga.l) <
               Math.abs(journeyBounds.east)
             ) {
-              journeyBounds.east = currentSeg.routes[0].bounds.Va.i
+              journeyBounds.east = currentSeg.routes[0].bounds.ga.l
             }
-            if (currentSeg.routes[0].bounds.Za.i > journeyBounds.north) {
-              journeyBounds.north = currentSeg.routes[0].bounds.Za.i
+            if (currentSeg.routes[0].bounds.na.l > journeyBounds.north) {
+              journeyBounds.north = currentSeg.routes[0].bounds.na.l
             }
-            if (currentSeg.routes[0].bounds.Za.j < journeyBounds.south) {
-              journeyBounds.south = currentSeg.routes[0].bounds.Za.j
+            if (currentSeg.routes[0].bounds.na.j < journeyBounds.south) {
+              journeyBounds.south = currentSeg.routes[0].bounds.na.j
             }
-            if (currentSeg.routes[0].bounds.Va.j < journeyBounds.west) {
-              journeyBounds.west = currentSeg.routes[0].bounds.Va.j
+            if (currentSeg.routes[0].bounds.ga.j < journeyBounds.west) {
+              journeyBounds.west = currentSeg.routes[0].bounds.ga.j
             }
             return journeyBounds
           },
