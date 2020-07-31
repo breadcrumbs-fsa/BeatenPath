@@ -149,7 +149,7 @@ const RouteLister = props => {
     (
       <div>
         <FormGroup row />
-        <Grid>
+        <Grid className={classes.gridWidth}>
           <Grid item xs={12} className={classes.gridWidth}>
             <Typography variant="h6" className={classes.title} />
 

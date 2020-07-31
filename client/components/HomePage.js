@@ -51,7 +51,6 @@ const useStyles = makeStyles(theme => ({
 
 export const HomePageView = props => {
   const classes = useStyles()
-  // const map = mapBackground
 
   return (
     <div

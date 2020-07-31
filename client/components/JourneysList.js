@@ -94,8 +94,8 @@ export const JourneyListView = props => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6} className={classes.gridWidth}>
+      <Grid container spacing={2} className={classes.gridWidth}>
+        <Grid className={classes.gridWidth}>
           <div className={classes.root}>
             {/* <List dense={dense}></List> */}
 

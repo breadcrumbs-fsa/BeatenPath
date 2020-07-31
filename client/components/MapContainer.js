@@ -74,7 +74,7 @@ export const MapContainer = props => {
             <div
               style={{
                 height: '39.5vh',
-                // width: '23.4rem',
+                width: '100%',
                 alignItems: 'center',
                 overflowY: 'auto'
               }}
